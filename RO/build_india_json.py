@@ -24,25 +24,36 @@ def clean_str(val: Any) -> str:
 
 def parse_hq(address: str) -> tuple[str, str]:
     """
-    Extracts hq_location and hq_country from an address string.
-    Falls back gracefully if address is sparse or unstructured.
+    Extracts a clean City, State, Country location.
+    Filters out zip codes and ignores street/colony data by targeting the end of the string.
     """
     addr = clean_str(address)
     if not addr:
         return "India", "India"
 
-    # Normalize whitespace
-    addr_clean = re.sub(r"\s+", " ", addr).strip()
+    # 1. Strip 5 to 6 digit postal codes BEFORE splitting
+    addr_clean = re.sub(r"\b\d{5,6}\b", "", addr)
     parts = [p.strip() for p in addr_clean.split(",") if p.strip()]
 
-    if len(parts) >= 2:
-        country = parts[-1]
-        # Strip postal / zip codes from country segment
-        country = re.sub(r"\b\d{5,6}\b", "", country).strip()
-        location = ", ".join(parts[-2:])
+    # 2. Filter out parts that are purely numbers or hyphens (like block numbers)
+    valid = []
+    for p in parts:
+        if re.fullmatch(r"[\d\s\-#]+", p):
+            continue
+        valid.append(p)
+
+    # 3. Smart Extraction
+    if len(valid) >= 3:
+        country = valid[-1]
+        # Grab the two items immediately before the country (usually City, State)
+        location = ", ".join(valid[-3:-1])
         return location, country if country else "India"
-    elif len(parts) == 1:
-        return parts[0], parts[0]
+        
+    elif len(valid) == 2:
+        return valid[0], valid[1]
+        
+    elif len(valid) == 1:
+        return valid[0], valid[0]
 
     return "India", "India"
 

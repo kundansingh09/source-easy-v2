@@ -58,12 +58,13 @@ export default function App() {
 
   const runSearch = useCallback(async (f, pageIndex) => {
     const isBrowse = !f.appliedQuery.trim();
-    if (!f.appliedQuery.trim() && !(
-      f.expo !== "All" || f.countries.length || f.l1.length || f.l2.length
-    )) {
-      setData(null);
-      return;
-    }
+    // commented to show results even when no filters are applied, so that the user can browse the catalogue without a query
+    // if (!f.appliedQuery.trim() && !(
+    //   f.expo !== "All" || f.countries.length || f.l1.length || f.l2.length
+    // )) {
+    //   setData(null);
+    //   return;
+    // }
     const id = ++reqId.current;
     setLoading(true);
     setError(null);
