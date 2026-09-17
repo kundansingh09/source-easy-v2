@@ -31,7 +31,10 @@ import threading
 from collections import Counter
 
 from qdrant_client import QdrantClient, models
-from test_engine import clean_overview
+try:
+    from backend.text_clean import clean_overview
+except ImportError:  # `python backend/search_engine.py` run directly, not as a package
+    from text_clean import clean_overview
 
 DENSE_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 SPARSE_MODEL = "Qdrant/bm25"
