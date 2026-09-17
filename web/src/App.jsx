@@ -5,7 +5,7 @@ import ResultCard from "./components/ResultCard.jsx";
 
 const PAGE_SIZE = 10;
 
-const EMPTY = {
+const CLEARED = {
   expo: "All",
   countries: [],
   l1: [],
@@ -20,9 +20,15 @@ const EMPTY = {
   appliedQuery: "",
 };
 
+// The default trade show the app opens with
+const DEFAULT_EXPO = "India expo";
+
+// The state the app loads with on first visit
+const INITIAL_FILTERS = { ...CLEARED, expo: DEFAULT_EXPO };
+
 export default function App() {
   const [draft, setDraft] = useState("");
-  const [filters, setFilters] = useState(EMPTY);
+  const [filters, setFilters] = useState(INITIAL_FILTERS);
   const [page, setPage] = useState(0);
 
   const [health, setHealth] = useState(null);
@@ -104,7 +110,7 @@ export default function App() {
   const clearAll = () => {
     setDraft("");
     setPage(0);
-    setFilters({ ...EMPTY });
+    setFilters({ ...CLEARED });
   };
 
   const taxonomyLabel = useMemo(() => {
@@ -138,7 +144,7 @@ export default function App() {
       <header className="header">
         <div className="header-inner">
           <div className="brand">
-            <span className="brand-mark">Semicon Sourcing</span>
+            <span className="brand-mark">SEMICON India 2026</span>
             <span className="brand-sub">
               {health?.status === "ok" ? `${health.count.toLocaleString()} suppliers` : ""}
             </span>

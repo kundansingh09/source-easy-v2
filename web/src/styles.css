@@ -222,7 +222,7 @@ a:hover { text-decoration: underline; }
 
 .facet-option {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 9px;
   padding: 5px 7px;
   margin: 0 -7px;
@@ -233,14 +233,18 @@ a:hover { text-decoration: underline; }
 }
 .facet-option:hover { background: var(--surface-alt); }
 
-.facet-option input { accent-color: var(--accent); margin: 0; flex-shrink: 0; }
+.facet-option input {
+  accent-color: var(--accent);
+  margin: 4px 0 0 0;
+  flex-shrink: 0;
+}
 
 .facet-name {
   flex: 1;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* Removed nowrap and ellipsis properties to allow text to wrap */
+    line-height: 1.35;
+    padding-bottom: 2px;
 }
 
 .facet-option.is-checked .facet-name { font-weight: 550; }
@@ -647,4 +651,11 @@ a:hover { text-decoration: underline; }
 @media (min-width: 861px) {
   /* The drawer close button is meaningless when the sidebar is static. */
   .sidebar-close { display: none; }
+}
+/* Allow filter chips to wrap long text */
+.chip {
+  white-space: normal;
+  height: auto;
+  min-height: 28px;
+  text-align: left;
 }
