@@ -31,6 +31,7 @@ import threading
 from collections import Counter
 
 from qdrant_client import QdrantClient, models
+from test_engine import clean_overview
 
 DENSE_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 SPARSE_MODEL = "Qdrant/bm25"
@@ -89,6 +90,7 @@ class SourcingSearchEngine:
         # interaction and FastEmbed's batch dict is not documented as re-entrant.
         self.lock = threading.Lock()
         self.taxonomy = self._load_taxonomy()
+        self.clean_overview = clean_overview
         self.l1_to_l2 = {}
         self.l1_names_by_id = {}
         self.l2_names_by_id = {}
@@ -116,7 +118,8 @@ class SourcingSearchEngine:
         about = item.get("about", "")
         has_real_about = bool(about) and about != FALLBACK_ABOUT
         if has_real_about:
-            parts.append(about)
+            embed_about = clean_overview(about)["cleaned"] if self.clean_overview else about
+            parts.append(f"About: {embed_about}")
 
         hq = item.get("hq_location") or item.get("hq_country")
         if hq and hq != UNKNOWN_COUNTRY:

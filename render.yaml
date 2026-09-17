@@ -1,50 +1,59 @@
 # Render Blueprint: one Python web service (the API) + one static site (the UI).
 #
 # Why Render and not Vercel for the backend: this API is a long-lived
-# stateful process. At startup it downloads an ONNX embedding model, embeds
-# the entire exhibitor catalogue and builds an in-memory Qdrant index —
-# tens of seconds to minutes, and hundreds of MB resident. Vercel's Python
-# functions are serverless: no persistent memory between invocations, a
-# hard bundle-size limit that the onnxruntime + model weights blow through,
-# and a request timeout far shorter than a cold index build. Every request
-# would rebuild the index, or more likely fail to deploy at all.
+# stateful process that keeps a Qdrant client and a loaded embedding model
+# in memory for the life of the process. Vercel's Python functions are
+# serverless: no persistent memory between invocations, a hard bundle-size
+# limit that onnxruntime + model weights blow through, and a request
+# timeout that doesn't suit a multi-second cold path. Vercel is perfectly
+# good for the FRONTEND (it's a static bundle), so splitting them across
+# providers is also a legitimate option - this blueprint just keeps both
+# on Render for one dashboard.
 #
-# Vercel is perfectly good for the FRONTEND (it's a static bundle), so
-# splitting them across providers is also fine. Keeping both here just
-# means one blueprint and one dashboard.
+# Updated for the Qdrant Cloud split: corpus embedding now happens ONCE,
+# locally, and is pushed to a persistent Qdrant Cloud cluster - Render no
+# longer re-embeds ~1,300+ companies on every cold boot. That was the
+# biggest RAM/time cost in the original single-service design (see the
+# retired disk block below for the note that first flagged it), so `plan:
+# free` is worth TRYING now. It is not guaranteed to fit: Qdrant Cloud's
+# server-side inference (which would let Render skip loading the embedding
+# model entirely) is a paid-Qdrant-plan feature - on a free Qdrant cluster,
+# this API still loads onnxruntime + the MiniLM ONNX weights into memory to
+# embed each incoming QUERY locally, it just no longer holds the whole
+# corpus's vectors or re-embeds the whole corpus. If Render's logs show the
+# instance getting OOM-killed (deploy dies with no clear error, or the
+# process restarts right after a search request), that's this - bump to
+# `starter` ($7/mo, 512MB -> still tight) or `standard` ($25/mo, 2GB).
+#
+# No disk block: free-tier services can't have one. Without it, the ~90MB
+# ONNX weights re-download on every cold boot instead of being cached - a
+# real but modest cost, and free tier spins down after 15 min idle anyway,
+# so this happens often. The block used to live here as the FastEmbed
+# model cache, with a note that it did NOT cache the embeddings themselves
+# and that persisting a Qdrant snapshot instead of rebuilding from JSON was
+# "the thing to fix next" - that fix is exactly what the Qdrant Cloud split
+# above is. If you move to a paid plan and want the weights cached again,
+# the block is still valid, just re-add it:
+#
+#   disk:
+#     name: fastembed-cache
+#     mountPath: /var/cache/fastembed
+#     sizeGB: 1
 
 services:
   # ------------------------------------------------------------- API ---
   - type: web
     name: semicon-sourcing-api
     runtime: python
-    # `standard` = 2 GB RAM / 1 CPU. This is deliberate, not cautious:
-    # onnxruntime plus the MiniLM weights plus the Qdrant index and payloads
-    # lands in the 500 MB–1 GB range, and BOTH the free and starter plans
-    # cap at 512 MB. A 512 MB instance will OOM during the startup embed,
-    # which presents as a deploy that dies partway with no useful error.
-    # (Render renamed plans in Aug 2026 — `standard` still resolves, and the
-    # new-style id for the same specs is `1c-2g`.)
     plan: free
     region: frankfurt          # closest to the Asian shows' users; change freely
     branch: main
     buildCommand: pip install -r requirements.txt
-    # 1 worker on purpose. Each uvicorn worker builds its OWN copy of the
-    # index, so 2 workers = 2x the RAM and 2x the cold start for no gain at
-    # this traffic level. Scale with instances, not workers, and only after
-    # the startup cost is solved (see the disk note below).
+    # 1 worker on purpose. Each uvicorn worker loads its OWN copy of the
+    # embedding model into memory, so 2 workers = 2x the RAM for no gain at
+    # this traffic level - scale with instances, not workers.
     startCommand: uvicorn backend.api:app --host 0.0.0.0 --port $PORT --workers 1
     healthCheckPath: /api/health
-    # A persistent disk used purely as the FastEmbed model cache. Without
-    # it every cold boot re-downloads ~90 MB of ONNX weights before it can
-    # even start embedding. This does NOT cache the embeddings themselves —
-    # the catalogue is still re-embedded on each boot, which is the single
-    # biggest remaining startup cost and the thing to fix next (persist a
-    # Qdrant snapshot rather than rebuilding from JSON).
-    disk:
-      name: fastembed-cache
-      mountPath: /var/cache/fastembed
-      sizeGB: 1
     envVars:
       - key: PYTHON_VERSION
         value: "3.12"
@@ -54,9 +63,13 @@ services:
         value: data/semi_suppliers.json
       - key: TAXONOMY_PATH
         value: data/categories.json
-      - key: QDRANT_URL          # <--- Add this
+      - key: QDRANT_URL
+        # Your Qdrant Cloud cluster URL. Seed the cluster locally BEFORE
+        # this service's first boot (python backend/api.py with these two
+        # vars set) - otherwise the first Render boot finds an empty
+        # collection and attempts the full embed itself, on free-tier RAM.
         sync: false
-      - key: QDRANT_API_KEY      # <--- Add this
+      - key: QDRANT_API_KEY
         sync: false
       - key: ALLOWED_ORIGINS
         # Must match the static site's real URL once Render assigns it, or
@@ -78,8 +91,9 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_BASE
-        # Vite inlines this at BUILD time, not runtime — changing it
-        # requires a redeploy of the static site, not just a restart.
+        # Vite inlines this at BUILD time, not runtime - changing it
+        # requires "Clear build cache & deploy" on the static site, not
+        # just a restart.
         sync: false
     routes:
       # SPA fallback. Without it, a refresh on any non-root path 404s.
