@@ -465,10 +465,11 @@ class SourcingSearchEngine:
 
         # ---- Task 2: zero-query fork -------------------------------------
         if not query:
-            has_filters = bool(
-                (expo and expo != "All") or hq_countries or cat_l1_ids or cat_l2_ids)
-            if not has_filters:
-                return ([], 0) if with_total else []
+            # commenting out the "no filters, no results" logic to allow browsing without a query
+            # has_filters = bool(
+            #     (expo and expo != "All") or hq_countries or cat_l1_ids or cat_l2_ids)
+            # if not has_filters:
+            #     return ([], 0) if with_total else []
             rows, total = self.browse(expo, hq_countries, cat_l1_ids, cat_l2_ids,
                                       limit=limit, offset=offset)
             return (rows, total) if with_total else rows
