@@ -64,8 +64,8 @@ function InfoBadges({ parsed }) {
   const level = relevanceLevel(parsed.relevance);
   return (
     <div className="badge-row">
-      {parsed.booth && <span className="badge">Booth {parsed.booth}</span>}
-      {parsed.valueChain && <span className="badge">{parsed.valueChain}</span>}
+      {parsed.booth && <span className="badge">Booth: {parsed.booth}</span>}
+      {parsed.valueChain && <span className="badge">Role: {parsed.valueChain}</span>}
       {parsed.relevance && (
         <span className={`badge badge-relevance${level ? ` is-${level}` : ""}`}>
           Relevance: {parsed.relevance}
@@ -75,14 +75,12 @@ function InfoBadges({ parsed }) {
   );
 }
 
-function TagGroup({ title, items }) {
+function TextGroup({ title, items }) {
   if (!items || items.length === 0) return null;
   return (
     <div className="overview-subsection">
       <div className="overview-subsection-label">{title}</div>
-      <div className="tags">
-        {items.map((item, i) => <span key={i} className="tag">{item}</span>)}
-      </div>
+      <div className="overview-subsection-text">{items.join(", ")}.</div>
     </div>
   );
 }
@@ -102,9 +100,9 @@ function OverviewSection({ about }) {
     <div className="overview-structured">
       {parsed.summary && <ClampedText text={parsed.summary} />}
       <InfoBadges parsed={parsed} />
-      <TagGroup title="Key Capabilities" items={parsed.capabilities} />
-      <TagGroup title="Technical Expertise" items={parsed.technicalExpertise} />
-      <TagGroup title="End Markets" items={parsed.endMarkets} />
+      <TextGroup title="Key Capabilities" items={parsed.capabilities} />
+      <TextGroup title="Technical Expertise" items={parsed.technicalExpertise} />
+      <TextGroup title="End Markets" items={parsed.endMarkets} />
       {parsed.indiaPresence && (
         <div className="callout">
           <div className="callout-label">India Presence</div>

@@ -450,13 +450,11 @@ a:hover { text-decoration: underline; }
   border-color: #bfe3d3;
   color: var(--good);
 }
-
 .badge-relevance.is-medium {
   background: var(--accent-soft);
   border-color: var(--accent-border);
   color: #22408f;
 }
-
 .badge-relevance.is-low {
   background: var(--surface-alt);
   border-color: var(--border);
@@ -472,13 +470,22 @@ a:hover { text-decoration: underline; }
   margin-bottom: 5px;
 }
 
+/* Capabilities/expertise/end-markets read as a sentence, not a row of
+   boxes - a badge earns its visual weight for one glanceable fact (a booth
+   number, a status level); the same treatment applied to five or six list
+   items in a row is what produced the "tag soup" look. Plain text under a
+   small label keeps the same information scannable without it. */
+.overview-subsection-text {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
 .callout {
   padding: 9px 12px;
   background: var(--surface-alt);
   border-left: 2px solid var(--accent-border);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
-
 .callout-label {
   font-size: 11px;
   font-weight: 650;
@@ -487,12 +494,12 @@ a:hover { text-decoration: underline; }
   color: var(--text-faint);
   margin-bottom: 3px;
 }
-
 .callout-body {
   font-size: 13.5px;
   color: var(--text-muted);
   line-height: 1.5;
 }
+
 .overview-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
