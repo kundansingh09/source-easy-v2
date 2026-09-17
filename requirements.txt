@@ -1,0 +1,21 @@
+# --- API ---
+fastapi>=0.115
+uvicorn[standard]>=0.32
+
+# --- search engine ---
+qdrant-client[fastembed]>=1.15
+
+# --- ingestion ---
+requests
+beautifulsoup4
+lxml
+
+# --- LLM rerank + eval (optional at runtime; the rerank toggle degrades
+#     gracefully when OPENAI_API_KEY is unset) ---
+openai
+python-dotenv
+
+# --- legacy Streamlit UI (frontend/app.py). The React app in web/ replaces
+#     it; keep these only if you still want to run the Streamlit version. ---
+streamlit
+pandas

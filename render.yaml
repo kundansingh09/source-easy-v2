@@ -1,0 +1,95 @@
+# Render Blueprint: one Python web service (the API) + one static site (the UI).
+#
+# Why Render and not Vercel for the backend: this API is a long-lived
+# stateful process. At startup it downloads an ONNX embedding model, embeds
+# the entire exhibitor catalogue and builds an in-memory Qdrant index —
+# tens of seconds to minutes, and hundreds of MB resident. Vercel's Python
+# functions are serverless: no persistent memory between invocations, a
+# hard bundle-size limit that the onnxruntime + model weights blow through,
+# and a request timeout far shorter than a cold index build. Every request
+# would rebuild the index, or more likely fail to deploy at all.
+#
+# Vercel is perfectly good for the FRONTEND (it's a static bundle), so
+# splitting them across providers is also fine. Keeping both here just
+# means one blueprint and one dashboard.
+
+services:
+  # ------------------------------------------------------------- API ---
+  - type: web
+    name: semicon-sourcing-api
+    runtime: python
+    # `standard` = 2 GB RAM / 1 CPU. This is deliberate, not cautious:
+    # onnxruntime plus the MiniLM weights plus the Qdrant index and payloads
+    # lands in the 500 MB–1 GB range, and BOTH the free and starter plans
+    # cap at 512 MB. A 512 MB instance will OOM during the startup embed,
+    # which presents as a deploy that dies partway with no useful error.
+    # (Render renamed plans in Aug 2026 — `standard` still resolves, and the
+    # new-style id for the same specs is `1c-2g`.)
+    plan: free
+    region: frankfurt          # closest to the Asian shows' users; change freely
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    # 1 worker on purpose. Each uvicorn worker builds its OWN copy of the
+    # index, so 2 workers = 2x the RAM and 2x the cold start for no gain at
+    # this traffic level. Scale with instances, not workers, and only after
+    # the startup cost is solved (see the disk note below).
+    startCommand: uvicorn backend.api:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /api/health
+    # A persistent disk used purely as the FastEmbed model cache. Without
+    # it every cold boot re-downloads ~90 MB of ONNX weights before it can
+    # even start embedding. This does NOT cache the embeddings themselves —
+    # the catalogue is still re-embedded on each boot, which is the single
+    # biggest remaining startup cost and the thing to fix next (persist a
+    # Qdrant snapshot rather than rebuilding from JSON).
+    disk:
+      name: fastembed-cache
+      mountPath: /var/cache/fastembed
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: FASTEMBED_CACHE_PATH
+        value: /var/cache/fastembed
+      - key: DATA_PATH
+        value: data/semi_suppliers.json
+      - key: TAXONOMY_PATH
+        value: data/categories.json
+      - key: QDRANT_URL          # <--- Add this
+        sync: false
+      - key: QDRANT_API_KEY      # <--- Add this
+        sync: false
+      - key: ALLOWED_ORIGINS
+        # Must match the static site's real URL once Render assigns it, or
+        # the browser blocks every request with a CORS error that looks
+        # like the API is down.
+        sync: false
+      - key: OPENAI_API_KEY
+        # Optional. Absent = the rerank toggle renders disabled instead of
+        # erroring at request time.
+        sync: false
+
+  # -------------------------------------------------------- frontend ---
+  - type: web
+    name: semicon-sourcing-web
+    runtime: static
+    branch: main
+    rootDir: web
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE
+        # Vite inlines this at BUILD time, not runtime — changing it
+        # requires a redeploy of the static site, not just a restart.
+        sync: false
+    routes:
+      # SPA fallback. Without it, a refresh on any non-root path 404s.
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin

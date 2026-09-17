@@ -1,0 +1,319 @@
+[
+    {
+        "company_name": "\"Compound Semiconductor China\"/\"Silicon Semiconductor China\"",
+        "location": "China expo",
+        "ebooth_url": "https://expo.semi.org/china2026/public/eBooth.aspx?IndexInList=0&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=665915",
+        "about": "Semiconductor technology and equipment supplier.",
+        "hq_location": "Hong Kong",
+        "hq_country": "Hong Kong",
+        "website": "http://www.actintl.com.hk",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "3D CHIPS (GUANGDONG) TECHNOLOGY CO.,LTD.",
+        "location": "China expo",
+        "ebooth_url": "https://expo.semi.org/china2026/public/eBooth.aspx?IndexInList=1&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=680444",
+        "about": "Semiconductor technology and equipment supplier.",
+        "hq_location": "东莞市, China",
+        "hq_country": "China",
+        "website": "http://www.3d-chips.com",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "A&T (Changzhou) Precision Machinery Co.,Ltd.",
+        "location": "China expo",
+        "ebooth_url": "https://expo.semi.org/china2026/public/eBooth.aspx?IndexInList=2&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=640997",
+        "about": "Semiconductor technology and equipment supplier.",
+        "hq_location": "常州市, China",
+        "hq_country": "China",
+        "website": "http://www.ant-fa.com",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "AblePrint Technology Co., Ltd.",
+        "location": "China expo",
+        "ebooth_url": "https://expo.semi.org/china2026/public/eBooth.aspx?IndexInList=3&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=640002",
+        "about": "Semiconductor technology and equipment supplier.",
+        "hq_location": null,
+        "hq_country": "Unknown",
+        "website": "http://www.ableprint.com.tw",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "ABM, Inc. Asia Pacific Limited",
+        "location": "China expo",
+        "ebooth_url": "https://expo.semi.org/china2026/public/eBooth.aspx?IndexInList=4&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=638279",
+        "about": "Global Leader in Lithography Systems and Process Equipment！ ABM Inc. has been deeply engaged in semiconductor lithography equipment manufacturing for over 20 years. Leveraging its independently developed and manufactured G/H/I-line as well as full-spectrum DUV ultraviolet lithography systems, along with leading lithography processes, to provides core lithography process equipment support for front-end manufacturing of 200mm/300mm integrated circuits, advanced packaging, MEMS, power devices, optical communications, and other chip production. Its core products include proximity/contact lithography machines, coat/develop equipment, and bonding equipment. ABM offers a full-chain service covering equipment R&D, process optimization, and after-sales support (including complete machine refurbishment, installation & commissioning, and spare parts supply). Leveraging its proprietary lithography technology, the company supplies micro-nano optical devices such as FAC Lens, Micro-lens Array, and OCS lens arrays. These are widely used in CPO applications, supporting key processes including SiPh optical engine coupling, MPO/MT connector alignment, and ELS light source collimation. ABM holds over 2,000 independent patents in lithography technology and has served more than 300 industry customers worldwide. We look forward to meeting you at SEMICON China 2026 in Shanghai to jointly create the new future of advanced lithography manufacturing processes!",
+        "hq_location": "HONG KONG, China",
+        "hq_country": "China",
+        "website": "http://www.abmasia.com.hk",
+        "cat_l1_ids": [
+            118,
+            119,
+            122,
+            123,
+            125,
+            127,
+            131,
+            134,
+            135,
+            137,
+            138,
+            146,
+            153
+        ],
+        "cat_l1_names": [
+            "200 Equipment, Assembly",
+            "201 Equipment, Flat Panel Display",
+            "204 Equipment, Mems",
+            "205 Equipment, Nanotechnology",
+            "207 Equipment, Process",
+            "300 Materials, Assembly",
+            "304 Materials, Mask Making",
+            "307 Materials, Process",
+            "308 Materials, Substrate",
+            "400 Components, Parts & Accessories",
+            "401 Sub-systems",
+            "700 Manufacturing Services",
+            "900 Support Products"
+        ],
+        "cat_l2_ids": [
+            1290,
+            1295,
+            1300,
+            1303,
+            1357,
+            1358,
+            1359,
+            1366,
+            1367,
+            1370,
+            1376,
+            1377,
+            1407,
+            1453,
+            1466,
+            1472,
+            1500,
+            1501,
+            1510,
+            1515,
+            1574,
+            1582,
+            1643
+        ],
+        "cat_l2_names": [
+            "Lithography Systems for Wafer Level Packaging; Bumping; 3D Interconnect Aligners",
+            "Plating; Electro Chemical Plating for device assembly",
+            "Wafer Level Bonders",
+            "Alignment Film Coating Equipment",
+            "Double sided mask aligner",
+            "Wafer Level Bonders",
+            "Equipment, Nanotechnology Tools",
+            "Cleaning; Washing; Drying Equipment for Substrate, Fab Processing",
+            "Coat; Develop; Resist Processing; Track Equipment",
+            "Deposition; Physical Vapor (PVD); Sputtering; Evaporation Equipment",
+            "Lithography; Exposure; Aligners; Direct Write Systems; Steppers; Scanners; Nanoimprint",
+            "Plating; Electro Chemical Plating; Deposition Systems",
+            "Bonding; Interconnect Materials - Wire; Ribbon; Tape; Capillaries & Tools",
+            "Mask plate blanks; Glass",
+            "Photo Masks; Finished or Patterned",
+            "Compound Semiconductor substrates (GaAs on Silicon; GaN; InP; SiGe, etc.)",
+            "Lamps (non Lithography), all type UV; LED and other",
+            "Lamps for Lithography",
+            "Vacuum Systems Components & Accessories (optical monitors; Sputtering target fixtures; lubricants; p",
+            "Exposure; Illumination Sources - Laser; Lamp; X-ray & other",
+            "Mask Making Fabrication and Repair",
+            "Used; Rental Equipment; Inventory Reduction, Appraisal - Brokers; Resellers",
+            "Laboratory Apparatus and Supplies"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 118,
+                "l1_name": "200 Equipment, Assembly",
+                "children": [
+                    {
+                        "id": 1290,
+                        "name": "Lithography Systems for Wafer Level Packaging; Bumping; 3D Interconnect Aligners"
+                    },
+                    {
+                        "id": 1295,
+                        "name": "Plating; Electro Chemical Plating for device assembly"
+                    },
+                    {
+                        "id": 1300,
+                        "name": "Wafer Level Bonders"
+                    }
+                ]
+            },
+            {
+                "l1_id": 119,
+                "l1_name": "201 Equipment, Flat Panel Display",
+                "children": [
+                    {
+                        "id": 1303,
+                        "name": "Alignment Film Coating Equipment"
+                    }
+                ]
+            },
+            {
+                "l1_id": 122,
+                "l1_name": "204 Equipment, Mems",
+                "children": [
+                    {
+                        "id": 1357,
+                        "name": "Double sided mask aligner"
+                    },
+                    {
+                        "id": 1358,
+                        "name": "Wafer Level Bonders"
+                    }
+                ]
+            },
+            {
+                "l1_id": 123,
+                "l1_name": "205 Equipment, Nanotechnology",
+                "children": [
+                    {
+                        "id": 1359,
+                        "name": "Equipment, Nanotechnology Tools"
+                    }
+                ]
+            },
+            {
+                "l1_id": 125,
+                "l1_name": "207 Equipment, Process",
+                "children": [
+                    {
+                        "id": 1366,
+                        "name": "Cleaning; Washing; Drying Equipment for Substrate, Fab Processing"
+                    },
+                    {
+                        "id": 1367,
+                        "name": "Coat; Develop; Resist Processing; Track Equipment"
+                    },
+                    {
+                        "id": 1370,
+                        "name": "Deposition; Physical Vapor (PVD); Sputtering; Evaporation Equipment"
+                    },
+                    {
+                        "id": 1376,
+                        "name": "Lithography; Exposure; Aligners; Direct Write Systems; Steppers; Scanners; Nanoimprint"
+                    },
+                    {
+                        "id": 1377,
+                        "name": "Plating; Electro Chemical Plating; Deposition Systems"
+                    }
+                ]
+            },
+            {
+                "l1_id": 127,
+                "l1_name": "300 Materials, Assembly",
+                "children": [
+                    {
+                        "id": 1407,
+                        "name": "Bonding; Interconnect Materials - Wire; Ribbon; Tape; Capillaries & Tools"
+                    }
+                ]
+            },
+            {
+                "l1_id": 131,
+                "l1_name": "304 Materials, Mask Making",
+                "children": [
+                    {
+                        "id": 1453,
+                        "name": "Mask plate blanks; Glass"
+                    }
+                ]
+            },
+            {
+                "l1_id": 134,
+                "l1_name": "307 Materials, Process",
+                "children": [
+                    {
+                        "id": 1466,
+                        "name": "Photo Masks; Finished or Patterned"
+                    }
+                ]
+            },
+            {
+                "l1_id": 135,
+                "l1_name": "308 Materials, Substrate",
+                "children": [
+                    {
+                        "id": 1472,
+                        "name": "Compound Semiconductor substrates (GaAs on Silicon; GaN; InP; SiGe, etc.)"
+                    }
+                ]
+            },
+            {
+                "l1_id": 137,
+                "l1_name": "400 Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 1500,
+                        "name": "Lamps (non Lithography), all type UV; LED and other"
+                    },
+                    {
+                        "id": 1501,
+                        "name": "Lamps for Lithography"
+                    },
+                    {
+                        "id": 1510,
+                        "name": "Vacuum Systems Components & Accessories (optical monitors; Sputtering target fixtures; lubricants; p"
+                    }
+                ]
+            },
+            {
+                "l1_id": 138,
+                "l1_name": "401 Sub-systems",
+                "children": [
+                    {
+                        "id": 1515,
+                        "name": "Exposure; Illumination Sources - Laser; Lamp; X-ray & other"
+                    }
+                ]
+            },
+            {
+                "l1_id": 146,
+                "l1_name": "700 Manufacturing Services",
+                "children": [
+                    {
+                        "id": 1574,
+                        "name": "Mask Making Fabrication and Repair"
+                    },
+                    {
+                        "id": 1582,
+                        "name": "Used; Rental Equipment; Inventory Reduction, Appraisal - Brokers; Resellers"
+                    }
+                ]
+            },
+            {
+                "l1_id": 153,
+                "l1_name": "900 Support Products",
+                "children": [
+                    {
+                        "id": 1643,
+                        "name": "Laboratory Apparatus and Supplies"
+                    }
+                ]
+            }
+        ]
+    }
+]
