@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { visibleCategories, allCategories } from "../categories.js";
+import { parseOverview, relevanceLevel } from "../overview.js";
 
 const FALLBACK_ABOUT = "Semiconductor technology and equipment supplier.";
 
@@ -41,17 +42,11 @@ function Scores({ item }) {
   );
 }
 
-function Overview({ text }) {
+function ClampedText({ text, longThreshold = 180 }) {
+  // Extracted unchanged from the old Overview component so legacy records
+  // keep the exact same clamp/toggle behavior they always had.
   const [open, setOpen] = useState(false);
-  if (!text || text === FALLBACK_ABOUT) {
-    return <div className="overview" style={{ fontStyle: "italic", opacity: 0.7 }}>
-      No overview provided by this exhibitor.
-    </div>;
-  }
-  // Two-line clamp by default. The old collapsed-by-default expander hid
-  // everything, so scanning a list meant clicking every card; a clamped
-  // preview lets you skim and only expand what looks promising.
-  const longEnough = text.length > 180;
+  const longEnough = text.length > longThreshold;
   return (
     <div>
       <div className={`overview${open || !longEnough ? "" : " overview-clamp"}`}>{text}</div>
@@ -59,6 +54,62 @@ function Overview({ text }) {
         <button className="overview-toggle" onClick={() => setOpen((v) => !v)}>
           {open ? "Show less" : "Read more"}
         </button>
+      )}
+    </div>
+  );
+}
+
+function InfoBadges({ parsed }) {
+  if (!parsed.booth && !parsed.valueChain && !parsed.relevance) return null;
+  const level = relevanceLevel(parsed.relevance);
+  return (
+    <div className="badge-row">
+      {parsed.booth && <span className="badge">Booth {parsed.booth}</span>}
+      {parsed.valueChain && <span className="badge">{parsed.valueChain}</span>}
+      {parsed.relevance && (
+        <span className={`badge badge-relevance${level ? ` is-${level}` : ""}`}>
+          Relevance: {parsed.relevance}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function TagGroup({ title, items }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div className="overview-subsection">
+      <div className="overview-subsection-label">{title}</div>
+      <div className="tags">
+        {items.map((item, i) => <span key={i} className="tag">{item}</span>)}
+      </div>
+    </div>
+  );
+}
+
+function OverviewSection({ about }) {
+  const parsed = useMemo(() => parseOverview(about), [about]);
+
+  if (!parsed.structured) {
+    // Legacy format - identical behavior to the original Overview component.
+    if (!parsed.summary || parsed.summary === FALLBACK_ABOUT) {
+      return <div className="overview overview-empty">No overview provided by this exhibitor.</div>;
+    }
+    return <ClampedText text={parsed.summary} />;
+  }
+
+  return (
+    <div className="overview-structured">
+      {parsed.summary && <ClampedText text={parsed.summary} />}
+      <InfoBadges parsed={parsed} />
+      <TagGroup title="Key Capabilities" items={parsed.capabilities} />
+      <TagGroup title="Technical Expertise" items={parsed.technicalExpertise} />
+      <TagGroup title="End Markets" items={parsed.endMarkets} />
+      {parsed.indiaPresence && (
+        <div className="callout">
+          <div className="callout-label">India Presence</div>
+          <div className="callout-body">{parsed.indiaPresence}</div>
+        </div>
       )}
     </div>
   );
@@ -142,7 +193,7 @@ export default function ResultCard({ item, filters }) {
         </div>
       )}
 
-      <Overview text={item.about} />
+      <OverviewSection about={item.about} />
       <CategoryTags item={item} filters={filters} />
 
       {(item.website || sources.length > 1) && (

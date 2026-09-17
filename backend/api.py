@@ -23,7 +23,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.search_engine import SourcingSearchEngine
 
-DATA_PATH = os.environ.get("DATA_PATH", "data/semi_suppliers.json")
+DATA_PATH = os.environ.get("DATA_PATH", "data/final_combined_suppliers.json")
 TAXONOMY_PATH = os.environ.get("TAXONOMY_PATH", "data/categories.json")
 # Comma-separated list, e.g. "https://sourcing-web.onrender.com,http://localhost:5173"
 ALLOWED_ORIGINS = [o.strip() for o in os.environ.get(

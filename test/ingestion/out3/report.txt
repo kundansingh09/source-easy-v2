@@ -1,0 +1,52 @@
+============================================================
+SEMICON India 2026 -- eBooth profile report
+============================================================
+Total companies: 548
+
+Fetch status:
+  no-url         6  (1.1%)
+  ok             542  (98.9%)
+
+FIELD       FILLED   EMPTY  % FILLED
+------------------------------------------------------------
+name           548       0    100.0%  <- key
+booth          542       6     98.9%  <- key
+website        495      53     90.3%  <- key
+address        541       7     98.7%
+overview       178     370     32.5%
+------------------------------------------------------------
+Complete on name+booth+website: 495 / 548 (90.3%)
+
+Missing website (53 total), first 30:
+  - 3M INDIA LIMITED
+  - AGEM Innovation Private Limited
+  - Air Liquide India Holding Pvt Ltd
+  - AMD India Private Limited
+  - Assam Industrial Development Corporation Limited (Government of Assam)
+  - Assigned
+  - Available
+  - Bergen Systems Pvt. Ltd.
+  - Brain Domain Pte Ltd
+  - CALIBER INTERCONNECTS PRIVATE LTD
+  - CeramTec GmbH
+  - Chukoh Chemical Industries Limited
+  - DCAS Technologies
+  - DeepLase Technologies
+  - Delta Electronics India Pvt Ltd
+  - Department of Industries, Govt. of Bihar
+  - DTECH PRODUCTS PVT LTD
+  - GERB Vibration Control Systems Pvt Ltd
+  - Government of Telangana
+  - GRUNDFOS PUMPS INDIA PVT LTD
+  - Guidance Tamil Nadu
+  - HANKOOM WATTTECH ENERGY INDIA PRIVATE LIMITED
+  - Honeywell International India PVT LTD
+  - Indian Institute of Information Technology and Management Kerala
+  - Iwate Industry Promotion Center
+  - JSR Electronic Materials Singapore Pte Ltd
+  - Karnataka Innovation and Technology Society, Government of Karnataka
+  - Lasertec U.S.A., Inc.
+  - Lindstrom India
+  - Map It
+
+============================================================

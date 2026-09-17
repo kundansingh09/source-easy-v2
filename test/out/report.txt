@@ -1,0 +1,65 @@
+==============================================================
+SEMICON india2026 -- EXHIBITOR COMPLETENESS REPORT
+==============================================================
+Total unique exhibitors: 548
+
+FIELD         FILLED   EMPTY  % FILLED
+--------------------------------------------------------------
+name             548       0    100.0%  <- key
+booth            542       6     98.9%  <- key
+website           20     528      3.6%  <- key
+address           12     536      2.2%
+overview           2     546      0.4%
+country            3     545      0.5%
+email              0     548      0.0%
+phone              7     541      1.3%
+--------------------------------------------------------------
+Complete on all 3 key fields (name+booth+website): 20 / 548  (3.6%)
+
+By hall (mapid):
+  633|634        548
+
+Portal page resolution:
+  404            7
+  no-portal-listed 6
+  skipped        522
+  slug-guessed   13
+
+Missing website (528 total), first 25:
+  - AGC Asia Pacific (India) Pvt. Ltd.
+  - AGEM Innovation Private Limited
+  - Agilent Technologies
+  - Agnisys Technology Pvt. Ltd
+  - AGNIT Semiconductors Pvt Ltd
+  - AGRU Plastic Technology Pvt Ltd
+  - AHEESA DIGITAL INNOVATIONS PRIVATE LIMITED
+  - Aimil Ltd
+  - Air Liquide India Holding Pvt Ltd
+  - Air Water India Pvt Ltd
+  - AirLife Gases Pvt. Ltd
+  - AIRTECH SYSTEMS INDIA PVT LTD
+  - Akribis Systems Pte Ltd
+  - Akros Trading India Pvt Ltd
+  - ALIGNED TEST PTE LTD
+  - ALLIED RESOURCING
+  - AMD India Private Limited
+  - Ami Polymer
+  - Amity University Uttar Pradesh Noida
+  - Ample Semiconductors Private Limited
+  - ANANANT SYSTEMS PRIVATE LIMITED
+  - Andhra Pradesh Economic Development Board - Govt of Andhra Pradesh
+  - ANEMO PRIME
+  - Anora Instrumentation Private Limited
+  - Ansell India Protective Products Pvt Ltd
+
+Missing booth (6 total), first 25:
+  - Assigned
+  - Available
+  - Map It
+  - My Exhibitors
+  - Reserved
+  - Search Result
+
+Rows with no portal link in the source at all: 6 (website/overview will be empty for these by design)
+
+==============================================================

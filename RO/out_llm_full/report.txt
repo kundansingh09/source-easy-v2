@@ -1,0 +1,23 @@
+============================================================
+REFINED OVERVIEW GENERATION -- REPORT
+============================================================
+Total companies: 542
+
+Status breakdown:
+  empty-input            90  (16.6%)
+  ok                     452  (83.4%)
+
+Of 452 successful:
+  empty capabilities        72 (15.9%)
+  empty summary              11
+  rows with any (inferred)   3 (0.7%)
+  total (inferred) fields    10
+
+semiconductor_relevance distribution:
+  High       178  (39.4%)
+  Medium     155  (34.3%)
+  Low        68  (15.0%)
+  None       50  (11.1%)
+  unset      1  (0.2%)
+
+============================================================
