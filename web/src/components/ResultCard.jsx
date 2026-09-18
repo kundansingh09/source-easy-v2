@@ -65,12 +65,16 @@ function Scores({ item }) {
 // (badge shown) until then so nothing silently disappears.
 const SHOW_RELEVANCE_BADGE = true;
 
-function InfoBadges({ parsed }) {
+function InfoBadges({ parsed, country }) {
   const showRelevance = SHOW_RELEVANCE_BADGE && !!parsed.relevance;
-  if (!parsed.booth && !parsed.valueChain && !showRelevance) return null;
+  const validCountry = country && country !== "Unknown";
+
+  if (!parsed.booth && !parsed.valueChain && !showRelevance && !validCountry) return null;
   const level = relevanceLevel(parsed.relevance);
+  
   return (
     <div className="badge-row">
+      {validCountry && <span className="badge">Country: {country}</span>}
       {parsed.booth && <span className="badge">Booth: {parsed.booth}</span>}
       {parsed.valueChain && <span className="badge">Segment: {parsed.valueChain}</span>}
       {showRelevance && (
@@ -206,12 +210,15 @@ function CategoryTags({ item, filters }) {
   );
 }
 
-function CardLinks({ item, sources }) {
-  if (!item.website && sources.length <= 1) return null;
+function CardLinks({ item, sources, hasOverview }) {
+  const showSemiconProfile = hasOverview && item.url && item.url !== "#";
+  
+  if (!showSemiconProfile && sources.length <= 1) return null;
+  
   return (
     <div className="card-links">
-      {item.website && (
-        <a href={item.website} target="_blank" rel="noopener noreferrer">Website ↗</a>
+      {showSemiconProfile && (
+        <a href={item.url} target="_blank" rel="noopener noreferrer">Semicon Profile ↗</a>
       )}
       {sources.length > 1 &&
         sources
@@ -230,14 +237,16 @@ export default function ResultCard({ item, filters }) {
   const locations = item.locations || [];
   const sources = item.sources || [];
   const parsed = useMemo(() => parseOverview(item.about), [item.about]);
+  
+  const hasOverview = parsed.structured || (parsed.summary && parsed.summary !== FALLBACK_ABOUT);
 
   return (
     <article className="card">
       <div className="card-top">
         <div style={{ minWidth: 0 }}>
           <h3 className="card-name">
-            {item.url && item.url !== "#" ? (
-              <a href={item.url} target="_blank" rel="noopener noreferrer">{item.company_name}</a>
+            {item.website && item.website !== "#" ? (
+              <a href={item.website} target="_blank" rel="noopener noreferrer">{item.company_name}</a>
             ) : (
               item.company_name
             )}
@@ -268,9 +277,9 @@ export default function ResultCard({ item, filters }) {
           above the overview - they're the scannable, glanceable facts;
           the free-text overview is the heaviest read, so it goes last and
           collapsed. */}
-      <InfoBadges parsed={parsed} />
+      <InfoBadges parsed={parsed} country={item.hq_country} />
       <CategoryTags item={item} filters={filters} />
-      <CardLinks item={item} sources={sources} />
+      <CardLinks item={item} sources={sources} hasOverview={hasOverview} />
 
       <OverviewSection about={item.about} />
     </article>
