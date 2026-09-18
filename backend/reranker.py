@@ -31,6 +31,7 @@ is inside the noise), at the cost of scores that no longer read as 0-1.
 
 import json
 import os
+import time
 
 from openai import OpenAI
 
@@ -219,9 +220,10 @@ def rerank_with_llm(query, hybrid_results, alpha=DEFAULT_ALPHA, top_n=None,
         return hybrid_results[:top_n] if top_n else hybrid_results
 
     alpha = min(1.0, max(0.0, float(alpha)))
-    client = client or OpenAI()  # reads OPENAI_API_KEY from env
+    client = client or OpenAI(timeout=8.0)  # reads OPENAI_API_KEY from env
 
     try:
+        t0 = time.perf_counter()
         resp = client.chat.completions.create(
             model=model or RERANK_MODEL,
             temperature=temperature,
@@ -233,6 +235,9 @@ def rerank_with_llm(query, hybrid_results, alpha=DEFAULT_ALPHA, top_n=None,
                             f"{_format_candidates(hybrid_results)}"},
             ],
         )
+        llm_ms = (time.perf_counter() - t0) * 1000
+        print(f"[DEBUG] OpenAI Rerank Time: {llm_ms:.2f} ms")
+        
         judged = _parse(resp.choices[0].message.content)
         if not judged:
             raise ValueError("judge returned no usable scores")

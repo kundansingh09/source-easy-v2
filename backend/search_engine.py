@@ -28,6 +28,7 @@ never passed rerank=True, the break was invisible.
 import json
 import os
 import threading
+import time
 from collections import Counter
 
 from qdrant_client import QdrantClient, models
@@ -451,7 +452,7 @@ class SourcingSearchEngine:
                cat_l1_ids=None, cat_l2_ids=None, limit: int = 5,
                candidates: int = 50, fusion: str = "rrf",
                rerank: bool = False, alpha: float = 0.4,
-               rerank_depth: int = 20, offset: int = 0,
+               rerank_depth: int = 12, offset: int = 0,
                with_total: bool = False):
         """Fork: query present -> hybrid retrieval; query empty -> filter browse.
 
@@ -484,8 +485,11 @@ class SourcingSearchEngine:
         # verified empirically. Inside the branches it constrains the vector
         # search itself, so you get `limit` matching results rather than
         # top-k-then-discard (which silently under-returns).
+        t0 = time.perf_counter()
         response = self._hybrid_query(query, query_filter, candidates,
                                       fetch_n, fusion_method)
+        qdrant_ms = (time.perf_counter() - t0) * 1000
+        print(f"[DEBUG] Qdrant Search Time: {qdrant_ms:.2f} ms")
 
         results = [self._shape(r.id, r.payload, r.score) for r in response.points]
 
