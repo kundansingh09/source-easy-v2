@@ -125,19 +125,18 @@ export default function FilterPanel({
 
         <div className="facet-group">
           <div className="facet-label">Ranking</div>
-          <label className="toggle-row">
-            <span>LLM rerank</span>
-            <input
-              type="checkbox"
-              checked={filters.rerank}
-              disabled={!rerankAvailable}
-              onChange={(e) => setFilters((p) => ({ ...p, rerank: e.target.checked }))}
-            />
-          </label>
-          {!rerankAvailable && (
-            <div className="hint">Unavailable — the server has no OPENAI_API_KEY set.</div>
+          {rerankAvailable ? (
+            <div className="hint" style={{ marginTop: 0 }}>
+              LLM reranking runs automatically for text searches — no need to
+              turn it on. It never runs for filter-only browsing.
+            </div>
+          ) : (
+            <div className="hint" style={{ marginTop: 0 }}>
+              LLM reranking is unavailable — the server has no OPENAI_API_KEY
+              set. Searches use hybrid retrieval only.
+            </div>
           )}
-          {filters.rerank && (
+          {rerankAvailable && (
             <>
               <label className="toggle-row" style={{ marginTop: 10 }}>
                 <span>α (retrieval weight)</span>

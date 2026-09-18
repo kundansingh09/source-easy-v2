@@ -10,7 +10,10 @@ const CLEARED = {
   countries: [],
   l1: [],
   l2: [],
-  rerank: false,
+  // alpha stays user-tunable (retrieval-vs-judge weight); whether rerank
+  // RUNS AT ALL is no longer a manual choice - see runSearch. Mentor's ask:
+  // "don't need to select in filters", it should just happen for a real
+  // search query and never for filter-only browsing.
   alpha: 0.4,
   // The query that produced the CURRENT results, as distinct from whatever
   // is sitting in the input box. Search now runs on an explicit submit, so
@@ -19,6 +22,15 @@ const CLEARED = {
   // against a query that was never run.
   appliedQuery: "",
 };
+
+// How long to wait after the last filter/query change before actually
+// firing a search. Filter clicks used to trigger a call immediately and
+// unconditionally - harmless when a query search was a cheap hybrid
+// lookup, but now that reranking runs automatically for every text query,
+// three quick filter clicks while a query is active would fire three
+// separate paid LLM calls, with only the last one's result kept. This
+// collapses a burst of rapid changes into one actual call.
+const SEARCH_DEBOUNCE_MS = 400;
 
 // The default trade show the app opens with
 const DEFAULT_EXPO = "India expo";
@@ -39,6 +51,7 @@ export default function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const reqId = useRef(0);
+  const debounceRef = useRef(null);
 
   useEffect(() => {
     api.health().then(setHealth).catch((e) => setError(e.message));
@@ -75,7 +88,13 @@ export default function App() {
         countries: f.countries, l1: f.l1, l2: f.l2,
         limit: isBrowse ? PAGE_SIZE : 10,
         offset: isBrowse ? pageIndex * PAGE_SIZE : 0,
-        rerank: f.rerank, alpha: f.alpha, fusion: "rrf",
+        // Rerank automatically for any real query; never for filter-only
+        // browsing (there's nothing to rerank - browse is sorted
+        // alphabetically, not ranked, and always has been). The server
+        // degrades this to false on its own if no key is configured, so
+        // this is safe to send unconditionally.
+        rerank: !isBrowse,
+        alpha: f.alpha, fusion: "rrf",
       });
       // Drop responses that a newer request has already superseded, so a
       // slow rerank call can't overwrite fresher results.
@@ -87,14 +106,22 @@ export default function App() {
     }
   }, []);
 
-  // Filter changes re-run immediately (they're cheap and unambiguous);
-  // text changes wait for an explicit submit.
+  // Debounced: any change here (filter click, applied query, alpha) waits
+  // SEARCH_DEBOUNCE_MS of quiet before actually firing. A burst of changes
+  // within that window collapses to one call - the abuse case this exists
+  // for is a user (or a script) clicking several filters in quick
+  // succession while a query is active, which would otherwise fire one
+  // full rerank per click.
   useEffect(() => {
     if (!health || health.status !== "ok") return;
-    setPage(0);
-    runSearch(filters, 0);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      setPage(0);
+      runSearch(filters, 0);
+    }, SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(debounceRef.current);
   }, [health, filters.expo, filters.countries, filters.l1, filters.l2,
-      filters.rerank, filters.alpha, filters.appliedQuery]);
+      filters.alpha, filters.appliedQuery]);
 
   const submit = (e) => {
     e?.preventDefault();
@@ -140,6 +167,15 @@ export default function App() {
   const isBrowse = data?.mode === "browse";
   const pages = isBrowse ? Math.ceil((data?.total || 0) / PAGE_SIZE) : 1;
 
+  // Rerank runs automatically for any real query (see runSearch), so
+  // "loading a search with a query in the box" now specifically means
+  // "waiting on the LLM judge", not just a fast DB lookup - the button
+  // should say so rather than a generic "Searching…".
+  const isProcessingLLM = loading && !!filters.appliedQuery.trim();
+  const searchButtonLabel = isProcessingLLM
+    ? "Processing"
+    : loading ? "Searching…" : "Search";
+
   return (
     <>
       <header className="header">
@@ -167,7 +203,8 @@ export default function App() {
               )}
             </div>
             <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? "Searching…" : "Search"}
+              {isProcessingLLM && <span className="spinner" aria-hidden="true" />}
+              {searchButtonLabel}
             </button>
             <button type="button" className="btn btn-filters"
                     onClick={() => setDrawerOpen(true)}>

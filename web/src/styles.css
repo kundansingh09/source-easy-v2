@@ -136,6 +136,8 @@ a:hover { text-decoration: underline; }
   color: var(--text);
   font-weight: 500;
   white-space: nowrap;
+  display: inline-flex;
+    align-items: center;
   transition: background 0.12s, border-color 0.12s;
 }
 .btn:hover:not(:disabled) { background: var(--surface-alt); border-color: var(--text-faint); }
@@ -148,6 +150,29 @@ a:hover { text-decoration: underline; }
 }
 .btn-primary:hover:not(:disabled) { background: #2850bd; border-color: #2850bd; }
 
+.spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin-right: 7px;
+  vertical-align: -2px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
 .btn-sm { padding: 6px 11px; font-size: 13px; }
 
 .btn-ghost {
@@ -506,8 +531,8 @@ a:hover { text-decoration: underline; }
 
 .overview-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 4;
+    line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -614,7 +639,34 @@ a:hover { text-decoration: underline; }
   .brand-sub { display: none; }
 
   .header-inner { flex-wrap: wrap; padding: 10px 14px; gap: 10px; }
-  .searchbar { order: 3; width: 100%; flex-basis: 100%; }
+/* Input on its own full-width row; the two buttons wrap onto the row
+     below it as a group. flex-wrap does this without extra markup: the
+     input's flex-basis:100% forces a break after it, and the two buttons
+     (still flex:0 auto width) flow onto the next line together. */
+.searchbar {
+  order: 3;
+  width: 100%;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.search-input-wrap {
+  flex-basis: 100%;
+}
+
+/* 1.5x the desktop input height (10px vertical padding * 1.5 = 15px,
+     giving ~48px total tap target incl. border - comfortable for touch). */
+.search-input {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 16px;
+}
+
+.searchbar .btn {
+  flex: 1;
+  justify-content: center;
+}
 
   /* Sidebar becomes an off-canvas drawer. Kept in the DOM (not unmounted)
      so filter state and scroll position survive open/close. */
