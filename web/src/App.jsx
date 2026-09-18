@@ -10,10 +10,9 @@ const CLEARED = {
   countries: [],
   l1: [],
   l2: [],
-  // alpha stays user-tunable (retrieval-vs-judge weight); whether rerank
-  // RUNS AT ALL is no longer a manual choice - see runSearch. Mentor's ask:
-  // "don't need to select in filters", it should just happen for a real
-  // search query and never for filter-only browsing.
+  // Fixed for now, not user-tunable - the slider was removed from
+  // FilterPanel per the "keep it hard 0.4 for now" decision. Whether
+  // rerank RUNS AT ALL was already not a manual choice - see runSearch.
   alpha: 0.4,
   // The query that produced the CURRENT results, as distinct from whatever
   // is sitting in the input box. Search now runs on an explicit submit, so

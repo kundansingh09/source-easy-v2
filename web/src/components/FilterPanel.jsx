@@ -89,7 +89,18 @@ export default function FilterPanel({
           <select
             className="select"
             value={filters.expo || "All"}
-            onChange={(e) => setFilters((p) => ({ ...p, expo: e.target.value }))}
+            onChange={(e) => {
+              const newExpo = e.target.value;
+              setFilters((p) => ({
+                ...p,
+                expo: newExpo,
+                // Category/Subcategory are hidden while India expo is
+                // selected (see below) - clear them on switching IN so a
+                // filter picked earlier doesn't keep narrowing results
+                // invisibly, with no control left to see or remove it.
+                ...(newExpo === "India expo" ? { l1: [], l2: [] } : {}),
+              }));
+            }}
           >
             <option value="All">All shows ({totalIndexed})</option>
             {f.expos.map((o) => (
@@ -106,22 +117,26 @@ export default function FilterPanel({
           onToggle={(v) => toggleIn("countries", v)}
         />
 
-        <FacetList
-          label="Category"
-          options={f.l1}
-          selected={filters.l1}
-          onToggle={(v) => toggleIn("l1", v)}
-          idKey="id"
-        />
+        {filters.expo !== "India expo" && (
+          <>
+            <FacetList
+              label="Category"
+              options={f.l1}
+              selected={filters.l1}
+              onToggle={(v) => toggleIn("l1", v)}
+              idKey="id"
+            />
 
-        <FacetList
-          label="Subcategory"
-          options={f.l2}
-          selected={filters.l2}
-          onToggle={(v) => toggleIn("l2", v)}
-          idKey="id"
-          initial={8}
-        />
+            <FacetList
+              label="Subcategory"
+              options={f.l2}
+              selected={filters.l2}
+              onToggle={(v) => toggleIn("l2", v)}
+              idKey="id"
+              initial={8}
+            />
+          </>
+        )}
 
         <div className="facet-group">
           <div className="facet-label">Ranking</div>
@@ -135,27 +150,6 @@ export default function FilterPanel({
               LLM reranking is unavailable — the server has no OPENAI_API_KEY
               set. Searches use hybrid retrieval only.
             </div>
-          )}
-          {rerankAvailable && (
-            <>
-              <label className="toggle-row" style={{ marginTop: 10 }}>
-                <span>α (retrieval weight)</span>
-                <strong style={{ fontVariantNumeric: "tabular-nums" }}>
-                  {filters.alpha.toFixed(2)}
-                </strong>
-              </label>
-              <input
-                className="range"
-                type="range" min="0" max="1" step="0.05"
-                value={filters.alpha}
-                onChange={(e) => setFilters((p) => ({ ...p, alpha: Number(e.target.value) }))}
-              />
-              <div className="hint">
-                1.0 ignores the judge; 0.0 lets it fully override retrieval. 0.0 is the
-                riskiest setting — a weak judge with no retrieval anchor ranks worse than
-                no rerank at all.
-              </div>
-            </>
           )}
         </div>
       </aside>

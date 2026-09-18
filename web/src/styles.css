@@ -455,6 +455,10 @@ a:hover { text-decoration: underline; }
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  /* was unset - .badge-row typically follows straight after .card-top
+       (card-meta has no margin-bottom of its own), so with zero margin here
+       it sat flush against the HQ/Show line with no visible gap at all. */
+    margin-top: 10px;
 }
 
 .badge {
@@ -545,6 +549,18 @@ a:hover { text-decoration: underline; }
   color: var(--accent);
   font-size: 13px;
   font-weight: 500;
+  /* .overview-structured is a flex column with the default align-items:
+       stretch. ClampedText's OWN "Read more" button never shows this bug -
+       it's nested inside a plain (non-flex) div, so normal block flow keeps
+       it left-aligned at its natural width. But the SEPARATE "Read more
+       (capabilities, expertise, end markets)" button - rendered when the
+       summary is too short to need its own toggle - is a DIRECT child of
+       that flex container, so it stretches to the full row width, and a
+       <button>'s default text-align is center - hence it rendering centered
+       while the other one didn't. align-self overrides the stretch for just
+       this element, without touching how the other flex children (the
+       summary div, TextGroup sections, the callout) lay out. */
+    align-self: flex-start;
 }
 .overview-toggle:hover { text-decoration: underline; }
 
