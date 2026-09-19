@@ -452,8 +452,7 @@ class SourcingSearchEngine:
                cat_l1_ids=None, cat_l2_ids=None, limit: int = 5,
                candidates: int = 50, fusion: str = "rrf",
                rerank: bool = False, alpha: float = 0.4,
-               rerank_depth: int = 12, offset: int = 0,
-               with_total: bool = False):
+               offset: int = 0, with_total: bool = False):
         """Fork: query present -> hybrid retrieval; query empty -> filter browse.
 
         `rerank_depth` is deliberately separate from `candidates`. Prefetch
@@ -463,6 +462,9 @@ class SourcingSearchEngine:
         fusion had already ranked out of contention.
         """
         query = (query or "").strip()
+
+        # Dynamically scale rerank depth to 2x the display limit (minimum 20)
+        rerank_depth = max(limit * 2, 20)
 
         # ---- Task 2: zero-query fork -------------------------------------
         if not query:
@@ -533,5 +535,5 @@ class SourcingSearchEngine:
 if __name__ == "__main__":
     engine = SourcingSearchEngine()
     print(f"{engine.count()} suppliers indexed")
-    for row in engine.search("wafer defect inspection", limit=5):
+    for row in engine.search("wafer defect inspection", limit=10):
         print(f"  {row['score']:<8} {row['hq_country']:<16} {row['company_name']}")
