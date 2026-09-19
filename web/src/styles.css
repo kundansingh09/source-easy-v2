@@ -113,6 +113,16 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
+/* Disable default WebKit search clear button to prevent duplicate X */
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-results-button,
+.search-input::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
 .search-clear {
   position: absolute;
   right: 6px;
@@ -714,15 +724,6 @@ a:hover { text-decoration: underline; }
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 16px;
-}
-/* Disable default WebKit search clear button to prevent duplicate X */
-.search-input::-webkit-search-cancel-button,
-.search-input::-webkit-search-decoration,
-.search-input::-webkit-search-results-button,
-.search-input::-webkit-search-results-decoration {
-  -webkit-appearance: none;
-  appearance: none;
-  display: none;
 }
 
 .searchbar .btn {
