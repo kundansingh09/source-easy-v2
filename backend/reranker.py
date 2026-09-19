@@ -81,7 +81,7 @@ Apply this ONLY when the query expresses a geographic requirement (names a \
 country or region, or says "local", "domestic", "nearshore", "avoid X"):
   - HQ satisfies the requirement -> no adjustment.
   - HQ is in the same region but the wrong country (query says Taiwan, HQ is \
-Korea) -> cap relevance_score at 0.55 and say so in the reasoning.
+Korea) -> cap relevance_score at 0.55.
   - HQ is on a different continent than required -> cap at 0.35.
   - HQ is "Unknown" -> cap at 0.60. Do not guess a location from the company \
 name; unverified geography is a procurement risk, not a neutral fact.
@@ -110,11 +110,12 @@ manufacture a plausible-looking ranking out of a bad shortlist - the buyer \
 needs to know the search failed.
 
 # Output contract
-Return ONLY a JSON object, no prose, no markdown fences:
-{"results": [{"id": <int, copied exactly from the record>, \
-"relevance_score": <float 0.0-1.0>, \
-"reasoning": "<=20 words, cite the specific evidence or the specific gap>"}]}
-Include every id from the shortlist exactly once. Never invent an id.\
+Return ONLY a JSON object, no prose, no markdown fences, no explanation of any \
+kind - only the score. Explanations are handled by a separate call and must \
+never appear here.
+{"results": [[<id, int, copied exactly from the record>, <relevance_score, float 0.0-1.0>], ...]}
+Include every id from the shortlist exactly once, each as a 2-element \
+[id, relevance_score] pair. Never invent an id.\
 """
 
 
@@ -170,22 +171,36 @@ def _format_candidates(candidates):
 
 
 def _parse(raw):
+    """Bare scorer output only: {"results": [[id, score], ...]}. No reasoning
+    field exists on this path by design - explanations are a separate call
+    (see explain_results below), never generated here.
+
+    Accepts the compact [id, score] pair primarily, but also tolerates the
+    old {"id":.., "relevance_score":..} object shape defensively: JSON mode
+    guarantees valid syntax, not that the model follows a schema change on
+    the first try, and a model that reverts to the old shape (or adds a
+    reasoning key we now ignore) should still parse cleanly rather than
+    silently losing that candidate's score.
+    """
     raw = raw.strip()
     if raw.startswith("```"):
         raw = raw.split("```")[1]
         raw = raw[4:] if raw.lower().startswith("json") else raw
     data = json.loads(raw.strip())
     rows = data["results"] if isinstance(data, dict) else data
+
     out = {}
     for row in rows:
         try:
-            score = float(row["relevance_score"])
-        except (KeyError, TypeError, ValueError):
+            if isinstance(row, (list, tuple)) and len(row) >= 2:
+                cid, score = row[0], row[1]
+            elif isinstance(row, dict):
+                cid, score = row["id"], row["relevance_score"]
+            else:
+                continue
+            out[int(cid)] = min(1.0, max(0.0, float(score)))
+        except (KeyError, TypeError, ValueError, IndexError):
             continue
-        out[int(row["id"])] = {
-            "relevance_score": min(1.0, max(0.0, score)),
-            "reasoning": str(row.get("reasoning", ""))[:200],
-        }
     return out
 
 
@@ -206,8 +221,12 @@ def rerank_with_llm(query, hybrid_results, alpha=DEFAULT_ALPHA, top_n=None,
         normalise_method: "minmax" (default, keeps final_score in 0-1) or
             "zscore" (scale-equalised, final_score unbounded).
 
-    Returns the same dicts, reordered, each with `retrieval_norm`, `llm_score`,
-    `llm_reason` and `final_score` added.
+    Returns the same dicts, reordered, each with `retrieval_norm`, `llm_score`
+    and `final_score` added. No `llm_reason` here by design - this path never
+    generates explanation text; that's a separate, on-demand call
+    (explain_results, below), wired to its own trigger elsewhere in the app.
+    If a caller needs a reason string on these dicts, populate it from that
+    call, not from this one.
 
     Never raises. Any failure - missing API key, network error, malformed JSON,
     a judge that skips ids - degrades to the original hybrid ordering, because
@@ -263,17 +282,19 @@ def rerank_with_llm(query, hybrid_results, alpha=DEFAULT_ALPHA, top_n=None,
     # Candidates the judge silently dropped keep their retrieval position
     # rather than being sent to the bottom by a 0.0 default - a parsing gap is
     # our problem, not evidence against the supplier.
-    llm_raw = [judged.get(c["id"], {}).get("relevance_score") for c in hybrid_results]
+    # judged is now a bare {id: score} dict (see _parse) - no nested lookup.
+    llm_raw = [judged.get(c["id"]) for c in hybrid_results]
     seen = [s for s in llm_raw if s is not None]
     fallback = sum(seen) / len(seen) if seen else 0.5
 
     for cand, rnorm, llm in zip(hybrid_results, normed, llm_raw):
-        hit = judged.get(cand["id"])
         score = fallback if llm is None else llm
         cand["retrieval_norm"] = round(rnorm, 4)
         cand["llm_score"] = None if llm is None else round(llm, 3)
-        cand["llm_reason"] = (hit or {}).get("reasoning") or ("not scored by judge"
-                                                             if llm is None else "")
+        # Explicitly None, not omitted: this path generates no explanation
+        # text by design. Populated later, if at all, by explain_results()
+        # via the app's own on-demand trigger - never guess/backfill here.
+        cand["llm_reason"] = None
         cand["final_score"] = round(alpha * rnorm + (1 - alpha) * score, 4)
 
     ranked = sorted(hybrid_results, key=lambda c: c["final_score"], reverse=True)
