@@ -63,7 +63,7 @@ function Scores({ item }) {
 // frontend can see - so this is a manual, data-driven call, not something
 // to guess at here. Flip this to false once you've checked it; left true
 // (badge shown) until then so nothing silently disappears.
-const SHOW_RELEVANCE_BADGE = true;
+const SHOW_RELEVANCE_BADGE = false;
 
 function InfoBadges({ parsed, country }) {
   const showRelevance = SHOW_RELEVANCE_BADGE && !!parsed.relevance;

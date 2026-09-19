@@ -1,0 +1,87 @@
+# ----------------------------------------------------------------------
+# DATA & OUTPUT FILES
+# ----------------------------------------------------------------------
+data/
+*.csv
+# If you want to keep some JSON config files but ignore scraped data, 
+# you can specifically ignore scraped files instead of all JSONs:
+# *2025.json
+# *2026.json
+
+# ----------------------------------------------------------------------
+# PYTHON (Web Scraping / Backend)
+# ----------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# ----------------------------------------------------------------------
+# NODE.JS & REACT (Frontend UI)
+# ----------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+build/
+dist/
+.next/
+out/
+
+# ----------------------------------------------------------------------
+# OS & ENVIRONMENT
+# ----------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ----------------------------------------------------------------------
+# IDEs & EDITORS
+# ----------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo

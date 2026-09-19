@@ -1,1 +1,1017 @@
-[]
+[
+    {
+        "company_name": "Advanced Semiconductor Equipment Technology Singapore",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=0&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=663309",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.asets.com.sg",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "Aehr Test Systems",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=1&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=631019",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.aehr.com",
+        "cat_l1_ids": [
+            351,
+            361
+        ],
+        "cat_l1_names": [
+            "208 装置、テスト / Test Equipment",
+            "309 材料、テスト / Test Materials"
+        ],
+        "cat_l2_ids": [
+            3713,
+            3714,
+            3719,
+            3730,
+            3731,
+            3812,
+            3813
+        ],
+        "cat_l2_names": [
+            "バーンインアクセサリ装置 / Burn-In Accessory Systems",
+            "バーンイン装置 / Burn-In Systems",
+            "不良解析装置 / Failure Analysis Systems",
+            "プローブカードメンテナンス及び解析装置 / Probe Card Maintenance and Analysis Systems",
+            "分析；回路/マニュアル/電子ビーム/光学/ウェーハプローバを含むプローブ装置 / Probing Equipment incl. Analytical; Circuit;  Manual; E-Beam; Optical; Wafer Probers",
+            "バーンインボード；パフォーマンスボード（低；高温用途及びセラミック）/ Burn-In Boards; Performance Boards (incl. Low; High Temp and Ceramic)",
+            "プローブカード；DUTボード及び他のプローブ付属品（セラミック及び特定用途プローブカードを含む）/ Probe Cards; DUT boards and other probing accessories (incl Ceramic and Special Purpose Probe Cards)"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 351,
+                "l1_name": "208 装置、テスト / Test Equipment",
+                "children": [
+                    {
+                        "id": 3713,
+                        "name": "バーンインアクセサリ装置 / Burn-In Accessory Systems"
+                    },
+                    {
+                        "id": 3714,
+                        "name": "バーンイン装置 / Burn-In Systems"
+                    },
+                    {
+                        "id": 3719,
+                        "name": "不良解析装置 / Failure Analysis Systems"
+                    },
+                    {
+                        "id": 3730,
+                        "name": "プローブカードメンテナンス及び解析装置 / Probe Card Maintenance and Analysis Systems"
+                    },
+                    {
+                        "id": 3731,
+                        "name": "分析；回路/マニュアル/電子ビーム/光学/ウェーハプローバを含むプローブ装置 / Probing Equipment incl. Analytical; Circuit;  Manual; E-Beam; Optical; Wafer Probers"
+                    }
+                ]
+            },
+            {
+                "l1_id": 361,
+                "l1_name": "309 材料、テスト / Test Materials",
+                "children": [
+                    {
+                        "id": 3812,
+                        "name": "バーンインボード；パフォーマンスボード（低；高温用途及びセラミック）/ Burn-In Boards; Performance Boards (incl. Low; High Temp and Ceramic)"
+                    },
+                    {
+                        "id": 3813,
+                        "name": "プローブカード；DUTボード及び他のプローブ付属品（セラミック及び特定用途プローブカードを含む）/ Probe Cards; DUT boards and other probing accessories (incl Ceramic and Special Purpose Probe Cards)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "Aemulus",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=2&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=663399",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.aemulus.com",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "AGD",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=3&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=632927",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.agd-group.co.kr",
+        "cat_l1_ids": [
+            350,
+            362
+        ],
+        "cat_l1_names": [
+            "207 装置、プロセス / Process Equipment",
+            "400 部品、パーツと付属品 / Components, Parts & Accessories"
+        ],
+        "cat_l2_ids": [
+            3696,
+            3838
+        ],
+        "cat_l2_names": [
+            "クリーニング/洗浄/基板乾燥装置/ファブプロセス / Cleaning; Washing; Drying Equipment for Substrate, Fab Processing",
+            "センサ / Sensors"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 350,
+                "l1_name": "207 装置、プロセス / Process Equipment",
+                "children": [
+                    {
+                        "id": 3696,
+                        "name": "クリーニング/洗浄/基板乾燥装置/ファブプロセス / Cleaning; Washing; Drying Equipment for Substrate, Fab Processing"
+                    }
+                ]
+            },
+            {
+                "l1_id": 362,
+                "l1_name": "400 部品、パーツと付属品 / Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 3838,
+                        "name": "センサ / Sensors"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "AKONEER",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=4&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=662871",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "https://www.akoneer.com/",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "AlixLabs",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=5&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=662872",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "https://www.alixlabs.com/",
+        "cat_l1_ids": [
+            346,
+            347,
+            348,
+            350,
+            357,
+            373,
+            374
+        ],
+        "cat_l1_names": [
+            "203 装置、検査及び測定 / Inspection & Measurement Products",
+            "204 装置、MEMS / MEMS Equipment",
+            "205 装置、ナノテクノロジー / Nanotechnology Equipment and Tools",
+            "207 装置、プロセス / Process Equipment",
+            "305 材料、ナノテクノロジー / Nanotechnology Materials",
+            "700 製造サービス / Manufacturing Services",
+            "701 製造サービス、またはコンサルテング / Manufacturing Services or Consulting"
+        ],
+        "cat_l2_ids": [
+            3679,
+            3683,
+            3686,
+            3703,
+            3786,
+            3904,
+            3933,
+            3927
+        ],
+        "cat_l2_names": [
+            "ウェーハ：基板測定/トポロジ/ナノトポグラフィ/平坦度測定/結晶方位 / Wafer; Substrate Metrology; Topology; Nanotopography; Flatness Measurement; Crystalline Orientation",
+            "深堀ＲＩＥエッチング/ドライエッチング / Deep RIE etching; Dry Etching",
+            "装置/ナノテクノロジー機器 / Equipment, Nanotechnology Tools",
+            "エッチング/ストリッッピング/アッシング-ドライ及びウェット装置 / Etching; Stripping; Ashing - Dry and Wet Equipment",
+            "材料；ナノテクノロジー / Nanotechnology Materials",
+            "エッチング/ストリッッピング/クリーニングサービス / Etch; Strip; Cleaning Service",
+            "ナノテクノロジーIP開発/研究 / Nanotechnology Intellectual Property Development; Research",
+            "装置；ハードウェア、プロダクトデザイン、インテグレーションと製造 / Equipment; Hardware; Product Design, Integration and Manufacturing"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 346,
+                "l1_name": "203 装置、検査及び測定 / Inspection & Measurement Products",
+                "children": [
+                    {
+                        "id": 3679,
+                        "name": "ウェーハ：基板測定/トポロジ/ナノトポグラフィ/平坦度測定/結晶方位 / Wafer; Substrate Metrology; Topology; Nanotopography; Flatness Measurement; Crystalline Orientation"
+                    }
+                ]
+            },
+            {
+                "l1_id": 347,
+                "l1_name": "204 装置、MEMS / MEMS Equipment",
+                "children": [
+                    {
+                        "id": 3683,
+                        "name": "深堀ＲＩＥエッチング/ドライエッチング / Deep RIE etching; Dry Etching"
+                    }
+                ]
+            },
+            {
+                "l1_id": 348,
+                "l1_name": "205 装置、ナノテクノロジー / Nanotechnology Equipment and Tools",
+                "children": [
+                    {
+                        "id": 3686,
+                        "name": "装置/ナノテクノロジー機器 / Equipment, Nanotechnology Tools"
+                    }
+                ]
+            },
+            {
+                "l1_id": 350,
+                "l1_name": "207 装置、プロセス / Process Equipment",
+                "children": [
+                    {
+                        "id": 3703,
+                        "name": "エッチング/ストリッッピング/アッシング-ドライ及びウェット装置 / Etching; Stripping; Ashing - Dry and Wet Equipment"
+                    }
+                ]
+            },
+            {
+                "l1_id": 357,
+                "l1_name": "305 材料、ナノテクノロジー / Nanotechnology Materials",
+                "children": [
+                    {
+                        "id": 3786,
+                        "name": "材料；ナノテクノロジー / Nanotechnology Materials"
+                    }
+                ]
+            },
+            {
+                "l1_id": 373,
+                "l1_name": "700 製造サービス / Manufacturing Services",
+                "children": [
+                    {
+                        "id": 3904,
+                        "name": "エッチング/ストリッッピング/クリーニングサービス / Etch; Strip; Cleaning Service"
+                    }
+                ]
+            },
+            {
+                "l1_id": 374,
+                "l1_name": "701 製造サービス、またはコンサルテング / Manufacturing Services or Consulting",
+                "children": [
+                    {
+                        "id": 3933,
+                        "name": "ナノテクノロジーIP開発/研究 / Nanotechnology Intellectual Property Development; Research"
+                    },
+                    {
+                        "id": 3927,
+                        "name": "装置；ハードウェア、プロダクトデザイン、インテグレーションと製造 / Equipment; Hardware; Product Design, Integration and Manufacturing"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "AMFLO Fluid Systems & Components",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=6&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=649164",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.amfloco.com",
+        "cat_l1_ids": [
+            362,
+            366
+        ],
+        "cat_l1_names": [
+            "400 部品、パーツと付属品 / Components, Parts & Accessories",
+            "500 工場のモニタリングと制御システム(FMCS) / Factory Monitoring & Control Systems (FMCS)"
+        ],
+        "cat_l2_ids": [
+            3825,
+            3834,
+            3874
+        ],
+        "cat_l2_names": [
+            "流量調節計-バルブ；メータ-、ゲージ、レギュレータ、流量計（MFC）/ Flow Control Components - Valves; Meters; Gauges; Regulators; MFC's",
+            "パイプ、チューブ、ホース、フランジ、コネクタ、連結器、管継手 / Pipe; Tubing; Hose; Flanges; Connectors; Couplings; Plumbing Fittings",
+            "ガス取扱い-キャビネット/管理/供給システム / Gas Handling - Cabinets; Control; Supply Systems"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 362,
+                "l1_name": "400 部品、パーツと付属品 / Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 3825,
+                        "name": "流量調節計-バルブ；メータ-、ゲージ、レギュレータ、流量計（MFC）/ Flow Control Components - Valves; Meters; Gauges; Regulators; MFC's"
+                    },
+                    {
+                        "id": 3834,
+                        "name": "パイプ、チューブ、ホース、フランジ、コネクタ、連結器、管継手 / Pipe; Tubing; Hose; Flanges; Connectors; Couplings; Plumbing Fittings"
+                    }
+                ]
+            },
+            {
+                "l1_id": 366,
+                "l1_name": "500 工場のモニタリングと制御システム(FMCS) / Factory Monitoring & Control Systems (FMCS)",
+                "children": [
+                    {
+                        "id": 3874,
+                        "name": "ガス取扱い-キャビネット/管理/供給システム / Gas Handling - Cabinets; Control; Supply Systems"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "Anupam Rasayan India Limited",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=7&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=631133",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.anupamrasayan.com",
+        "cat_l1_ids": [
+            353,
+            354
+        ],
+        "cat_l1_names": [
+            "301 材料、化学物質と固体 / Chemicals & Solids",
+            "302 材料、フラットパネルディスプレイ / FPD Materials"
+        ],
+        "cat_l2_ids": [
+            3753,
+            3755,
+            3757,
+            3758,
+            3759,
+            3762,
+            3763,
+            3767,
+            3768
+        ],
+        "cat_l2_names": [
+            "酸；エッチング液 / Acids; Etchants",
+            "クリーニング薬品、溶剤、ストリッパー  / Cleaning Chemicals; Solvents; Strippers",
+            "ドーパント；液体または固体 / Dopants; liquid or solid",
+            "他の特定化学薬品 / Other Specialty Chemicals",
+            "フォトレジスト；現像及び補助剤（定着促進剤（HDMS)/プライマ；反射防止膜塗布（ARC)/BARC/TARCを含む）/ Photo Resist; Developers & Ancillaries (incl. Adhesion promoter (HMDS); Primer; Anti-Reflective Coat",
+            "表面保護材；塗布 / Surface protection material; coatings",
+            "アライメント膜材 / Alignment Film Materials",
+            "液晶材料 / Liquid Crystal Materials",
+            "偏光材 / Polarizer Materials"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 353,
+                "l1_name": "301 材料、化学物質と固体 / Chemicals & Solids",
+                "children": [
+                    {
+                        "id": 3753,
+                        "name": "酸；エッチング液 / Acids; Etchants"
+                    },
+                    {
+                        "id": 3755,
+                        "name": "クリーニング薬品、溶剤、ストリッパー  / Cleaning Chemicals; Solvents; Strippers"
+                    },
+                    {
+                        "id": 3757,
+                        "name": "ドーパント；液体または固体 / Dopants; liquid or solid"
+                    },
+                    {
+                        "id": 3758,
+                        "name": "他の特定化学薬品 / Other Specialty Chemicals"
+                    },
+                    {
+                        "id": 3759,
+                        "name": "フォトレジスト；現像及び補助剤（定着促進剤（HDMS)/プライマ；反射防止膜塗布（ARC)/BARC/TARCを含む）/ Photo Resist; Developers & Ancillaries (incl. Adhesion promoter (HMDS); Primer; Anti-Reflective Coat"
+                    },
+                    {
+                        "id": 3762,
+                        "name": "表面保護材；塗布 / Surface protection material; coatings"
+                    }
+                ]
+            },
+            {
+                "l1_id": 354,
+                "l1_name": "302 材料、フラットパネルディスプレイ / FPD Materials",
+                "children": [
+                    {
+                        "id": 3763,
+                        "name": "アライメント膜材 / Alignment Film Materials"
+                    },
+                    {
+                        "id": 3767,
+                        "name": "液晶材料 / Liquid Crystal Materials"
+                    },
+                    {
+                        "id": 3768,
+                        "name": "偏光材 / Polarizer Materials"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "APP",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=8&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=656759",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.applasma.com",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "Appentra Solutions",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=9&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=663196",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "https://www.codee.com",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "APT",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=10&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=662873",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "https://www.aptsrl.com",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    },
+    {
+        "company_name": "Arizona Commerce Authority",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=11&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=662855",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.azcommerce.com",
+        "cat_l1_ids": [
+            379
+        ],
+        "cat_l1_names": [
+            "804 プロフェッショナルサービス / Professional Services"
+        ],
+        "cat_l2_ids": [
+            3957
+        ],
+        "cat_l2_names": [
+            "政府のアドボカシー/規制/経済開発機関 / Government Advocacy; Regulation; Economic Development Agencies"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 379,
+                "l1_name": "804 プロフェッショナルサービス / Professional Services",
+                "children": [
+                    {
+                        "id": 3957,
+                        "name": "政府のアドボカシー/規制/経済開発機関 / Government Advocacy; Regulation; Economic Development Agencies"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "Asia Air Precision Technology",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=12&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=631085",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.aap-tech.com",
+        "cat_l1_ids": [
+            367,
+            374
+        ],
+        "cat_l1_names": [
+            "501 HVAC、温度、湿度、汚染の制御 / HVAC, Temperature, Humidity, Contamination Control",
+            "701 製造サービス、またはコンサルテング / Manufacturing Services or Consulting"
+        ],
+        "cat_l2_ids": [
+            3879,
+            3880,
+            3925,
+            3921,
+            3932
+        ],
+        "cat_l2_names": [
+            "クリーンルーム / Clean Rooms",
+            "汚染管理；HEPAフィルタリングシステム / Contamination Control; HEPA Filtering Systems",
+            "クリーンルーム；汚染管理 / Clean Room; Contamination Control",
+            "組み立て / Assembly",
+            "製造工程サポートと開発 / Manufacturing Process Support and Development"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 367,
+                "l1_name": "501 HVAC、温度、湿度、汚染の制御 / HVAC, Temperature, Humidity, Contamination Control",
+                "children": [
+                    {
+                        "id": 3879,
+                        "name": "クリーンルーム / Clean Rooms"
+                    },
+                    {
+                        "id": 3880,
+                        "name": "汚染管理；HEPAフィルタリングシステム / Contamination Control; HEPA Filtering Systems"
+                    }
+                ]
+            },
+            {
+                "l1_id": 374,
+                "l1_name": "701 製造サービス、またはコンサルテング / Manufacturing Services or Consulting",
+                "children": [
+                    {
+                        "id": 3925,
+                        "name": "クリーンルーム；汚染管理 / Clean Room; Contamination Control"
+                    },
+                    {
+                        "id": 3921,
+                        "name": "組み立て / Assembly"
+                    },
+                    {
+                        "id": 3932,
+                        "name": "製造工程サポートと開発 / Manufacturing Process Support and Development"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "ATECOM TECHNOLOGY",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=13&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=632944",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "https://www.atecom.com.tw",
+        "cat_l1_ids": [
+            352,
+            355,
+            359,
+            360,
+            362
+        ],
+        "cat_l1_names": [
+            "300 材料、組み立て / Packaging and Assembly Materials",
+            "303 材料、ガス / Gases",
+            "307 材料、プロセス / Process Materials",
+            "308 材料、基板 / Substrates",
+            "400 部品、パーツと付属品 / Components, Parts & Accessories"
+        ],
+        "cat_l2_ids": [
+            3750,
+            3773,
+            3780,
+            3777,
+            3793,
+            3811,
+            3807,
+            3804,
+            3805,
+            3803,
+            3806,
+            3802,
+            3810,
+            3817,
+            3826,
+            3823,
+            3836,
+            3835
+        ],
+        "cat_l2_names": [
+            "放熱材；ヒートシンク / Thermal Interface Materials; Heat Sinks",
+            "エッチングガス / Etchant Gases",
+            "シリコン前駆体ガス / Silicon Precursor Gas",
+            "純ガス及びバルクガス / Pure & Bulk Gases",
+            "CMP/グラインド/ラップ/研磨/研磨剤 / CMP; Grind; Lap; Polish; Abrasive materials",
+            "MEMS用薄膜及び厚膜基板 / Thin & Thick film substrates for MEMS",
+            "SOI/SOS/シリコンカーバイド / Silicon on Insulator (SOI); Silicon on Sapphire (SOS); Silicon Carbide;",
+            "エピタキシャル/Epi/ゲッタード/内部ゲッターウェーハ / Epitaxial; Epi; Gettered; Internal Gettered Wafers",
+            "ガリウム・ヒ素（GaAs);サファイヤ基板 / Gallium Arsenide (GaAs); Sapphire Substrates",
+            "ダイヤモンド基板 / Diamond substrates",
+            "プライム/研磨/鏡面ウェーハ / Prime; Polished; Mirrored Wafers",
+            "化合物半導体（GaAs、GaN、InP、SiGe） / Compound Semiconductor substrates (GaAs on Silicon; GaN; InP; SiGe, etc.)",
+            "試験/モニターウェーハ：再生またはバージン / Test; Monitor Wafers; Reclaim or Virgin",
+            "ウェーハその他の基板用チャック / Chucks for Wafer and other Substrates",
+            "ガスケット/シール/O－リング/エラストマー/レジン / Gaskets; Seals; O rings; Elastomers; Resins",
+            "フィルタ；液体、オイル用 / Filters for Liquid; Oil",
+            "プラスチック原材料および特注部品 / Raw Material & Custom components; Plastic",
+            "金属原材料および特注部品  / Raw Material & Custom components; Metal"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 352,
+                "l1_name": "300 材料、組み立て / Packaging and Assembly Materials",
+                "children": [
+                    {
+                        "id": 3750,
+                        "name": "放熱材；ヒートシンク / Thermal Interface Materials; Heat Sinks"
+                    }
+                ]
+            },
+            {
+                "l1_id": 355,
+                "l1_name": "303 材料、ガス / Gases",
+                "children": [
+                    {
+                        "id": 3773,
+                        "name": "エッチングガス / Etchant Gases"
+                    },
+                    {
+                        "id": 3780,
+                        "name": "シリコン前駆体ガス / Silicon Precursor Gas"
+                    },
+                    {
+                        "id": 3777,
+                        "name": "純ガス及びバルクガス / Pure & Bulk Gases"
+                    }
+                ]
+            },
+            {
+                "l1_id": 359,
+                "l1_name": "307 材料、プロセス / Process Materials",
+                "children": [
+                    {
+                        "id": 3793,
+                        "name": "CMP/グラインド/ラップ/研磨/研磨剤 / CMP; Grind; Lap; Polish; Abrasive materials"
+                    }
+                ]
+            },
+            {
+                "l1_id": 360,
+                "l1_name": "308 材料、基板 / Substrates",
+                "children": [
+                    {
+                        "id": 3811,
+                        "name": "MEMS用薄膜及び厚膜基板 / Thin & Thick film substrates for MEMS"
+                    },
+                    {
+                        "id": 3807,
+                        "name": "SOI/SOS/シリコンカーバイド / Silicon on Insulator (SOI); Silicon on Sapphire (SOS); Silicon Carbide;"
+                    },
+                    {
+                        "id": 3804,
+                        "name": "エピタキシャル/Epi/ゲッタード/内部ゲッターウェーハ / Epitaxial; Epi; Gettered; Internal Gettered Wafers"
+                    },
+                    {
+                        "id": 3805,
+                        "name": "ガリウム・ヒ素（GaAs);サファイヤ基板 / Gallium Arsenide (GaAs); Sapphire Substrates"
+                    },
+                    {
+                        "id": 3803,
+                        "name": "ダイヤモンド基板 / Diamond substrates"
+                    },
+                    {
+                        "id": 3806,
+                        "name": "プライム/研磨/鏡面ウェーハ / Prime; Polished; Mirrored Wafers"
+                    },
+                    {
+                        "id": 3802,
+                        "name": "化合物半導体（GaAs、GaN、InP、SiGe） / Compound Semiconductor substrates (GaAs on Silicon; GaN; InP; SiGe, etc.)"
+                    },
+                    {
+                        "id": 3810,
+                        "name": "試験/モニターウェーハ：再生またはバージン / Test; Monitor Wafers; Reclaim or Virgin"
+                    }
+                ]
+            },
+            {
+                "l1_id": 362,
+                "l1_name": "400 部品、パーツと付属品 / Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 3817,
+                        "name": "ウェーハその他の基板用チャック / Chucks for Wafer and other Substrates"
+                    },
+                    {
+                        "id": 3826,
+                        "name": "ガスケット/シール/O－リング/エラストマー/レジン / Gaskets; Seals; O rings; Elastomers; Resins"
+                    },
+                    {
+                        "id": 3823,
+                        "name": "フィルタ；液体、オイル用 / Filters for Liquid; Oil"
+                    },
+                    {
+                        "id": 3836,
+                        "name": "プラスチック原材料および特注部品 / Raw Material & Custom components; Plastic"
+                    },
+                    {
+                        "id": 3835,
+                        "name": "金属原材料および特注部品  / Raw Material & Custom components; Metal"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "ATLANT 3D Nanosystems",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=14&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=631061",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "https://www.atlant3d.com",
+        "cat_l1_ids": [
+            348,
+            349,
+            350,
+            352,
+            374
+        ],
+        "cat_l1_names": [
+            "205 装置、ナノテクノロジー / Nanotechnology Equipment and Tools",
+            "206 太陽光発電装置 / PV Equipment",
+            "207 装置、プロセス / Process Equipment",
+            "300 材料、組み立て / Packaging and Assembly Materials",
+            "701 製造サービス、またはコンサルテング / Manufacturing Services or Consulting"
+        ],
+        "cat_l2_ids": [
+            3686,
+            3690,
+            3699,
+            3752,
+            3932
+        ],
+        "cat_l2_names": [
+            "装置/ナノテクノロジー機器 / Equipment, Nanotechnology Tools",
+            "薄膜 / Thin Film",
+            "積層化：化学的気相成長（ＣＶＤ）/MOCVD/ PECVD/ LPCVD/ ALD/ REALD/ MVD",
+            "薄膜；絶縁フィルム材 / Thin Film; Dielectric Film Materials",
+            "製造工程サポートと開発 / Manufacturing Process Support and Development"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 348,
+                "l1_name": "205 装置、ナノテクノロジー / Nanotechnology Equipment and Tools",
+                "children": [
+                    {
+                        "id": 3686,
+                        "name": "装置/ナノテクノロジー機器 / Equipment, Nanotechnology Tools"
+                    }
+                ]
+            },
+            {
+                "l1_id": 349,
+                "l1_name": "206 太陽光発電装置 / PV Equipment",
+                "children": [
+                    {
+                        "id": 3690,
+                        "name": "薄膜 / Thin Film"
+                    }
+                ]
+            },
+            {
+                "l1_id": 350,
+                "l1_name": "207 装置、プロセス / Process Equipment",
+                "children": [
+                    {
+                        "id": 3699,
+                        "name": "積層化：化学的気相成長（ＣＶＤ）/MOCVD/ PECVD/ LPCVD/ ALD/ REALD/ MVD"
+                    }
+                ]
+            },
+            {
+                "l1_id": 352,
+                "l1_name": "300 材料、組み立て / Packaging and Assembly Materials",
+                "children": [
+                    {
+                        "id": 3752,
+                        "name": "薄膜；絶縁フィルム材 / Thin Film; Dielectric Film Materials"
+                    }
+                ]
+            },
+            {
+                "l1_id": 374,
+                "l1_name": "701 製造サービス、またはコンサルテング / Manufacturing Services or Consulting",
+                "children": [
+                    {
+                        "id": 3932,
+                        "name": "製造工程サポートと開発 / Manufacturing Process Support and Development"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "ATT Systems",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=15&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=656839",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.att-systems.com",
+        "cat_l1_ids": [
+            346,
+            351,
+            362
+        ],
+        "cat_l1_names": [
+            "203 装置、検査及び測定 / Inspection & Measurement Products",
+            "208 装置、テスト / Test Equipment",
+            "400 部品、パーツと付属品 / Components, Parts & Accessories"
+        ],
+        "cat_l2_ids": [
+            3678,
+            3720,
+            3727,
+            3728,
+            3725,
+            3731,
+            3817
+        ],
+        "cat_l2_names": [
+            "熱検知/測定/分析 / Thermal Sensing, Measurement, Analysis",
+            "FPDテスト/測定/リペア装置 / FPD Test; Measurement; Repair Equipment",
+            "パッケージテスト装置 / Package Test Systems",
+            "パラメータテスト装置 / Parametric Test Systems",
+            "メモリテスト装置 / Memory Test Systems",
+            "分析；回路/マニュアル/電子ビーム/光学/ウェーハプローバを含むプローブ装置 / Probing Equipment incl. Analytical; Circuit;  Manual; E-Beam; Optical; Wafer Probers",
+            "ウェーハその他の基板用チャック / Chucks for Wafer and other Substrates"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 346,
+                "l1_name": "203 装置、検査及び測定 / Inspection & Measurement Products",
+                "children": [
+                    {
+                        "id": 3678,
+                        "name": "熱検知/測定/分析 / Thermal Sensing, Measurement, Analysis"
+                    }
+                ]
+            },
+            {
+                "l1_id": 351,
+                "l1_name": "208 装置、テスト / Test Equipment",
+                "children": [
+                    {
+                        "id": 3720,
+                        "name": "FPDテスト/測定/リペア装置 / FPD Test; Measurement; Repair Equipment"
+                    },
+                    {
+                        "id": 3727,
+                        "name": "パッケージテスト装置 / Package Test Systems"
+                    },
+                    {
+                        "id": 3728,
+                        "name": "パラメータテスト装置 / Parametric Test Systems"
+                    },
+                    {
+                        "id": 3725,
+                        "name": "メモリテスト装置 / Memory Test Systems"
+                    },
+                    {
+                        "id": 3731,
+                        "name": "分析；回路/マニュアル/電子ビーム/光学/ウェーハプローバを含むプローブ装置 / Probing Equipment incl. Analytical; Circuit;  Manual; E-Beam; Optical; Wafer Probers"
+                    }
+                ]
+            },
+            {
+                "l1_id": 362,
+                "l1_name": "400 部品、パーツと付属品 / Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 3817,
+                        "name": "ウェーハその他の基板用チャック / Chucks for Wafer and other Substrates"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "AUROS Technology",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=16&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=632763",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.aurostech.com",
+        "cat_l1_ids": [
+            346
+        ],
+        "cat_l1_names": [
+            "203 装置、検査及び測定 / Inspection & Measurement Products"
+        ],
+        "cat_l2_ids": [
+            3679,
+            3673,
+            3672,
+            3659,
+            3662,
+            3671
+        ],
+        "cat_l2_names": [
+            "ウェーハ：基板測定/トポロジ/ナノトポグラフィ/平坦度測定/結晶方位 / Wafer; Substrate Metrology; Topology; Nanotopography; Flatness Measurement; Crystalline Orientation",
+            "パーテクルモニター/分析器－気体、液体 / Particle Monitors; Analyzers - Airborne or Liquid",
+            "パッケージ検査/リードスキャナー / Package Inspection; Lead Scanners",
+            "欠陥/パーテクル/バンプ/汚染検出、評価、検査 / Defect; Particle; Bump; Contamination Detection, Review or Inspection",
+            "膜厚：厚さ/均一性測定/エリプソメーター / Film Thickness; Thickness; Uniformity Measurement; Ellipsometer",
+            "表面測定 / Overlay Measurement"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 346,
+                "l1_name": "203 装置、検査及び測定 / Inspection & Measurement Products",
+                "children": [
+                    {
+                        "id": 3679,
+                        "name": "ウェーハ：基板測定/トポロジ/ナノトポグラフィ/平坦度測定/結晶方位 / Wafer; Substrate Metrology; Topology; Nanotopography; Flatness Measurement; Crystalline Orientation"
+                    },
+                    {
+                        "id": 3673,
+                        "name": "パーテクルモニター/分析器－気体、液体 / Particle Monitors; Analyzers - Airborne or Liquid"
+                    },
+                    {
+                        "id": 3672,
+                        "name": "パッケージ検査/リードスキャナー / Package Inspection; Lead Scanners"
+                    },
+                    {
+                        "id": 3659,
+                        "name": "欠陥/パーテクル/バンプ/汚染検出、評価、検査 / Defect; Particle; Bump; Contamination Detection, Review or Inspection"
+                    },
+                    {
+                        "id": 3662,
+                        "name": "膜厚：厚さ/均一性測定/エリプソメーター / Film Thickness; Thickness; Uniformity Measurement; Ellipsometer"
+                    },
+                    {
+                        "id": 3671,
+                        "name": "表面測定 / Overlay Measurement"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "Axcelis Technologies",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=17&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=630514",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.axcelis.com",
+        "cat_l1_ids": [
+            350
+        ],
+        "cat_l1_names": [
+            "207 装置、プロセス / Process Equipment"
+        ],
+        "cat_l2_ids": [
+            3704
+        ],
+        "cat_l2_names": [
+            "イオン注入装置 / Ion Implantation Equipment"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 350,
+                "l1_name": "207 装置、プロセス / Process Equipment",
+                "children": [
+                    {
+                        "id": 3704,
+                        "name": "イオン注入装置 / Ion Implantation Equipment"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "Axelera AI",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=18&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=663168",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.axelera.ai",
+        "cat_l1_ids": [
+            382
+        ],
+        "cat_l1_names": [
+            "902 その他 / Other"
+        ],
+        "cat_l2_ids": [
+            3986
+        ],
+        "cat_l2_names": [
+            "その他 / Other"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 382,
+                "l1_name": "902 その他 / Other",
+                "children": [
+                    {
+                        "id": 3986,
+                        "name": "その他 / Other"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "company_name": "Bayern International",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=19&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=629702",
+        "raw_about_jp": "Semiconductor technology and equipment supplier.",
+        "about_en": "Semiconductor technology and equipment supplier.",
+        "website": "http://www.bayern-international.de",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": []
+    }
+]

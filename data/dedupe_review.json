@@ -1,95 +1,38 @@
 [
   {
-    "domain": "3sline.co.kr",
+    "domain": "amcoss.com",
     "companies": [
-      "3S LINE",
-      "3SLINE CO., LTD."
+      "Amcoss Components",
+      "Amcoss GmbH"
     ]
   },
   {
-    "domain": "accretech.jp",
+    "domain": "zeiss.de",
     "companies": [
-      "ACCRETECH KOREA CO., LTD.",
-      "Accretech Taiwan Co., Ltd."
+      "Carl Zeiss Digital Innovation GmbH",
+      "Carl Zeiss Microscopy",
+      "Smart Manufacturing Pavilion"
     ]
   },
   {
-    "domain": "bruker.com",
+    "domain": "classone.com",
     "companies": [
-      "BRUKER KOREA CO., LTD.",
-      "Bruker Taiwan Co., Ltd"
+      "ClassOne Equipment",
+      "ClassOne Technology"
     ]
   },
   {
-    "domain": "camtek.com",
+    "domain": "semiconductors.investinpomerania.pl",
     "companies": [
-      "CAMTEK HK LTD.",
-      "Camtek Inspection Technology Limited"
+      "Invest in Pomerania",
+      "Invest in Pomerania - Poland Pavilion"
     ]
   },
   {
-    "domain": "coherent.com",
+    "domain": "tsi.com",
     "companies": [
-      "COHERENT KOREA",
-      "Coherent Corp."
-    ]
-  },
-  {
-    "domain": "comet.tech",
-    "companies": [
-      "COMET",
-      "Comet Solutions Taiwan Ltd."
-    ]
-  },
-  {
-    "domain": "das-ee.com",
-    "companies": [
-      "DAS Asia Ltd. Taiwan Branch",
-      "DAS ENVIRONMENTAL EQUIPMENT KOREA LTD."
-    ]
-  },
-  {
-    "domain": "disco.co.jp",
-    "companies": [
-      "DHK SOLUTION",
-      "DISCO HI-TEC KOREA CORP.",
-      "Disco HI-TEC Taiwan Co., Ltd."
-    ]
-  },
-  {
-    "domain": "ensingerplastics.com",
-    "companies": [
-      "ENSINGER KOREA LTD.",
-      "Ensinger Asia Holding PTE. LTD. Taiwan Branch"
-    ]
-  },
-  {
-    "domain": "entegris.com",
-    "companies": [
-      "ENTEGRIS",
-      "Entegris Asia Pte. Ltd. Taiwan Branch"
-    ]
-  },
-  {
-    "domain": "itri.org.tw",
-    "companies": [
-      "IC STARTUP ZONE",
-      "Industrial Technology Research Institute",
-      "Security Platform as a Service, Administration for Digital Industries of moda"
-    ]
-  },
-  {
-    "domain": "crescent.tw",
-    "companies": [
-      "Shin Yueh Applied Materials Co., Ltd.",
-      "Yu Shyan System Technology Materials Co., Ltd."
-    ]
-  },
-  {
-    "domain": "technic.com",
-    "companies": [
-      "Technic Taiwan Co., Ltd.",
-      "Technic, Inc."
+      "MSP, a Division of TSI",
+      "TSI Incorporated"
     ]
   }
 ]
