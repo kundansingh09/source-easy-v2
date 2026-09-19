@@ -20,6 +20,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 
 from backend.search_engine import SourcingSearchEngine
 
@@ -56,7 +57,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
     allow_credentials=False,
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -155,6 +156,29 @@ def search(
         "reranked": bool(rerank),
         "results": results,
     }
+
+
+class ExplainRequest(BaseModel):
+    query: str | None = ""
+    q: str | None = None
+    candidates: list[dict] | None = None
+    suppliers: list[dict] | None = None
+
+
+@app.post("/api/explain")
+def explain(req: ExplainRequest):
+    """Generate on-demand 1-sentence explanations for candidate suppliers."""
+    query = req.query or req.q or ""
+    candidates = req.candidates or req.suppliers or []
+    try:
+        from backend.reranker import explain_results
+    except ImportError:
+        from reranker import explain_results
+
+    try:
+        return explain_results(query, candidates)
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=f"Explanation failed: {e}") from e
 
 
 if __name__ == "__main__":

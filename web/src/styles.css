@@ -333,6 +333,43 @@ a:hover { text-decoration: underline; }
 }
 
 .results-count { font-size: 15px; font-weight: 600; }
+.results-explain-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  margin-left: 12px;
+}
+.btn-explain {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-explain:hover:not(:disabled) {
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+.btn-explain:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.explaining-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+}
+.spinner-dark {
+  border-color: rgba(34, 64, 143, 0.25);
+  border-top-color: var(--accent);
+  margin-right: 0;
+}
 .results-note { font-size: 13px; color: var(--text-muted); }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }

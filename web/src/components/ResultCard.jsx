@@ -238,7 +238,7 @@ function CardLinks({ item, sources, hasOverview }) {
   );
 }
 
-export default function ResultCard({ item, filters }) {
+export default function ResultCard({ item, filters, explanation, explanations }) {
   const hq = formatHQ(item.hq_location, item.hq_country);
   const locations = item.locations || [];
   const sources = item.sources || [];
@@ -246,6 +246,7 @@ export default function ResultCard({ item, filters }) {
   
   const hasOverview = parsed.structured || (parsed.summary && parsed.summary !== FALLBACK_ABOUT);
   const safeWebsite = toSafeUrl(item.website);
+  const cardReason = explanation || explanations?.[item.id] || explanations?.[String(item.id)];
 
   return (
     <article className="card">
@@ -271,7 +272,7 @@ export default function ResultCard({ item, filters }) {
         <Scores item={item} />
       </div>
 
-      {item.llm_reason && <p className="reason">{item.llm_reason}</p>}
+      {cardReason && <p className="reason">{cardReason}</p>}
 
       {item.hq_country_conflict?.length > 0 && (
         <div className="conflict">

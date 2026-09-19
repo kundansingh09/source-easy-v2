@@ -49,6 +49,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isExplaining, setIsExplaining] = useState(false);
+  const [explanations, setExplanations] = useState({});
 
   const reqId = useRef(0);
   const debounceRef = useRef(null);
@@ -82,6 +84,8 @@ export default function App() {
     const id = ++reqId.current;
     setLoading(true);
     setError(null);
+    setExplanations({});
+    setIsExplaining(false);
     try {
       const res = await api.search({
         query: f.appliedQuery,
@@ -131,6 +135,12 @@ export default function App() {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     skipNextDebounceRef.current = true;
     setPage(0);
+
+    // If the query didn't change, re-run immediately without priming the skip ref
+    if (draft === filters.appliedQuery) {
+      runSearch(filters, 0);
+      return;
+    }
     const updated = { ...filters, appliedQuery: draft };
     setFilters(updated);
     runSearch(updated, 0);
@@ -146,6 +156,22 @@ export default function App() {
     setDraft("");
     setPage(0);
     setFilters({ ...CLEARED });
+    setExplanations({});
+    setIsExplaining(false);
+  };
+
+  const handleExplain = async () => {
+    if (isExplaining || !results || results.length === 0) return;
+    setIsExplaining(true);
+    try {
+      const query = filters.appliedQuery || data?.query || "";
+      const res = await api.explain(query, results);
+      setExplanations(res || {});
+    } catch (e) {
+      console.error("Failed to explain rankings:", e);
+    } finally {
+      setIsExplaining(false);
+    }
   };
 
   const taxonomyLabel = useMemo(() => {
@@ -173,6 +199,7 @@ export default function App() {
   const results = data?.results || [];
   const isBrowse = data?.mode === "browse";
   const pages = isBrowse ? Math.ceil((data?.total || 0) / PAGE_SIZE) : 1;
+  const hasExplanations = Object.keys(explanations).length > 0;
 
   // Rerank runs automatically for any real query (see runSearch), so
   // "loading a search with a query in the box" now specifically means
@@ -306,6 +333,22 @@ export default function App() {
                   {isBrowse && data.total > PAGE_SIZE &&
                     ` · showing ${data.offset + 1}–${data.offset + results.length}`}
                 </div>
+                <div className="results-explain-row">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-explain"
+                    onClick={handleExplain}
+                    disabled={isExplaining || hasExplanations}
+                  >
+                    Explain Rankings
+                  </button>
+                  {isExplaining && (
+                    <span className="explaining-inline">
+                      <span className="spinner spinner-dark" aria-hidden="true" />
+                      Explaining the ranks...
+                    </span>
+                  )}
+                </div>
                 <div className="results-note">
                   {isBrowse
                     ? "Filter-only browse — sorted alphabetically, not ranked."
@@ -316,7 +359,13 @@ export default function App() {
               </div>
 
               {results.map((item) => (
-                <ResultCard key={item.id} item={item} filters={filters} />
+                <ResultCard
+                  key={item.id}
+                  item={item}
+                  filters={filters}
+                  explanation={explanations[item.id] || explanations[String(item.id)]}
+                  explanations={explanations}
+                />
               ))}
 
               {isBrowse && pages > 1 && (

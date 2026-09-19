@@ -41,6 +41,31 @@ async function get(path, params) {
   return res.json();
 }
 
+async function post(path, data) {
+  const url = `${BASE}${path}`;
+  let res;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  } catch {
+    throw new Error("Can't reach the API. If it's on a free/idle instance, it may still be waking up.");
+  }
+  if (!res.ok) {
+    let detail = `${res.status}`;
+    try {
+      const body = await res.json();
+      detail = body.detail || detail;
+    } catch {
+      /* non-JSON error body */
+    }
+    throw new Error(detail);
+  }
+  return res.json();
+}
+
 export const api = {
   health: () => get("/api/health"),
   taxonomy: () => get("/api/taxonomy"),
@@ -53,4 +78,6 @@ export const api = {
     rerank: f.rerank ? "true" : "false",
     alpha: f.alpha, fusion: f.fusion,
   }),
+  explain: (query, candidates) => post("/api/explain", { query, candidates }),
 };
+

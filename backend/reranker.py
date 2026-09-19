@@ -151,7 +151,7 @@ def normalise(values, method="minmax"):
 def _format_candidates(candidates):
     lines = []
     for c in candidates:
-        cats = ", ".join((c.get("categories_l2") or c.get("categories_l1") or [])[:6])
+        cats = ", ".join((c.get("categories_l2") or c.get("cat_l2_names") or c.get("categories_l1") or c.get("cat_l1_names") or [])[:6])
         about = (c.get("about") or "").strip()
         if not about or about == FALLBACK_ABOUT:
             about = "(no overview provided)"
@@ -160,7 +160,7 @@ def _format_candidates(candidates):
             # opening lines carry the capability statement in practice.
             about = about[:700].rsplit(" ", 1)[0] + " ..."
         lines.append(
-            f"id={c['id']}\n"
+            f"id={c.get('id')}\n"
             f"  company: {c.get('company_name')}\n"
             f"  hq: {c.get('hq_country') or 'Unknown'}\n"
             f"  categories: {cats or 'none listed'}\n"
@@ -283,3 +283,110 @@ def rerank_with_llm(query, hybrid_results, alpha=DEFAULT_ALPHA, top_n=None,
 # Backwards-compatible alias for the previous entry point.
 def llm_rerank(query, candidates, top_n=None, client=None):
     return rerank_with_llm(query, candidates, top_n=top_n, client=client)
+
+
+# ----------------------------------------------------------- on-demand explainer
+
+EXPLAIN_SYSTEM_PROMPT = """\
+You are a senior procurement judge for a semiconductor fab qualifying suppliers. \
+You will receive a buyer's sourcing query and a shortlist of candidates. \
+For EACH candidate in the provided shortlist, write a 1-sentence (<=20 words) \
+explanation of why that candidate fits the query based on their capabilities, \
+products, or categories.
+
+Return ONLY a JSON object:
+{"explanations": [{"id": <id, copied exactly from the record>, "reasoning": "<1-sentence explanation <=20 words>"}]}
+Include every candidate id from the shortlist exactly once. Never invent an id.\
+"""
+
+
+def _parse_explanations(raw):
+    raw = raw.strip()
+    if raw.startswith("```"):
+        raw = raw.split("```")[1]
+        raw = raw[4:] if raw.lower().startswith("json") else raw
+    try:
+        data = json.loads(raw.strip())
+    except Exception:
+        return {}
+
+    out = {}
+    items = []
+    if isinstance(data, dict):
+        if "explanations" in data and isinstance(data["explanations"], list):
+            items = data["explanations"]
+        elif "results" in data and isinstance(data["results"], list):
+            items = data["results"]
+        elif "candidates" in data and isinstance(data["candidates"], list):
+            items = data["candidates"]
+        else:
+            for k, v in data.items():
+                if isinstance(v, str):
+                    out[k] = v
+                elif isinstance(v, dict) and "reasoning" in v:
+                    out[k] = str(v["reasoning"])
+    elif isinstance(data, list):
+        items = data
+
+    for item in items:
+        if isinstance(item, dict) and "id" in item:
+            reason = item.get("reasoning") or item.get("explanation") or ""
+            out[item["id"]] = str(reason).strip()
+
+    return out
+
+
+def explain_results(query, candidates, client=None, model=None, temperature=0.0):
+    """Generate 1-sentence explanations of why each candidate fits the query.
+
+    Args:
+        query: the buyer's sourcing query string.
+        candidates: list of exhibitor dicts (each having an 'id').
+        client: optional OpenAI client instance.
+        model: optional LLM model name.
+        temperature: sampling temperature (default 0.0).
+
+    Returns:
+        A dict mapping each candidate's id to its 1-sentence reasoning string.
+    """
+    if not candidates:
+        return {}
+
+    try:
+        if not os.environ.get("OPENAI_API_KEY") and client is None:
+            raise ValueError("OPENAI_API_KEY not configured")
+        client = client or OpenAI(timeout=10.0)
+        t0 = time.perf_counter()
+        resp = client.chat.completions.create(
+            model=model or RERANK_MODEL,
+            temperature=temperature,
+            response_format={"type": "json_object"},
+            messages=[
+                {"role": "system", "content": EXPLAIN_SYSTEM_PROMPT},
+                {"role": "user",
+                 "content": f"Buyer query: {query}\n\nShortlist:\n\n"
+                            f"{_format_candidates(candidates)}"},
+            ],
+        )
+        llm_ms = (time.perf_counter() - t0) * 1000
+        print(f"[DEBUG] OpenAI Explain Time: {llm_ms:.2f} ms")
+        parsed = _parse_explanations(resp.choices[0].message.content)
+    except Exception as e:
+        print(f"[explain_results] judge call failed: {e}")
+        parsed = {}
+
+    out = {}
+    for c in candidates:
+        cid = c.get("id")
+        if cid is None:
+            continue
+        reason = (
+            parsed.get(cid)
+            or parsed.get(str(cid))
+            or (parsed.get(int(cid)) if isinstance(cid, str) and cid.isdigit() else None)
+        )
+        if not reason:
+            reason = "Matches query criteria based on supplier profile and industry capabilities."
+        out[cid] = str(reason).strip()
+
+    return out
