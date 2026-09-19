@@ -210,21 +210,27 @@ function CategoryTags({ item, filters }) {
   );
 }
 
+function toSafeUrl(url) {
+  if (!url || url === "#") return null;
+  return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+}
+
 function CardLinks({ item, sources, hasOverview }) {
-  const showSemiconProfile = hasOverview && item.url && item.url !== "#";
+  const profileUrl = toSafeUrl(item.url);
+  const showSemiconProfile = hasOverview && profileUrl;
   
   if (!showSemiconProfile && sources.length <= 1) return null;
   
   return (
     <div className="card-links">
       {showSemiconProfile && (
-        <a href={item.url} target="_blank" rel="noopener noreferrer">Semicon Profile ↗</a>
+        <a href={profileUrl} target="_blank" rel="noopener noreferrer">Semicon Profile ↗</a>
       )}
       {sources.length > 1 &&
         sources
-          .filter((s) => s.ebooth_url && s.ebooth_url !== "#")
+          .filter((s) => toSafeUrl(s.ebooth_url))
           .map((s) => (
-            <a key={s.location} href={s.ebooth_url} target="_blank" rel="noopener noreferrer">
+            <a key={s.location} href={toSafeUrl(s.ebooth_url)} target="_blank" rel="noopener noreferrer">
               {s.location} booth ↗
             </a>
           ))}
@@ -239,14 +245,15 @@ export default function ResultCard({ item, filters }) {
   const parsed = useMemo(() => parseOverview(item.about), [item.about]);
   
   const hasOverview = parsed.structured || (parsed.summary && parsed.summary !== FALLBACK_ABOUT);
+  const safeWebsite = toSafeUrl(item.website);
 
   return (
     <article className="card">
       <div className="card-top">
         <div style={{ minWidth: 0 }}>
           <h3 className="card-name">
-            {item.website && item.website !== "#" ? (
-              <a href={item.website} target="_blank" rel="noopener noreferrer">{item.company_name}</a>
+            {safeWebsite ? (
+              <a href={safeWebsite} target="_blank" rel="noopener noreferrer">{item.company_name}</a>
             ) : (
               item.company_name
             )}

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { api } from "./api.js";
 import FilterPanel from "./components/FilterPanel.jsx";
 import ResultCard from "./components/ResultCard.jsx";
+import { ProcessingIndicator, ResultCardSkeleton } from "./components/ProcessingIndicator.jsx";
 
 const PAGE_SIZE = 10;
 
@@ -51,6 +52,7 @@ export default function App() {
 
   const reqId = useRef(0);
   const debounceRef = useRef(null);
+  const skipNextDebounceRef = useRef(false);
 
   useEffect(() => {
     api.health().then(setHealth).catch((e) => setError(e.message));
@@ -105,14 +107,15 @@ export default function App() {
     }
   }, []);
 
-  // Debounced: any change here (filter click, applied query, alpha) waits
-  // SEARCH_DEBOUNCE_MS of quiet before actually firing. A burst of changes
-  // within that window collapses to one call - the abuse case this exists
-  // for is a user (or a script) clicking several filters in quick
-  // succession while a query is active, which would otherwise fire one
-  // full rerank per click.
+  // Debounced: any filter click or alpha change waits SEARCH_DEBOUNCE_MS of
+  // quiet before firing, collapsing bursts. Explicit form submissions bypass
+  // this and run immediately via submit().
   useEffect(() => {
     if (!health || health.status !== "ok") return;
+    if (skipNextDebounceRef.current) {
+      skipNextDebounceRef.current = false;
+      return;
+    }
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
       setPage(0);
@@ -125,7 +128,12 @@ export default function App() {
   const submit = (e) => {
     e?.preventDefault();
     setDrawerOpen(false);
-    setFilters((p) => ({ ...p, appliedQuery: draft }));
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    skipNextDebounceRef.current = true;
+    setPage(0);
+    const updated = { ...filters, appliedQuery: draft };
+    setFilters(updated);
+    runSearch(updated, 0);
   };
 
   const goPage = (next) => {
@@ -178,6 +186,7 @@ export default function App() {
   return (
     <>
       <header className="header">
+        {loading && <div className="top-scanner" aria-hidden="true" />}
         <div className="header-inner">
           <div className="brand">
             <span className="brand-mark">SEMICON India 2026</span>
@@ -239,6 +248,10 @@ export default function App() {
             </div>
           )}
 
+          {isProcessingLLM && (
+            <ProcessingIndicator query={filters.appliedQuery} isReranking={true} />
+          )}
+
           {health && health.status === "building" && (
             <div className="state">
               <div className="state-title">Building the index…</div>
@@ -256,8 +269,12 @@ export default function App() {
             </div>
           )}
 
-          {loading && !data && (
-            <>{[0, 1, 2, 3].map((i) => <div key={i} className="skeleton" />)}</>
+          {loading && (isProcessingLLM || !data) && (
+            <div aria-label="Loading suppliers" aria-busy="true">
+              {[0, 1, 2].map((i) => (
+                <ResultCardSkeleton key={i} />
+              ))}
+            </div>
           )}
 
           {!loading && !error && !data && health?.status === "ok" && (
@@ -279,8 +296,8 @@ export default function App() {
             </div>
           )}
 
-          {data && results.length > 0 && (
-            <>
+          {data && results.length > 0 && (!loading || !isProcessingLLM) && (
+            <div className={loading ? "results-dimmed" : ""}>
               <div className="results-head">
                 <div className="results-count">
                   {isBrowse
@@ -311,7 +328,7 @@ export default function App() {
                           onClick={() => goPage(page + 1)}>Next →</button>
                 </div>
               )}
-            </>
+            </div>
           )}
         </main>
       </div>

@@ -11,9 +11,10 @@ import os
 import re
 import sys
 
-WEB = "/mnt/user-data/outputs/web"
+WEB = os.environ.get("WEB_DIR", "web")
 FILES = ["src/main.jsx", "src/App.jsx", "src/api.js", "src/categories.js",
-         "src/components/FilterPanel.jsx", "src/components/ResultCard.jsx"]
+         "src/components/FilterPanel.jsx", "src/components/ResultCard.jsx",
+         "src/components/ProcessingIndicator.jsx"]
 
 # Void/self-closing HTML elements that legitimately never have a closing tag.
 VOID = {"input", "br", "hr", "img", "meta", "link", "source", "area", "base", "col"}

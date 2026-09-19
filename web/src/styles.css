@@ -727,3 +727,306 @@ a:hover { text-decoration: underline; }
   min-height: 28px;
   text-align: left;
 }
+
+/* ----------------------------------------------- search processing --- */
+
+/* Slim indeterminate top scanning bar */
+.top-scanner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, #769eff 80%, transparent 100%);
+  background-size: 200% 100%;
+  animation: scan-indeterminate 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  z-index: 50;
+}
+
+@keyframes scan-indeterminate {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* AI Pipeline Step Banner */
+.processing-banner {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(47, 95, 216, 0.07);
+}
+
+.processing-glow-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, #8caeff 80%, transparent 100%);
+  background-size: 200% 100%;
+  animation: scan-indeterminate 1.6s ease-in-out infinite;
+}
+
+.processing-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.processing-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.processing-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.processing-icon {
+  width: 20px;
+  height: 20px;
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+
+.processing-pulse-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 12px;
+  border: 1.5px solid var(--accent);
+  opacity: 0.4;
+  animation: ring-pulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes icon-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes ring-pulse {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 0.15; }
+  100% { transform: scale(0.95); opacity: 0.6; }
+}
+
+.processing-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.processing-title {
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.processing-query {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.processing-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  transition: color 0.2s ease;
+}
+
+.processing-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.processing-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-faint);
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  transition: all 0.25s ease;
+}
+
+.processing-step-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  transition: all 0.25s ease;
+}
+
+.processing-step.is-done {
+  color: var(--good);
+  background: var(--good-soft);
+  border-color: #bfe3d3;
+}
+.processing-step.is-done .processing-step-dot {
+  background: var(--good);
+}
+
+.processing-step.is-current {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  font-weight: 600;
+}
+.processing-step.is-current .processing-step-dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(47, 95, 216, 0.25);
+  animation: dot-glow 1.2s infinite ease-in-out;
+}
+
+@keyframes dot-glow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+/* Realistic ResultCard Skeletons */
+.skeleton-card {
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.skeleton-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-bar {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #f0efec 25%, #f8f8f7 50%, #f0efec 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 48%;
+  min-width: 140px;
+}
+
+.skeleton-subtitle {
+  height: 14px;
+  width: 32%;
+  min-width: 100px;
+}
+
+.skeleton-scorebox {
+  width: 64px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #f0efec 25%, #f8f8f7 50%, #f0efec 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  flex-shrink: 0;
+}
+
+.skeleton-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.skeleton-badge {
+  height: 22px;
+  width: 80px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #f0efec 25%, #f8f8f7 50%, #f0efec 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-badge-wide {
+  width: 110px;
+}
+
+.skeleton-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.skeleton-tag {
+  height: 22px;
+  width: 90px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #f0efec 25%, #f8f8f7 50%, #f0efec 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-tag-wide {
+  width: 140px;
+}
+
+.skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 4px;
+}
+
+.skeleton-line {
+  height: 13px;
+  width: 94%;
+}
+
+.skeleton-line-short {
+  width: 68%;
+}
+
+.results-dimmed {
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-scanner,
+  .processing-glow-line,
+  .processing-icon,
+  .processing-pulse-ring,
+  .processing-step-dot,
+  .skeleton-bar,
+  .skeleton-scorebox,
+  .skeleton-badge,
+  .skeleton-tag {
+    animation: none !important;
+  }
+}
