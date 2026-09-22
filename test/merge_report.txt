@@ -1,0 +1,65 @@
+======================================================================
+MERGE REPORT — japan2025 hq_location merge (en base, default hq)
+======================================================================
+
+default pass records : 1212
+en pass records      : 1213
+merged output records: 1213  (same count as en pass, by design)
+
+----------------------------------------------------------------------
+JOIN RESULT
+----------------------------------------------------------------------
+Matched by Booth ID and hq_location overwritten : 1130
+Matched, value already identical (no change needed): 45
+No matching Booth ID in default pass (kept en value) : 38
+  — of those, the kept en value is itself known-bad  : 22
+En records with no parseable Booth ID at all      : 0
+
+----------------------------------------------------------------------
+DATA QUALITY FLAGS
+----------------------------------------------------------------------
+Overwrote with a default value that is ITSELF suspicious (e.g. bare 'Japan'/'United States'/empty): 0
+Companies present only in 'default' pass, absent from 'en' (not included in merged output — see ambiguity CSV): 37
+Duplicate Booth IDs found in default pass: 0
+Duplicate Booth IDs found in en pass: 0
+
+----------------------------------------------------------------------
+SAMPLE OF OVERWRITTEN VALUES (first 10)
+----------------------------------------------------------------------
+  [662582] Nagatsu LEVEX
+      old (en, likely garbage): United States
+      new (default, trusted)  : 京都市, 京都府, Japan
+  [654407] 3M Japan
+      old (en, likely garbage): Shinagawa-ku, Tokyo, Japan
+      new (default, trusted)  : 品川区, 東京都, Japan
+  [662475] Accenture Japan
+      old (en, likely garbage): United States
+      new (default, trusted)  : 港区, 東京都, Japan
+  [629408] ACE
+      old (en, likely garbage): United States
+      new (default, trusted)  : 横浜市港北区, 神奈川県, Japan
+  [630530] Achilles
+      old (en, likely garbage): United States
+      new (default, trusted)  : 新宿区, 東京都, Japan
+  [632987] ADTEC Engineering
+      old (en, likely garbage): United States
+      new (default, trusted)  : 港区, 東京都, Japan
+  [632633] ADVANCE ELECTRIC
+      old (en, likely garbage): United States
+      new (default, trusted)  : 春日井市, 愛知県, Japan
+  [649150] Advanced Research Infrastructure for Materials and Nanotechnology in Japan
+      old (en, likely garbage): None
+      new (default, trusted)  : 京都市, 京都府, Japan
+  [663309] Advanced Semiconductor Equipment Technology Singapore
+      old (en, likely garbage): #06-08/09 TechPoint Lobby B, Singapore 569059
+      new (default, trusted)  : Singapore 569059
+  [629123] Advanced SoC Research for Automotive
+      old (en, likely garbage): Nagoya, Aichi, Japan
+      new (default, trusted)  : 名古屋市, 愛知県, Japan
+
+----------------------------------------------------------------------
+FILES WRITTEN
+----------------------------------------------------------------------
+  /Users/kundansingh/source-easy-v2/test/japan2025_en_merged.json
+  /Users/kundansingh/source-easy-v2/test/japan2025_en_merged.csv
+  /Users/kundansingh/source-easy-v2/test/merge_report_ambiguities.csv   (full row-by-row ambiguity list)

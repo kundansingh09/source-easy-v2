@@ -1,30 +1,41 @@
 ==============================================================
 SEMICON india2026 -- EXHIBITOR COMPLETENESS REPORT
 ==============================================================
-Total unique exhibitors: 542
+Total unique exhibitors: 548
 
 FIELD         FILLED   EMPTY  % FILLED
 --------------------------------------------------------------
-name             542       0    100.0%  <- key
-booth            542       0    100.0%  <- key
-website           20     522      3.7%  <- key
-address           18     524      3.3%
-overview           4     538      0.7%
-country            5     537      0.9%
-email              0     542      0.0%
-phone             11     531      2.0%
+name             548       0    100.0%  <- key
+booth            542       6     98.9%  <- key
+website           10     538      1.8%  <- key
+address            6     542      1.1%
+overview           2     546      0.4%
+country            2     546      0.4%
+email              0     548      0.0%
+phone              5     543      0.9%
 --------------------------------------------------------------
-Complete on all 3 key fields (name+booth+website): 20 / 542  (3.7%)
+Complete on all 3 key fields (name+booth+website): 10 / 548  (1.8%)
 
 By hall (mapid):
-  628|629|630|631|632|633|634|635|636|637|638|639|640|641|642|643|644|645|646|647|648|649 542
+  633|634        548
 
 Portal page resolution:
-  404            1
-  skipped        522
-  slug-guessed   19
+  404            3
+  no-portal-listed 6
+  skipped        532
+  slug-guessed   7
 
-Missing website (522 total), first 25:
+Missing website (538 total), first 25:
+  - Advance Panels & Switchgears P Ltd
+  - ADVANCED EXPERTISE TECHNOLOGY PVT. LTD.
+  - ADVANCED SEMICONDUCTOR EQUIPMENT TECHNOLOGY SINGAPORE
+  - ADVANCED SYSTEM IN PACKAGE TECHNOLOGIES
+  - Advantec Materials India Pvt Ltd
+  - Advantest (Singapore) Pte. Ltd.
+  - AECOM India Private Limited
+  - Aequs SEZ Private Limited
+  - Aeromech Equipments Private Limited
+  - Aether Semiconductors Private Ltd
   - AGC Asia Pacific (India) Pvt. Ltd.
   - AGEM Innovation Private Limited
   - Agilent Technologies
@@ -40,15 +51,15 @@ Missing website (522 total), first 25:
   - Akribis Systems Pte Ltd
   - Akros Trading India Pvt Ltd
   - ALIGNED TEST PTE LTD
-  - ALLIED RESOURCING
-  - AMD India Private Limited
-  - Ami Polymer
-  - Amity University Uttar Pradesh Noida
-  - Ample Semiconductors Private Limited
-  - ANANANT SYSTEMS PRIVATE LIMITED
-  - Andhra Pradesh Economic Development Board - Govt of Andhra Pradesh
-  - ANEMO PRIME
-  - Anora Instrumentation Private Limited
-  - Ansell India Protective Products Pvt Ltd
+
+Missing booth (6 total), first 25:
+  - Assigned
+  - Available
+  - Map It
+  - My Exhibitors
+  - Reserved
+  - Search Result
+
+Rows with no portal link in the source at all: 6 (website/overview will be empty for these by design)
 
 ==============================================================

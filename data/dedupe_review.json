@@ -1,38 +1,37 @@
 [
   {
-    "domain": "amcoss.com",
+    "domain": "disco.co.jp",
     "companies": [
-      "Amcoss Components",
-      "Amcoss GmbH"
+      "DHK SOLUTION",
+      "DISCO HI-TEC KOREA CORP."
     ]
   },
   {
-    "domain": "zeiss.de",
+    "domain": "euhan.com",
     "companies": [
-      "Carl Zeiss Digital Innovation GmbH",
-      "Carl Zeiss Microscopy",
-      "Smart Manufacturing Pavilion"
+      "EUHAN FLOWTECH",
+      "EUHANFLONWARE"
     ]
   },
   {
-    "domain": "classone.com",
+    "domain": "horiba.com",
     "companies": [
-      "ClassOne Equipment",
-      "ClassOne Technology"
-    ]
-  },
-  {
-    "domain": "semiconductors.investinpomerania.pl",
-    "companies": [
-      "Invest in Pomerania",
-      "Invest in Pomerania - Poland Pavilion"
+      "HORIBA KOREA LTD.",
+      "HORIBA STEC KOREA, LTD."
     ]
   },
   {
     "domain": "tsi.com",
     "companies": [
-      "MSP, a Division of TSI",
+      "MSPC KOREA",
       "TSI Incorporated"
+    ]
+  },
+  {
+    "domain": "shi-ms.com",
+    "companies": [
+      "Sumitomo Heavy Industries Material Solutions Co., Ltd.",
+      "Sumitomo Heavy Industries Material Solutions Co., Ltd. (Korea)"
     ]
   }
 ]

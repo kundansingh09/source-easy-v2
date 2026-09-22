@@ -24,8 +24,8 @@ from pydantic import BaseModel, Field
 
 from backend.search_engine import SourcingSearchEngine
 
-DATA_PATH = os.environ.get("DATA_PATH", "data/final_combined_suppliers.json")
-TAXONOMY_PATH = os.environ.get("TAXONOMY_PATH", "data/categories.json")
+DATA_PATH = os.environ.get("DATA_PATH", "/Users/kundansingh/source-easy-v2/full-global-refined-hybrid.json")
+# TAXONOMY_PATH = os.environ.get("TAXONOMY_PATH", "data/categories.json")
 # Comma-separated list, e.g. "https://sourcing-web.onrender.com,http://localhost:5173"
 ALLOWED_ORIGINS = [o.strip() for o in os.environ.get(
     "ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if o.strip()]
@@ -42,7 +42,7 @@ async def lifespan(app: FastAPI):
     # multi-minute hang.
     try:
         print(f"Building index from {DATA_PATH} ...")
-        engine = SourcingSearchEngine(DATA_PATH, TAXONOMY_PATH)
+        engine = SourcingSearchEngine(DATA_PATH)
         state["engine"] = engine
         print(f"Index ready: {engine.count()} suppliers")
     except Exception as e:  # noqa: BLE001 - surfaced via /api/health
@@ -89,10 +89,9 @@ def health():
 def taxonomy():
     """Id -> name maps, so the client can label an active filter chip without
     waiting on a facet response."""
-    engine = get_engine()
     return {
-        "l1": {str(k): v for k, v in engine.l1_names_by_id.items()},
-        "l2": {str(k): v for k, v in engine.l2_names_by_id.items()},
+        "l1": {},
+        "l2": {},
     }
 
 
@@ -100,14 +99,14 @@ def taxonomy():
 def facets(
     expo: str | None = None,
     country: list[str] = Query(default=[]),
-    l1: list[int] = Query(default=[]),
-    l2: list[int] = Query(default=[]),
+    # l1: list[int] = Query(default=[]),
+    # l2: list[int] = Query(default=[]),
 ):
     """Reachable filter values + counts for the current selection. Drill-down
     semantics and the 'never offer a zero-result option' guarantee come from
     the engine unchanged."""
-    return get_engine().facets(expo=expo, hq_countries=country or None,
-                               cat_l1_ids=l1 or None, cat_l2_ids=l2 or None)
+    return get_engine().facets(expo=expo, hq_countries=country or None)
+                            #    cat_l1_ids=l1 or None, cat_l2_ids=l2 or None)
 
 
 @app.get("/api/search")
@@ -115,8 +114,8 @@ def search(
     q: str = "",
     expo: str | None = None,
     country: list[str] = Query(default=[]),
-    l1: list[int] = Query(default=[]),
-    l2: list[int] = Query(default=[]),
+    # l1: list[int] = Query(default=[]),
+    # l2: list[int] = Query(default=[]),
     limit: int = 10,
     offset: int = 0,
     rerank: bool = False,
@@ -136,7 +135,7 @@ def search(
     try:
         results, total = engine.search(
             query=q, expo=expo, hq_countries=country or None,
-            cat_l1_ids=l1 or None, cat_l2_ids=l2 or None,
+            # cat_l1_ids=l1 or None, cat_l2_ids=l2 or None,
             limit=limit, offset=offset, rerank=rerank, alpha=alpha,
             fusion=fusion, with_total=True,
         )

@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DATA_PATH = "data/final_combined_suppliers.json"
+DATA_PATH = "/Users/kundansingh/source-easy-v2/full-global-refined-hybrid.json"
 COLLECTION_NAME = "semicon_suppliers"
 
 def main():

@@ -1,0 +1,38 @@
+=========================================
+ CHINA 2026 MERGE REPORT (BOOTH-ID MATCH)
+=========================================
+
+Total Base Records (lang1) : 1428
+Supp Records Indexed (lang2): 1428
+Successfully Matched Pairs : 1428/1428
+
+--- SUMMARY OF GAINS ---
+Overviews (About) backfilled : 20
+Categories backfilled        : 0
+Websites backfilled          : 1
+
+--- OVERVIEWS BACKFILLED FROM CHINESE PASS ---
+ - [BoothID 645017] Beijing Sanpower Electronics Co., Ltd
+ - [BoothID 638122] CETC Electronics Equipment Group Co., LTD
+ - [BoothID 649440] Dalian Fuji Plastics Products Co., Ltd.
+ - [BoothID 640035] Dongguan Yingxin Semiconductor Material Co.,Ltd
+ - [BoothID 637151] Hangzhou GAREN Semiconductor Co.,Ltd.
+ - [BoothID 663071] Hotlong Technology Co., Ltd.
+ - [BoothID 638862] Hubei Feilihua Quartz Glass Co., Ltd.
+ - [BoothID 639777] Hwacheon Machine Tool (Nanjing) Co.,LTD.
+ - [BoothID 640282] KANOMAX HOLDINGS(SHANGHAI) CO., LTD
+ - [BoothID 665916] LUOLOGY Diqital Technology Co., Ltd.
+ - [BoothID 649354] Miraclean Technology Co.,Ltd.
+ - [BoothID 656517] QD Scientific Instruments (Beijing) Co., Ltd.
+ - [BoothID 637673] Rokko Electronics Co., Ltd.
+ - [BoothID 649360] Shanghai Sharetek Technology Co.,ltd.
+ - [BoothID 662317] Shenzhen Blue Dynamics  Precision Co.,Ltd.
+ - [BoothID 649324] Shinwa Controls(Shanghai)Co.,Ltd.
+ - [BoothID 662388] Solvay Lantian (Quzhou) Chemicals Co.,Ltd.
+ - [BoothID 649394] Yantai AWSOM Brake Material Co., Ltd.
+ - [BoothID 649375] YUEYANG KAIMEITE ELECTRONIC SPECIALTY RARE GASES CO.,LTD
+ - [BoothID 649340] Zhejiang Dongkai Semiconductor Science&Technology Co., Ltd.
+
+--- WEBSITES BACKFILLED FROM CHINESE PASS ---
+ - [BoothID 638122] CETC Electronics Equipment Group Co., LTD
+

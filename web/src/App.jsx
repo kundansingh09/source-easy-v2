@@ -33,7 +33,7 @@ const CLEARED = {
 const SEARCH_DEBOUNCE_MS = 400;
 
 // The default trade show the app opens with
-const DEFAULT_EXPO = "India expo";
+const DEFAULT_EXPO = "All";
 
 // The state the app loads with on first visit
 const INITIAL_FILTERS = { ...CLEARED, expo: DEFAULT_EXPO };
@@ -216,7 +216,7 @@ export default function App() {
         {loading && <div className="top-scanner" aria-hidden="true" />}
         <div className="header-inner">
           <div className="brand">
-            <span className="brand-mark">SEMICON India 2026</span>
+            <span className="brand-mark">SEMICON Global Sourcing</span>
             <span className="brand-sub">
               {health?.status === "ok" ? `${health.count.toLocaleString()} suppliers` : ""}
             </span>

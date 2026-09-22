@@ -1,0 +1,837 @@
+[
+    {
+        "company_name": "Nagatsu LEVEX",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=1&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=662582&langID=2",
+        "about": null,
+        "hq_location": "京都市, 京都府, Japan",
+        "website": "https://levex.co.jp/",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": [],
+        "hq_location_source": "default_pass",
+        "website_scrape": "N・リベックス株式会社 ｜ 京都市下京区の開発・製造メーカー センサ、ポンプ、シリンダ等多数製造\n日本語\nENGLISH\nHOME\n製品紹介\n耐熱アブソリュートセンサ\nTCセンサ\n小型アブソリュートセンサ\nリニアパルスコーダ\n小径アブソリュートセンサ\nワイヤインパルスコーダ\n非接触式 近接センサ\nフラットパルスコーダ\n接触式 小型変位センサ\nコンタクトリニアパルスコーダ\n耐環境ロッドセンサ\nラインレゾルバ\n耐環境インロッドセンサ\nインナーレゾルバ\nセンサ付シリンダ\nセナシル（油圧／空圧／水圧）\n油圧製品\n油圧ポンプ\n水圧製品\n水圧ポンプ\n使用事例\n制作実績集\n会社概要\n技術資料\nお問い合わせ\n製品紹介\nPRODUCTS\n耐熱アブソリュートセンサ\nTCセンサ\n小型アブソリュートセンサ\nリニアパルスコーダ\n小径アブソリュートセンサ\nワイヤインパルスコーダ\n非接触式 近接センサ\nフラットパルスコーダ\n接触式 小型変位センサ\nコンタクトリニアパルスコーダ\n耐環境ロッドセンサ\nラインレゾルバ\n耐環境インロッドセンサ\nインナーレゾルバ\nセンサ付シリンダ\nセナシル（油圧／空圧／水圧）\n油圧製品\n油圧ポンプ\n水圧製品\n水圧ポンプ\n使用事例\nCASE STUDIES\n制作実績集\nPRODUCTION RESULTS\n会社概要\nCOMPANY\n技術資料\nTECHNOLOGY\nお問い合わせ\nCONTACT\nお知らせ\nNEWS\nお知らせ一覧\n2026.09\nINTERMEASURE 2026（第32回計量計測展）に製品展示致します 会期：2026年9月16日(水)～18日(金)／会場：東京ビッグサイト 東ホール ブース番号：I-22（㈱共和電業殿展示ブース）\n2026.07\n夏季休暇：2026年8月8日（土）～8月16日（日）8月17日（月）より通常通り営業致します。ご不便をお掛け致しますが、何卒 ご理解の程 宜しくお願い申し上げます。\n2026.05\n人とくるまのテクノロジー展 2026 YOKOHAMAに製品展示致します 会期：2026年5月27日(水)～29日(金)／会場：パシフィコ横浜 展示ホールD ブース番号：188（㈱共和電業殿展示ブース）\n2026.04\nゴールデンウィーク休業のお知らせ 期間：5月2日（土）～5月6日（水）\n2026.04\n金型展2026（大阪）に製品展示致します 会期：2026年4月15日(水)～17日(金)／会場：インテックス大阪ブース番号：6A-642\n株式会社リベックス"
+    },
+    {
+        "company_name": "3M Japan",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=2&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=654407&langID=2",
+        "about": "We'll show latest semiconductor manufacturing solutions. On display will be a wide range of actual samples, including CMP solutions utilized in leading-edge nodes, materials for advanced packaging manufacturing processes, and transportation solutions designed for increasingly thinner and smaller chips. We are confident that the information presented will provide valuable insights for your business. 3M™ Trizact™ CMP Pad／3M™ CMP Pad Conditioner 3M has been providing innovative CMP solutions for the ever-evolving semiconductor manufacturing processes for over 25 years. 3M is dedicated to continually redefining the cutting edge of pad conditioner technology.... In the world of semiconductor fabrication, consistency, reliability and yield are critical at every part of the process. For over 25 years, 3M™ CMP Pad Conditioners have provided innovative pad conditioning solutions to some of the world’s leading semiconductor fabricators. From the exclusive sintered abrasive diamond technology behind 3M™ Diamond Pad Conditioners to the precisely microreplicated patterns in 3M™ Trizact ™ Pad Conditioners, our global technical team is committed to continually redefining the cutting edge of pad conditioner technology. Multiple geographically independent research and manufacturing facilities around the world provide convenient product support and product supplies. The 3M™ Wafer Support System is a complete, cost-effective temporary bonding and debonding solution for advanced packaging.... The 3M™ Wafer Support System (WSS) is a complete, cost-effective temporary bonding and debonding solution for high-volume wafer manufacturing needs including IBGT ultrathin silicon, silicon carbide, and advanced packaging. Through the combination of a temporary bonding adhesive, a release layer, and an adhesive removal tape, it helps semiconductor fabricators enable new stacked wafer designs and more effective fan-out packaging processes. Adhesives undergo strict adhesion, thermal and chemical resistance testing, so they can withstand critical process, time, temperature and substrate requirements. 3M™ Carrier Tape／3M™ Cover Tape It is a solution for tracking small, delicate components during the manufacturing process. It maintains traceability without etching codes directly onto the product.... Safe and secure transport between the stages of the semiconductor fabrication process is critical for maximizing chip and chiplet yield. As chips architecture evolves to 2D, 2.5D and 3D in pursuit of smaller footprint, better power management and overall performance, the risks to chip integrity during transportation are significant due to the complex architecture. 3M™ Polycarbonate Carrier tapes are available in a range of precision manufactured designs and solutions to help minimize die migration and cracking and to help reduce pick-up failure. Plus, these tapes are available in transparent form, are compatible for clean room use and can offer additional features such as traceability that meet the needs of your manufacturing processes. Explore our range of solutions.",
+        "hq_location": "品川区, 東京都, Japan",
+        "website": "https://www.3mcompany.jp/3M/ja_JP/semiconductor-jp/",
+        "cat_l1_ids": [
+            343,
+            344,
+            345,
+            346,
+            347,
+            350,
+            359,
+            365,
+            368,
+            374
+        ],
+        "cat_l1_names": [
+            "200 Equipment, Assembly",
+            "201 Equipment, Flat Panel Display",
+            "202 Equipment, General Use",
+            "203 Equipment, Inspection & Measurement",
+            "204 Equipment, Mems",
+            "207 Equipment, Process",
+            "307 Materials, Process",
+            "403 PV Components, Tracking and Mounting Systems",
+            "502 Material Handling Systems",
+            "701 Manufacturing Services or Consulting"
+        ],
+        "cat_l2_ids": [
+            3628,
+            3617,
+            3627,
+            3608,
+            3602,
+            3640,
+            3652,
+            3660,
+            3685,
+            3708,
+            3695,
+            3793,
+            3864,
+            3882,
+            3942
+        ],
+        "cat_l2_names": [
+            "Wafer Mount; Taping Equipment",
+            "Lithography Systems for Wafer Level Packaging; Bumping; 3D Interconnect Aligners",
+            "Wafer Level Bonders",
+            "Device Handling; Feeding Systems",
+            "Backgrind; Slicing; Lapping; Polishing Equipment",
+            "Rubbing Equipment",
+            "Vision; ID; Bar Code Systems",
+            "Die Inspection; Die Shear",
+            "Wafer Level Bonders",
+            "SOI Bonders; Temporary Bonders; De-Bonders",
+            "Chemical Mechanical Polishing (CMP); Electro Polishing, Mechanical Polishing Equipment",
+            "CMP; Grind; Lap; Polish; Abrasive materials",
+            "Tracking Systems",
+            "Conveying; Material Handling Systems",
+            "Wafer Handling"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 343,
+                "l1_name": "200 Equipment, Assembly",
+                "children": [
+                    {
+                        "id": 3628,
+                        "name": "Wafer Mount; Taping Equipment"
+                    },
+                    {
+                        "id": 3617,
+                        "name": "Lithography Systems for Wafer Level Packaging; Bumping; 3D Interconnect Aligners"
+                    },
+                    {
+                        "id": 3627,
+                        "name": "Wafer Level Bonders"
+                    },
+                    {
+                        "id": 3608,
+                        "name": "Device Handling; Feeding Systems"
+                    },
+                    {
+                        "id": 3602,
+                        "name": "Backgrind; Slicing; Lapping; Polishing Equipment"
+                    }
+                ]
+            },
+            {
+                "l1_id": 344,
+                "l1_name": "201 Equipment, Flat Panel Display",
+                "children": [
+                    {
+                        "id": 3640,
+                        "name": "Rubbing Equipment"
+                    }
+                ]
+            },
+            {
+                "l1_id": 345,
+                "l1_name": "202 Equipment, General Use",
+                "children": [
+                    {
+                        "id": 3652,
+                        "name": "Vision; ID; Bar Code Systems"
+                    }
+                ]
+            },
+            {
+                "l1_id": 346,
+                "l1_name": "203 Equipment, Inspection & Measurement",
+                "children": [
+                    {
+                        "id": 3660,
+                        "name": "Die Inspection; Die Shear"
+                    }
+                ]
+            },
+            {
+                "l1_id": 347,
+                "l1_name": "204 Equipment, Mems",
+                "children": [
+                    {
+                        "id": 3685,
+                        "name": "Wafer Level Bonders"
+                    }
+                ]
+            },
+            {
+                "l1_id": 350,
+                "l1_name": "207 Equipment, Process",
+                "children": [
+                    {
+                        "id": 3708,
+                        "name": "SOI Bonders; Temporary Bonders; De-Bonders"
+                    },
+                    {
+                        "id": 3695,
+                        "name": "Chemical Mechanical Polishing (CMP); Electro Polishing, Mechanical Polishing Equipment"
+                    }
+                ]
+            },
+            {
+                "l1_id": 359,
+                "l1_name": "307 Materials, Process",
+                "children": [
+                    {
+                        "id": 3793,
+                        "name": "CMP; Grind; Lap; Polish; Abrasive materials"
+                    }
+                ]
+            },
+            {
+                "l1_id": 365,
+                "l1_name": "403 PV Components, Tracking and Mounting Systems",
+                "children": [
+                    {
+                        "id": 3864,
+                        "name": "Tracking Systems"
+                    }
+                ]
+            },
+            {
+                "l1_id": 368,
+                "l1_name": "502 Material Handling Systems",
+                "children": [
+                    {
+                        "id": 3882,
+                        "name": "Conveying; Material Handling Systems"
+                    }
+                ]
+            },
+            {
+                "l1_id": 374,
+                "l1_name": "701 Manufacturing Services or Consulting",
+                "children": [
+                    {
+                        "id": 3942,
+                        "name": "Wafer Handling"
+                    }
+                ]
+            }
+        ],
+        "hq_location_source": "default_pass",
+        "website_scrape": ""
+    },
+    {
+        "company_name": "Accenture Japan",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=3&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=662475&langID=2",
+        "about": "AI・データを駆使し、貴社の設計・製造のグローバル競争力を強化 をテーマに、以下の５つの視点から、業界を取り巻くマクロトレンドとその影響を受ける現場の課題、そしてその課題を解決に導く最新ソリューションをご紹介します。 Siemensソリューション活用による設計・生産データの集約・連携のご紹介 Accenture Industrial Intelligence Suite (AIIS)のご紹介 これらのサービスのご紹介に合わせ、ブース内ではテーマごとのトークセッションも開催します。また、 デモ：最新設計環境に向けたサービス、半導体リスキルプログラムのご紹介 デモ：最新設計環境に向けたサービス、半導体リスキルプログラムのご紹介 デモ：最新設計環境に向けたサービス、半導体リスキルプログラムのご紹介 につながる最新情報を確認いただける、アクセンチュアの講演およびブースにぜひお立ち寄り頂きますようお願いいたします。",
+        "hq_location": "港区, 東京都, Japan",
+        "website": "https://www.accenture.com/jp-ja",
+        "cat_l1_ids": [
+            379
+        ],
+        "cat_l1_names": [
+            "804 Professional Services"
+        ],
+        "cat_l2_ids": [
+            3959,
+            3964
+        ],
+        "cat_l2_names": [
+            "IT; Data Processing Services",
+            "Operations; Management Consulting"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 379,
+                "l1_name": "804 Professional Services",
+                "children": [
+                    {
+                        "id": 3959,
+                        "name": "IT; Data Processing Services"
+                    },
+                    {
+                        "id": 3964,
+                        "name": "Operations; Management Consulting"
+                    }
+                ]
+            }
+        ],
+        "hq_location_source": "default_pass",
+        "website_scrape": "360° VALUE\nアクセンチュアは日々変化を受け入れ、世界のあらゆる場所で、すべてのステークホルダーのために価値を創出します。\n表彰・受賞\n倫理的なビジネスリーダー\nEthisphereの「World’s Most Ethical Companies」に17年連続で選出。\nアクセンチュアは、より善き社会の実現に向け、常に正しい行動を実践します。Ethisphereは、持続可能な業績を促進しながら、社員、地域社会、ステークホルダーにプラスの影響を与える倫理的慣行を維持している企業を表彰しています。\n働きやすい職場\n「World's Best Workplaces™」で10位にランクイン。\nこの表彰は、従業員からのフィードバックに基づいており、職場での信頼、誇り、仲間意識のレベルを測定しています。\n影響力のあるイノベーター\nアクセンチュアの会長 兼 最高経営責任者であるジュリー・スウィートは、「TIME100 Most Influential People of 2024」の一人です。\nジュリーをはじめとするアクセンチュアの社員一同は、イノベーションと人材を中心に据え、世界のリーディング・カンパニーが取り組む絶え間ない変革を日々支援しています。"
+    },
+    {
+        "company_name": "ACE",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=4&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=629408&langID=2",
+        "about": "流体計測・制御技術及びモニタリング技術をベースに、コンポーネント開発とその応用機器の提供を行っております。 排気圧コントローラ、マスフローコントローラ、高精度基準流量校正器などを展示しております。 是非ご興味のある方は、ぜひとも弊社展示ブースへお立ち寄り下さい。",
+        "hq_location": "横浜市港北区, 神奈川県, Japan",
+        "website": "http://www.kk-ace.co.jp",
+        "cat_l1_ids": [
+            343,
+            362,
+            363,
+            366,
+            373
+        ],
+        "cat_l1_names": [
+            "200 Equipment, Assembly",
+            "400 Components, Parts & Accessories",
+            "401 Sub-systems",
+            "500 Factory Monitoring & Control Systems (FMCS)",
+            "700 Manufacturing Services"
+        ],
+        "cat_l2_ids": [
+            3605,
+            3834,
+            3825,
+            3845,
+            3867,
+            3900,
+            3911
+        ],
+        "cat_l2_names": [
+            "Cleaning; Washing Equipment for Assembly & Packaging",
+            "Pipe; Tubing; Hose; Flanges; Connectors; Couplings; Plumbing Fittings",
+            "Flow Control Components - Valves; Meters; Gauges; Regulators; MFC's",
+            "Gas; Liquid delivery panels as subsystems",
+            "Chemical; Pure Water; Fluid Monitoring & Control Systems",
+            "Calibration & Reference Standards",
+            "Measurement; Inspection Service"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 343,
+                "l1_name": "200 Equipment, Assembly",
+                "children": [
+                    {
+                        "id": 3605,
+                        "name": "Cleaning; Washing Equipment for Assembly & Packaging"
+                    }
+                ]
+            },
+            {
+                "l1_id": 362,
+                "l1_name": "400 Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 3834,
+                        "name": "Pipe; Tubing; Hose; Flanges; Connectors; Couplings; Plumbing Fittings"
+                    },
+                    {
+                        "id": 3825,
+                        "name": "Flow Control Components - Valves; Meters; Gauges; Regulators; MFC's"
+                    }
+                ]
+            },
+            {
+                "l1_id": 363,
+                "l1_name": "401 Sub-systems",
+                "children": [
+                    {
+                        "id": 3845,
+                        "name": "Gas; Liquid delivery panels as subsystems"
+                    }
+                ]
+            },
+            {
+                "l1_id": 366,
+                "l1_name": "500 Factory Monitoring & Control Systems (FMCS)",
+                "children": [
+                    {
+                        "id": 3867,
+                        "name": "Chemical; Pure Water; Fluid Monitoring & Control Systems"
+                    }
+                ]
+            },
+            {
+                "l1_id": 373,
+                "l1_name": "700 Manufacturing Services",
+                "children": [
+                    {
+                        "id": 3900,
+                        "name": "Calibration & Reference Standards"
+                    },
+                    {
+                        "id": 3911,
+                        "name": "Measurement; Inspection Service"
+                    }
+                ]
+            }
+        ],
+        "hq_location_source": "default_pass",
+        "website_scrape": "- 圧力制御器\n- 機種選定\n- AP100\n- AP150\n- AP160\n- AP200\n- AP250\n- AP310\n- AP500\n- 流量制御器\n- 機種選定\n- AFC150\n- AFC250\n- DPFM/DPFC250\n- DPFM/DPFC500\n- 排気圧力制御器・流量計\n- EPS5000シリーズ\n- 基準流量計\n- BIOS ML800/500\n- BIOS Flex Cal/Defender500\n- BIOS Definer1020\n- 燃料電池評価装置［PDF］\n- 流量検定サービス［PDF］\n- NTガスケット AGシリーズ\n- ガス混合装置\n- システム\n2026年3月\n  役員改選をしました\n2018年2月28日～3月2日\n    FC EXPO 2018に出展いたしました。\n2017年12月13日～15日\n   セミコン・ジャパン 2017に出展いたしました。\n2017年3月1日～3日\n    FC EXPO 2017に出展いたしました。\n2016年3月2日～4日\n    FC EXPO 2016に出展いたしました。\n2015年12月16日～18日\n   セミコン・ジャパン 2015に出展いたしました。\n2015年5月28日～29日\n   燃料電池シンポジウムに出展いたしました。\nCopyright© 2011 ACE inc. All Rights Reserved."
+    },
+    {
+        "company_name": "Achilles",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=5&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=630530&langID=2",
+        "about": "当社では、半導体、ハードディスク、液晶など、あらゆる電子部品の生産工程に欠かせない静電気対策品や 包装資材ならびに当社独自の導電加工技術「STポリ」を用いた様々な導電性プラスチック製品を開発・提供しております。 今回は、半導体搬送にかかわる技術や製品のほか、帯電防止性に優れたPOフィルムやガラス基板へのめっき層形成プロセス、 衝撃・振動吸収素材など幅広くご紹介いたします。ぜひ当社ブースにお立ち寄りください。 ・リングスペーサーを使うことで、ウエハー表面を非接触で搬送が可能 ・特殊なリング構造によりウエハーをしっかり固定　※特許取得済み イメージセンサーやMEMSウエハーなど表面が繊細なウエハーの搬送 静電チャック用サポートテープ(STSI-PI、STSI-PEN) ・帯電・耐薬品性-　CVD、プラズマエッチングなど様々な半導体製造工程で使用可能 フィルムフレームウエハーを❝より安全に❞運ぶプロトスキャリア... NDシリーズ(横置き)：コンパクトにウエハーを搬送し輸送コストを削減 FVシリーズ(横置き)：非接触によりクリーンなウエハー搬送を実現 液体原料のため、標準シート品から特注形状まで、お客様のご希望に合わせた生産が可能です。 各種テープ基材に適した、柔軟性に優れたPOフィルムです。優れた帯電防止性 Structure を付与したことにより、異物の誘引や剥離帯電を抑制する効果を有します。また 熱収縮機能により、フィルムに生じたたるみを熱で解消する効果が期待できます。",
+        "hq_location": "新宿区, 東京都, Japan",
+        "website": "http://www.achilles.jp",
+        "cat_l1_ids": [
+            362,
+            368,
+            381
+        ],
+        "cat_l1_names": [
+            "400 Components, Parts & Accessories",
+            "502 Material Handling Systems",
+            "900 Support Products"
+        ],
+        "cat_l2_ids": [
+            3817,
+            3836,
+            3882,
+            3884,
+            3980
+        ],
+        "cat_l2_names": [
+            "Chucks for Wafer and other Substrates",
+            "Raw Material & Custom components; Plastic",
+            "Conveying; Material Handling Systems",
+            "Static; ESD Control",
+            "Device; Wafer; Display Panel Handling Products"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 362,
+                "l1_name": "400 Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 3817,
+                        "name": "Chucks for Wafer and other Substrates"
+                    },
+                    {
+                        "id": 3836,
+                        "name": "Raw Material & Custom components; Plastic"
+                    }
+                ]
+            },
+            {
+                "l1_id": 368,
+                "l1_name": "502 Material Handling Systems",
+                "children": [
+                    {
+                        "id": 3882,
+                        "name": "Conveying; Material Handling Systems"
+                    },
+                    {
+                        "id": 3884,
+                        "name": "Static; ESD Control"
+                    }
+                ]
+            },
+            {
+                "l1_id": 381,
+                "l1_name": "900 Support Products",
+                "children": [
+                    {
+                        "id": 3980,
+                        "name": "Device; Wafer; Display Panel Handling Products"
+                    }
+                ]
+            }
+        ],
+        "hq_location_source": "default_pass",
+        "website_scrape": "このたびの令和8年熊本地震により\n被災された方々に謹んでお見舞いを申しあげます。\n一日も早い復旧・復興を心よりお祈りいたします。\nBU：ビジネスユニット\n- \n\t\t\t\t\t\t2026.09.18 \n  - イベント\n  - 展示会\n 危機管理産業展2026（RISCON TOKYO）に出展（防災BU）\n- \n\t\t\t\t\t\t2026.09.16 \n  - ニュースリリース\n  - 製品情報\n 子どものための靴「瞬足」から足の動きに反応して光るLED搭載モデルが登場 夜間歩行時の視認性に配慮し、子どもたちの外出にワクワク感をプラス\n- \n\t\t\t\t\t\t2026.09.15 \n  - イベント\n  - 展示会\n 「第3回九州半導体産業展」に出展（工業資材BU）\n- \n\t\t\t\t\t\t2026.09.16 \n  - ニュースリリース\n  - 製品情報\n 子どものための靴「瞬足」から足の動きに反応して光るLED搭載モデルが登場 夜間歩行時の視認性に配慮し、子どもたちの外出にワクワク感をプラス\n- \n\t\t\t\t\t\t2026.09.14 \n  - ニュースリリース\n  - 製品情報\n レザーシューズ「アキレス・ソルボ」人気インフルエンサー金子敦子さんと共同開発「上質ラムレザーシューズ」2タイプを新発売\n- \n\t\t\t\t\t\t2026.08.27 \n  - ニュースリリース\n  - 会社情報\n 令和8年熊本地震による被災地、被災者への支援について\n- \n\t\t\t\t\t\t2026.08.07 \n  - ニュースリリース\n  - IR\n 2027年3月期 第1四半期決算概要\n- \n\t\t\t\t\t\t2026.08.07 \n  - ニュースリリース\n  - IR\n 投資有価証券売却に伴う特別利益の計上見込みに関するお知らせ\n- \n\t\t\t\t\t\t2026.08.07 \n  - ニュースリリース\n  - IR\n 政策保有株式の縮減方針に関するお知らせ\n- \n\t\t\t\t\t\t2026.09.18 \n  - イベント\n  - 展示会\n 危機管理産業展2026（RISCON TOKYO）に出展（防災BU）\n- \n\t\t\t\t\t\t2026.09.15 \n  - イベント\n  - 展示会\n 「第3回九州半導体産業展」に出展（工業資材BU）\n- \n\t\t\t\t\t\t2026.09.14 \n  - イベント\n  - 展示会\n 「高機能素材Week内 第1回高機能マテリアル展」に出展（化成品BU）\n- \n\t\t\t\t\t\t2026.09.03 \n  - お知らせ\n  - 製品情報\n 「ジョイント総合カタログ」を更新しました。（防災販売部）\n- \n\t\t\t\t\t\t2026.08.26 \n  - お知らせ\n  - 会社情報\n 男子プロバレーボールチーム「レーヴィス栃木」と26-27シーズンスポンサー契約締結\n- \n\t\t\t\t\t\t2026.08.05 \n  - お知らせ\n  - 会社情報\n 夏季休業のお知らせ＜8月11日（火）～16日（日）＞"
+    },
+    {
+        "company_name": "ADTEC Engineering",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=6&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=632987&langID=2",
+        "about": "アドテックエンジニアリングは1983年に設立され、露光装置のリーディングカンパニーとして成長してきています。 弊社はフォトマスクを使用するコンタクト式露光装置から最先端のマスクレス露光装置まで製品ラインナップを拡大し、世界中の顧客に製品を提供し大きな市場シェアを獲得していると同時に、超精密機械加工や工場自動化（FA）機器にも事業展開しています。 今回は品質、性能、安定性を兼ね備えた次世代マスクレス露光装置を出展いたします。ご来場をお待ちしております。 ADTEC Engineering is a leading lithography equipment company established in 1983”. Our product lineup includes contact-type exposure systems that use photomasks and non-contact direct write maskless exposure systems with proven quality, performance and stability. Our product portfolio also covers precision machining and factory automation (FA) equipment. The Direct write exposure system will be exhibited at the show. We look forward to seeing you there. Direct Write Exposure System... Dedicated for Fan-Out process and high density IC package Achieved 2µm L/S & 1µm Overlay in Direct-write Exposure Deca Technologies’ Adaptive PatterningTM Live network 微細化と高生産性の両立をターゲットに、従来装置の特長であるワンタイムスキャンを継承しながら、現像後の最高解像性能L/S＝2/2μmを実現。 Automatic Protective Film Removal Device... This is an auto-peeling machine equipped with a mechanism that creates a peel initiation point without knurling, currently under patent application. It enables automatic peeling of materials that were previously difficult to peel, such as ABF, DFSR, polyimide film, and other strongly adhered films. Its unique peeling technology achieves stable peeling with minimal damage. Additionally, it features a film breakage (remnant) detection function, preventing defective boards caused by film breaks from flowing into subsequent processes. By linking film peeling data to the product, traceability management of the peeling condition is also possible. Peeling tests using substrate samples are also available. Please feel free to request them. Applicable Substrates: Organic substrates, glass substrates, ceramic substrates (Customization for special films is also possible)",
+        "hq_location": "港区, 東京都, Japan",
+        "website": "http://www.adtec.com/",
+        "cat_l1_ids": [
+            350
+        ],
+        "cat_l1_names": [
+            "207 Equipment, Process"
+        ],
+        "cat_l2_ids": [
+            3706
+        ],
+        "cat_l2_names": [
+            "Lithography; Exposure; Aligners; Direct Write Systems; Steppers; Scanners; Nanoimprint"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 350,
+                "l1_name": "207 Equipment, Process",
+                "children": [
+                    {
+                        "id": 3706,
+                        "name": "Lithography; Exposure; Aligners; Direct Write Systems; Steppers; Scanners; Nanoimprint"
+                    }
+                ]
+            }
+        ],
+        "hq_location_source": "default_pass",
+        "website_scrape": "スライダー画像\nスライダー画像\n私たちについて\n私たちについてAbout Us\n進化する世界に価値を届け\n暮らしに輝きを\n当社は、産業用自動化装置のメーカーとして、これまでに400種類以上の装置を開発してきました。\n皆さまの豊かな生活に貢献するため、\n今後もたゆまぬ努力を続けてまいります。\n製品情報\n技術・研究情報\nADTECWay\nお知らせタブ\nお知らせNews\n- \n2026年08月06日 製品・展示会\n- \n2026年07月16日 当社からのお知らせ\n- \n2026年06月19日 製品・展示会\n- \n2026年05月28日 お知らせ（日）当社からのお知らせ\n- \n2026年04月23日 お知らせ（日）当社からのお知らせ\n- \n2026年08月06日 製品・展示会\n- \n2026年06月19日 製品・展示会\n- \n2026年03月06日 お知らせ（日）製品・展示会\n- \n2026年01月06日 お知らせ（日）製品・展示会\n- \n2025年12月15日 お知らせ（日）製品・展示会\n- \n2026年07月16日 当社からのお知らせ\n- \n2026年05月28日 お知らせ（日）当社からのお知らせ\n- \n2026年04月23日 お知らせ（日）当社からのお知らせ\n- \n2026年04月03日 お知らせ（日）当社からのお知らせ\n- \n2025年12月01日 お知らせ（日）当社からのお知らせ\n採用情報\n採用情報Recruit\nやりたいことに、\n挑戦しよう。"
+    },
+    {
+        "company_name": "ADTEC Plasma Technology",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=7&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=629067&langID=2",
+        "about": "当社は、1985年の1月の設立以来、社是「信頼」と「QUICK（Quality=品質、Unique=ユニーク、Innovative=革新、Creative＝創造、Kind to the earth＝地球に優しく）」の経営理念のもと、半導体・液晶業界に対応する信頼性の高いプラズマ用高周波電源、マッチングユニットおよびその関連機器の販売・製造を行い、基礎技術の確立と最先端技術への挑戦に取り組んでまいりました。 これからはADTECグループの力を結集した付加価値の高い製品ラインアップを充実させるとともに、ますます重要となる海外市場に対応するため、欧米・アジアの販売・サービス拠点の機能拡充を図っていきます。 さらに「高周波技術」と「プラズマ技術」をキーワードとして、半導体・液晶分野製造装置分野のみならず、医療・環境分野など、広く一般産業に活用できる新製品の開発を積極的に進める所存であります。",
+        "hq_location": null,
+        "website": "https://www.adtec-rf.co.jp/",
+        "cat_l1_ids": [
+            363
+        ],
+        "cat_l1_names": [
+            "401 Sub-systems"
+        ],
+        "cat_l2_ids": [
+            3853
+        ],
+        "cat_l2_names": [
+            "Power Supplies; RF Generators; Converters; Electrical Conditioning"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 363,
+                "l1_name": "401 Sub-systems",
+                "children": [
+                    {
+                        "id": 3853,
+                        "name": "Power Supplies; RF Generators; Converters; Electrical Conditioning"
+                    }
+                ]
+            }
+        ],
+        "website_scrape": "Q\nU\nA\nL\nI\nT\nY\nU\nN\nI\nQ\nU\nE\nI\nN\nN\nO\nV\nA\nT\nI\nV\nE\nC\nR\nE\nA\nT\nI\nV\nE\nK\nI\nN\nD\nt\no\nT\nh\ne\nE\nA\nR\nT\nH\n製品情報\nOUR PRODUCTS\nプラズマ用高周波電源\n自動インピーダンス整合装置\n同軸ケーブル\nADTECの魅力\nABOUT US\n21世紀は、”プラズマ”が暮らしの中に浸透する時代といえます。\n当社は、プラズマの特性を応用し幅広い分野で活用できる製品の開発を目指しています。\n詳しくみる\n採用情報\nRECRUITMENT\n自分の好きなことを見つけ成長していける姿勢を大切にし、常に疑問を持ち、粘り強く課題に向き合える「創造できる人材」の育成を目指しています。\n詳しくみる\n企業情報\nニュースリリース\nNEWS RELLEASE\n一覧をみる\n2026.09.09\n弊社社内行事による臨時休業のお知らせ\n2026.08.25\n群馬テレビ「ビジネスジャーナル」放送予定のお知らせ\n2026.08.03\n夏季休業日のお知らせ\n2026.05.21\n広島ホームテレビ「THE LEADERS〜未来を創るモノづくり企業〜」放送予定のお知らせ\n2026.04.06\nテレビ東京系列「知られざるガリバー～エクセレントカンパニーファイル～」放送予定のお知らせ\nIRニュース\nIR NEWS\n一覧をみる\n2026.08.03\n2026年8月期通期決算発表について\n2026.07.10\n2026年8月期第3四半期決算発表に関するお知らせ\n2026.07.10\n業績予想及び配当予想の修正に関するお知らせ\n2026.04.28\n2026年8月期第3四半期決算発表について\n2026.04.15\n2026年８月期第２四半期　決算説明会"
+    },
+    {
+        "company_name": "ADVANCE ELECTRIC",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=9&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=632633&langID=2",
+        "about": "薬液用エアーオペレートバルブ、急速排水バルブ、セルフコントロールバルブを中心に、長年にわたって蓄積されたノウハウを元に製作された流体自動制御機器を多数展示致します。 本製品は、超純水及び腐食性流体等のON/OFFを制御するエアー操作弁です。... 本製品は、超純水及び腐食性流体等のON/OFFを制御するエアー操作弁です。 本製品は、超純水及び腐食性流体等のON/OFFを制御するマニュアル弁です。... 本製品は、超純水及び腐食性流体等のON/OFFを制御するマニュアル弁です。 本製品は、超純水及び腐食性流体等のON、OFFを制御するトグル弁です。... 本製品は、超純水及び腐食性流体等のON、OFFを制御するトグル弁です。 本製品は、超純水及び腐食性流体等の流量を微調節するニードルバルブです。... 本製品は、超純水及び腐食性流体等の流量を微調節するニードルバルブです。 本製品は、一次側圧力の変動に影響されず、二次側圧力を一定に保ち供給する事ができるコントロールバルブです。 本製品は、一次側圧力の変動に影響されず、二次側圧力を一定に保ち供給する事ができるコントロールバルブです。",
+        "hq_location": "春日井市, 愛知県, Japan",
+        "website": "https://www.advance-e.jp",
+        "cat_l1_ids": [
+            362,
+            382
+        ],
+        "cat_l1_names": [
+            "400 Components, Parts & Accessories",
+            "902 Other"
+        ],
+        "cat_l2_ids": [
+            3825,
+            3986
+        ],
+        "cat_l2_names": [
+            "Flow Control Components - Valves; Meters; Gauges; Regulators; MFC's",
+            "Other"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 362,
+                "l1_name": "400 Components, Parts & Accessories",
+                "children": [
+                    {
+                        "id": 3825,
+                        "name": "Flow Control Components - Valves; Meters; Gauges; Regulators; MFC's"
+                    }
+                ]
+            },
+            {
+                "l1_id": 382,
+                "l1_name": "902 Other",
+                "children": [
+                    {
+                        "id": 3986,
+                        "name": "Other"
+                    }
+                ]
+            }
+        ],
+        "hq_location_source": "default_pass",
+        "website_scrape": "製品紹介\n会社案内\nMORE\n採用情報\nアドバンス電気工業は、\n                    時代が求めるニーズを的確にとらえ、\n                    ビジネスドメインを広げています。\n                    そういった視点からも\n                    グローバルな視点にたった\n                    考え方が出来る方を求めています。\n更新情報\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tお知らせ 第三者評価を含む国際規格ISO56001の「自己適合宣言」を行います。\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tお知らせ 健康宣言チャレンジ事業所として認定されました\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tイベント SEMICON JAPAN 2021に出展致します\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tお知らせ 中小企業庁の選ぶはばたく中小企業・小規模事業者300に選ばれました\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tお知らせ マイナビEXPO名古屋(2020/4/11)イベント中止のお知らせ\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tイベント マイナビEXPO名古屋(2020年4月11日)に出展致します\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tお知らせ 会社説明会 新型コロナウイルス対策（技術職）\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tお知らせ 会社見学説明会一部中止の決定について\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tイベント SEMICON KOREA 2020中止のご案内\n- \n                            \n                            \t\t\t\t\t\t\t\t                            \t\tイベント SEMICON JAPAN 2019に出展致します"
+    },
+    {
+        "company_name": "Advanced Research Infrastructure for Materials and Nanotechnology in Japan",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=10&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=649150&langID=2",
+        "about": "マテリアル先端リサーチインフラ（ARIM）では、全国26の大学、研究機関が参画し、各機関が保有する最先端設備を一般の企業の方へも自由に使っていただける設備共用サービスを行ってます。3つの技術領域（１）透過電子顕微鏡に代表される計測、分析技術、（２）成膜・リソグラフィ・エッチングなどの加工、デバイスプロセス技術、（３）合成技術による物質創成と観察・評価を行う物質・材料合成技術、をすべてカバーしています。前事業のナノテクノロジープラットフォームで培ってきた全国的な最先端設備共用体制と高度な技術支援を提供する専門技術者等の基盤を活かしつつ、新たにデータ収集、利活用という新しい視点を加え、2025年10月よりデータ共用を開始しました。展示ではマテリアル先端リサーチインフラでの共用サービスの概要についてご紹介します。 半導体微細加工技術により進展した、ナノメートルオーダーの加工と分析・評価装置を用いた微細加工技術や計測評価技術は、半導体、電子デバイス産業のみならず光デバイス、バイオ・ライフサイエンス、環境技術、エネルギー技術など多くの分野を支える基盤技術として産官学において広く活用されています。しかしながらナノテクノロジーを支える設備は高価なものが多く、一企業、機関で必要な設備群を保有することは難しく、さらに性能の維持や操作にも専門の技術が必要であるなど、専門外の方には必ずしも使いやすいものではありません。このような背景のもと、文部科学省では2002年から20年以上にわたり大学や公的研究機関が保有する最先端の研究設備を共用化する事業が継続して実施され、広く産官学の研究者に機器利用などのサービスを提供する仕組みを構築し、現在、全国の企業、研究機関、大学の方に年間3000件以上の利用を頂いています。 原子層堆積装置、多元スパッタ装置、プラズマCVD装置、各種蒸着装置　めっき　等 RIE装置、D-RIE装置、レーザー加工装置　集束イオンビーム加工装置　等 走査電子顕微鏡、走査プローブ顕微鏡、分光分析装置、X線回折装置、膜厚測定装置　等",
+        "hq_location": "京都市, 京都府, Japan",
+        "website": "https://nanonet.go.jp/",
+        "cat_l1_ids": [
+            346,
+            347,
+            348,
+            350,
+            357,
+            373,
+            374,
+            377,
+            380
+        ],
+        "cat_l1_names": [
+            "203 Equipment, Inspection & Measurement",
+            "204 Equipment, Mems",
+            "205 Equipment, Nanotechnology",
+            "207 Equipment, Process",
+            "305 Materials, Nanotechnology",
+            "700 Manufacturing Services",
+            "701 Manufacturing Services or Consulting",
+            "802 Educational; Research Institutions",
+            "805 PV Services"
+        ],
+        "cat_l2_ids": [
+            3682,
+            3679,
+            3676,
+            3671,
+            3654,
+            3669,
+            3668,
+            3667,
+            3670,
+            3684,
+            3683,
+            3686,
+            3704,
+            3703,
+            3702,
+            3707,
+            3706,
+            3710,
+            3699,
+            3700,
+            3786,
+            3906,
+            3904,
+            3909,
+            3910,
+            3914,
+            3908,
+            3911,
+            3933,
+            3951,
+            3973,
+            3976
+        ],
+        "cat_l2_names": [
+            "X-ray; XRF; 3-D X-Ray; LEXES Systems",
+            "Wafer; Substrate Metrology; Topology; Nanotopography; Flatness Measurement; Crystalline Orientation",
+            "Spectrometers; Fourier Transform Infrared (FTIR); Attenuated Total Reflectance FTIR (ATR-FTIR); Auge",
+            "Overlay Measurement",
+            "Acoustic Spectroscopy; Electron Spectroscopy for Chemical Analysis (ESCA); Ultrasonic; Acoustical Mi",
+            "Microscopes:  Optical Microscopes",
+            "Microscopes:  Confocal Scanning Microscope; 3-D Video Microscopes",
+            "Microscopes:  Atomic Force Microscopes (AFM)",
+            "Microscopes:  Scanning Electron Microscope (SEM); Focused Ion Beam (FIB), Transmission Electron Micr",
+            "Double sided mask aligner",
+            "Deep RIE etching; Dry Etching",
+            "Equipment, Nanotechnology Tools",
+            "Ion Implantation Equipment",
+            "Etching; Stripping; Ashing - Dry and Wet Equipment",
+            "Epitaxy Equipment; Epi Reactors; Molecular Beam Epitaxy (MBE); Atomic Layer Epitaxy (ALE)",
+            "Plating; Electro Chemical Plating; Deposition Systems",
+            "Lithography; Exposure; Aligners; Direct Write Systems; Steppers; Scanners; Nanoimprint",
+            "Thermal Processing - Diffusion; Oxidation; Annealing; RTA; RTP Equipment",
+            "Deposition; Chemical Vapor (CVD); MOCVD; PECVD; LPCVD; ALD; REALD; MVD",
+            "Deposition; Physical Vapor (PVD); Sputtering; Evaporation Equipment",
+            "Materials, Nanotechnology",
+            "Ion Implant Service",
+            "Etch; Strip; Cleaning Service",
+            "Machine Shop; Fabrication Service",
+            "Mask Making Fabrication and Repair",
+            "Plating; Electro Polishing; Coating; Surface Treatment",
+            "Lithography; Patterning service",
+            "Measurement; Inspection Service",
+            "Nanotechnology Intellectual Property Development; Research",
+            "Education; Research Institutions (Non Profit); Academia; Schools",
+            "Education, Training",
+            "Research and Development"
+        ],
+        "cat_tree": [
+            {
+                "l1_id": 346,
+                "l1_name": "203 Equipment, Inspection & Measurement",
+                "children": [
+                    {
+                        "id": 3682,
+                        "name": "X-ray; XRF; 3-D X-Ray; LEXES Systems"
+                    },
+                    {
+                        "id": 3679,
+                        "name": "Wafer; Substrate Metrology; Topology; Nanotopography; Flatness Measurement; Crystalline Orientation"
+                    },
+                    {
+                        "id": 3676,
+                        "name": "Spectrometers; Fourier Transform Infrared (FTIR); Attenuated Total Reflectance FTIR (ATR-FTIR); Auge"
+                    },
+                    {
+                        "id": 3671,
+                        "name": "Overlay Measurement"
+                    },
+                    {
+                        "id": 3654,
+                        "name": "Acoustic Spectroscopy; Electron Spectroscopy for Chemical Analysis (ESCA); Ultrasonic; Acoustical Mi"
+                    },
+                    {
+                        "id": 3669,
+                        "name": "Microscopes:  Optical Microscopes"
+                    },
+                    {
+                        "id": 3668,
+                        "name": "Microscopes:  Confocal Scanning Microscope; 3-D Video Microscopes"
+                    },
+                    {
+                        "id": 3667,
+                        "name": "Microscopes:  Atomic Force Microscopes (AFM)"
+                    },
+                    {
+                        "id": 3670,
+                        "name": "Microscopes:  Scanning Electron Microscope (SEM); Focused Ion Beam (FIB), Transmission Electron Micr"
+                    }
+                ]
+            },
+            {
+                "l1_id": 347,
+                "l1_name": "204 Equipment, Mems",
+                "children": [
+                    {
+                        "id": 3684,
+                        "name": "Double sided mask aligner"
+                    },
+                    {
+                        "id": 3683,
+                        "name": "Deep RIE etching; Dry Etching"
+                    }
+                ]
+            },
+            {
+                "l1_id": 348,
+                "l1_name": "205 Equipment, Nanotechnology",
+                "children": [
+                    {
+                        "id": 3686,
+                        "name": "Equipment, Nanotechnology Tools"
+                    }
+                ]
+            },
+            {
+                "l1_id": 350,
+                "l1_name": "207 Equipment, Process",
+                "children": [
+                    {
+                        "id": 3704,
+                        "name": "Ion Implantation Equipment"
+                    },
+                    {
+                        "id": 3703,
+                        "name": "Etching; Stripping; Ashing - Dry and Wet Equipment"
+                    },
+                    {
+                        "id": 3702,
+                        "name": "Epitaxy Equipment; Epi Reactors; Molecular Beam Epitaxy (MBE); Atomic Layer Epitaxy (ALE)"
+                    },
+                    {
+                        "id": 3707,
+                        "name": "Plating; Electro Chemical Plating; Deposition Systems"
+                    },
+                    {
+                        "id": 3706,
+                        "name": "Lithography; Exposure; Aligners; Direct Write Systems; Steppers; Scanners; Nanoimprint"
+                    },
+                    {
+                        "id": 3710,
+                        "name": "Thermal Processing - Diffusion; Oxidation; Annealing; RTA; RTP Equipment"
+                    },
+                    {
+                        "id": 3699,
+                        "name": "Deposition; Chemical Vapor (CVD); MOCVD; PECVD; LPCVD; ALD; REALD; MVD"
+                    },
+                    {
+                        "id": 3700,
+                        "name": "Deposition; Physical Vapor (PVD); Sputtering; Evaporation Equipment"
+                    }
+                ]
+            },
+            {
+                "l1_id": 357,
+                "l1_name": "305 Materials, Nanotechnology",
+                "children": [
+                    {
+                        "id": 3786,
+                        "name": "Materials, Nanotechnology"
+                    }
+                ]
+            },
+            {
+                "l1_id": 373,
+                "l1_name": "700 Manufacturing Services",
+                "children": [
+                    {
+                        "id": 3906,
+                        "name": "Ion Implant Service"
+                    },
+                    {
+                        "id": 3904,
+                        "name": "Etch; Strip; Cleaning Service"
+                    },
+                    {
+                        "id": 3909,
+                        "name": "Machine Shop; Fabrication Service"
+                    },
+                    {
+                        "id": 3910,
+                        "name": "Mask Making Fabrication and Repair"
+                    },
+                    {
+                        "id": 3914,
+                        "name": "Plating; Electro Polishing; Coating; Surface Treatment"
+                    },
+                    {
+                        "id": 3908,
+                        "name": "Lithography; Patterning service"
+                    },
+                    {
+                        "id": 3911,
+                        "name": "Measurement; Inspection Service"
+                    }
+                ]
+            },
+            {
+                "l1_id": 374,
+                "l1_name": "701 Manufacturing Services or Consulting",
+                "children": [
+                    {
+                        "id": 3933,
+                        "name": "Nanotechnology Intellectual Property Development; Research"
+                    }
+                ]
+            },
+            {
+                "l1_id": 377,
+                "l1_name": "802 Educational; Research Institutions",
+                "children": [
+                    {
+                        "id": 3951,
+                        "name": "Education; Research Institutions (Non Profit); Academia; Schools"
+                    }
+                ]
+            },
+            {
+                "l1_id": 380,
+                "l1_name": "805 PV Services",
+                "children": [
+                    {
+                        "id": 3973,
+                        "name": "Education, Training"
+                    },
+                    {
+                        "id": 3976,
+                        "name": "Research and Development"
+                    }
+                ]
+            }
+        ],
+        "hq_location_source": "default_pass",
+        "website_scrape": "【令和8年熊本地震の被災者へ研究支援のお知らせ】\n地震により被災された皆さま、そのご家族の方々に心よりお見舞い申し上げます。一日も早い復旧によって、安定した生活を取り戻されることをお祈りいたします。被災に伴う研究・開発活動の支障に対し、優先的に支援を実施する予定です。お困りのことがありましたら、問い合わせ窓口よりご相談ください。\n文部科学省 マテリアル先端リサーチインフラAdvanced Research Infrastructure for Materials and Nanotechnology in Japan (ARIM)\n\t\t\t\t\t最先端研究設備と\nマテリアルデータの共用マテリアルDXによる研究開発をサポートします"
+    },
+    {
+        "company_name": "Advanced Semiconductor Equipment Technology Singapore",
+        "location": "Japan expo",
+        "ebooth_url": "https://expo.semi.org/japan2025/public/eBooth.aspx?IndexInList=11&FromPage=Exhibitors.aspx&ParentBoothID=&ListByBooth=true&BoothID=663309&langID=2",
+        "about": null,
+        "hq_location": "Singapore 569059",
+        "website": "http://www.asets.com.sg",
+        "cat_l1_ids": [],
+        "cat_l1_names": [],
+        "cat_l2_ids": [],
+        "cat_l2_names": [],
+        "cat_tree": [],
+        "hq_location_source": "default_pass",
+        "website_scrape": "Advanced Semiconductor Equipment Technology Singapore Pte Ltd is a Singapore registered company that conduct sales, assembly and repair of semiconductor equipment for the semiconductor manufacturing industry. It has licensing agreement with OEMs to conduct sales, assembly and service of its equipment.\nASETS also has a lab facility to conduct customer demo, process research and development, and equipment CIP.\nASETS is wholly founded by its employees with many years of experience in the industry. Its mission is to be the equipment of choice for the semiconductor manufacturing industry."
+    }
+]

@@ -1,0 +1,58 @@
+============================================================
+MERGE / DEDUPE REPORT
+============================================================
+
+input_records                    5244
+unique_companies                 4308
+multi_show_companies             617
+name_to_domain_reassignments     35
+flagged_refined_leakage          419
+flagged_dual_name                1
+flagged_no_website               426
+l1_code_parse_fallbacks          0
+
+Multi-show companies, first 20 of 617:
+  'AblePrint Technology Co., Ltd.' -> ['China expo', 'Taiwan expo']
+  'Achilles Corporation' -> ['China expo', 'Japan expo']
+  'ADTEC Plasma Technology China Ltd.' -> ['China expo', 'Japan expo', 'Korea expo']
+  'Advanced Global Alliance Limited' -> ['China expo', 'Taiwan expo']
+  'Advantest (China) Co.,Ltd.' -> ['', 'China expo', 'Europe expo', 'Japan expo', 'Korea expo']
+  'Agilent Technologies Co.,Ltd. (China)' -> ['', 'China expo', 'Japan expo']
+  'AI Technology, Inc.' -> ['China expo', 'Taiwan expo']
+  'AIR LIQUIDE China Holding Co., Ltd.' -> ['', 'China expo']
+  'All Ring Tech Co., Ltd.' -> ['China expo', 'Taiwan expo']
+  'Allied Supreme (Jia Xing) Corp.' -> ['China expo', 'Taiwan expo']
+  'Amaya Co., Ltd.' -> ['China expo', 'Japan expo']
+  'AMFLO Fluid Systems & Components Co., Ltd.' -> ['China expo', 'Japan expo', 'Taiwan expo']
+  'AMIES Technology Co., Ltd.' -> ['China expo', 'Taiwan expo']
+  'Asahi Diamond Industrial Co., Ltd.' -> ['', 'China expo', 'Japan expo']
+  'Asian Valve Co.,Ltd.' -> ['China expo', 'Europe expo']
+  'ASML' -> ['', 'China expo', 'Europe expo', 'Japan expo']
+  'ASMPT Technology Hong Kong Limited' -> ['', 'China expo', 'Japan expo', 'Korea expo', 'Taiwan expo']
+  'ATC Co., Ltd.' -> ['China expo', 'Korea expo']
+  'Atlas Technology Corporation' -> ['China expo', 'Taiwan expo']
+  'AUROS Technology, Inc.' -> ['China expo', 'Japan expo', 'Korea expo', 'Taiwan expo']
+
+Companies with at least one flag, first 20 of 828:
+  '"Compound Semiconductor China"/"Silicon Semiconductor China"': ['dual_bundled_company_name']
+  'Advantest (China) Co.,Ltd.': ['about_contains_refined_output_not_raw_text']
+  'AIR LIQUIDE China Holding Co., Ltd.': ['no_usable_website']
+  'Asahi Diamond Industrial Co., Ltd.': ['about_contains_refined_output_not_raw_text']
+  'ASML': ['about_contains_refined_output_not_raw_text']
+  'ASMPT Technology Hong Kong Limited': ['about_contains_refined_output_not_raw_text']
+  'BE Semiconductor Industries N.V.': ['about_contains_refined_output_not_raw_text']
+  'BMT Co., Ltd.': ['about_contains_refined_output_not_raw_text']
+  'Bruker (Beijing) Scientific Technology Co., Ltd': ['about_contains_refined_output_not_raw_text']
+  'Cryogenic Specialty Manufacturing Sdn. Bhd.': ['about_contains_refined_output_not_raw_text']
+  'Dassault Systemes (Shanghai) Information Technology Co., Ltd': ['about_contains_refined_output_not_raw_text']
+  'Delta Electronics, Inc.': ['no_usable_website']
+  'DISCO HI-TEC CHINA CO., LTD.': ['about_contains_refined_output_not_raw_text']
+  'E & R Engineering Corporation': ['no_usable_website']
+  'Ecosphere Clean Global Sdn Bhd': ['no_usable_website']
+  'Entegris (Shanghai) Microelectronics Trading Co., Ltd.': ['no_usable_website']
+  'EV Group': ['about_contains_refined_output_not_raw_text']
+  'Evatec China Ltd': ['about_contains_refined_output_not_raw_text']
+  'FEI Co (a part of Thermo Fisher Scientific)': ['about_contains_refined_output_not_raw_text']
+  'FITOK GmbH': ['no_usable_website']
+
+============================================================
