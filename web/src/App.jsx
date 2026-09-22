@@ -11,31 +11,12 @@ const CLEARED = {
   countries: [],
   l1: [],
   l2: [],
-  // Fixed for now, not user-tunable - the slider was removed from
-  // FilterPanel per the "keep it hard 0.4 for now" decision. Whether
-  // rerank RUNS AT ALL was already not a manual choice - see runSearch.
   alpha: 0.4,
-  // The query that produced the CURRENT results, as distinct from whatever
-  // is sitting in the input box. Search now runs on an explicit submit, so
-  // these two genuinely diverge while the user is typing, and category
-  // highlighting must follow the applied query or tags would flicker
-  // against a query that was never run.
   appliedQuery: "",
 };
 
-// How long to wait after the last filter/query change before actually
-// firing a search. Filter clicks used to trigger a call immediately and
-// unconditionally - harmless when a query search was a cheap hybrid
-// lookup, but now that reranking runs automatically for every text query,
-// three quick filter clicks while a query is active would fire three
-// separate paid LLM calls, with only the last one's result kept. This
-// collapses a burst of rapid changes into one actual call.
 const SEARCH_DEBOUNCE_MS = 400;
-
-// The default trade show the app opens with
 const DEFAULT_EXPO = "All";
-
-// The state the app loads with on first visit
 const INITIAL_FILTERS = { ...CLEARED, expo: DEFAULT_EXPO };
 
 export default function App() {
@@ -65,22 +46,16 @@ export default function App() {
     filters.countries.length + filters.l1.length + filters.l2.length;
   const hasFilters = activeCount > 0;
 
-  // Facets track the filter selection only - never the draft text - so the
-  // sidebar doesn't churn on every keystroke.
   useEffect(() => {
     if (!health || health.status !== "ok") return;
+    // Facets call: l1/l2 are sent but the backend silently ignores them
+    // if categories were removed — safe to always send, and the response
+    // will simply have empty l1/l2 arrays which FilterPanel handles.
     api.facets(filters).then(setFacets).catch(() => setFacets(null));
   }, [health, filters.expo, filters.countries, filters.l1, filters.l2]);
 
   const runSearch = useCallback(async (f, pageIndex) => {
     const isBrowse = !f.appliedQuery.trim();
-    // commented to show results even when no filters are applied, so that the user can browse the catalogue without a query
-    // if (!f.appliedQuery.trim() && !(
-    //   f.expo !== "All" || f.countries.length || f.l1.length || f.l2.length
-    // )) {
-    //   setData(null);
-    //   return;
-    // }
     const id = ++reqId.current;
     setLoading(true);
     setError(null);
@@ -90,19 +65,18 @@ export default function App() {
       const res = await api.search({
         query: f.appliedQuery,
         expo: f.expo === "All" ? null : f.expo,
-        countries: f.countries, l1: f.l1, l2: f.l2,
+        countries: f.countries,
+        // l1/l2 are still sent — FastAPI ignores unknown params, so this
+        // is safe even if the backend no longer uses them. When the backend
+        // is ready to re-add category filtering, no frontend change needed.
+        l1: f.l1,
+        l2: f.l2,
         limit: isBrowse ? PAGE_SIZE : 10,
         offset: isBrowse ? pageIndex * PAGE_SIZE : 0,
-        // Rerank automatically for any real query; never for filter-only
-        // browsing (there's nothing to rerank - browse is sorted
-        // alphabetically, not ranked, and always has been). The server
-        // degrades this to false on its own if no key is configured, so
-        // this is safe to send unconditionally.
         rerank: !isBrowse,
-        alpha: f.alpha, fusion: "rrf",
+        alpha: f.alpha,
+        fusion: "rrf",
       });
-      // Drop responses that a newer request has already superseded, so a
-      // slow rerank call can't overwrite fresher results.
       if (id === reqId.current) setData(res);
     } catch (e) {
       if (id === reqId.current) { setError(e.message); setData(null); }
@@ -111,9 +85,6 @@ export default function App() {
     }
   }, []);
 
-  // Debounced: any filter click or alpha change waits SEARCH_DEBOUNCE_MS of
-  // quiet before firing, collapsing bursts. Explicit form submissions bypass
-  // this and run immediately via submit().
   useEffect(() => {
     if (!health || health.status !== "ok") return;
     if (skipNextDebounceRef.current) {
@@ -135,8 +106,6 @@ export default function App() {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     skipNextDebounceRef.current = true;
     setPage(0);
-
-    // If the query didn't change, re-run immediately without priming the skip ref
     if (draft === filters.appliedQuery) {
       runSearch(filters, 0);
       return;
@@ -201,10 +170,6 @@ export default function App() {
   const pages = isBrowse ? Math.ceil((data?.total || 0) / PAGE_SIZE) : 1;
   const hasExplanations = Object.keys(explanations).length > 0;
 
-  // Rerank runs automatically for any real query (see runSearch), so
-  // "loading a search with a query in the box" now specifically means
-  // "waiting on the LLM judge", not just a fast DB lookup - the button
-  // should say so rather than a generic "Searching…".
   const isProcessingLLM = loading && !!filters.appliedQuery.trim();
   const searchButtonLabel = isProcessingLLM
     ? "Processing"

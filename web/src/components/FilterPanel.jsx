@@ -5,9 +5,6 @@ function FacetList({ label, options, selected, onToggle, idKey = "value", initia
   const [expanded, setExpanded] = useState(false);
   const sel = new Set(selected.map(String));
 
-  // Selected values are pinned to the top so they never hide under a
-  // collapsed "show more" - otherwise a user can't see (or undo) a filter
-  // they just applied.
   const ordered = [
     ...options.filter((o) => sel.has(String(o[idKey]))),
     ...options.filter((o) => !sel.has(String(o[idKey]))),
@@ -57,6 +54,10 @@ export default function FilterPanel({
 }) {
   const f = facets || { expos: [], countries: [], l1: [], l2: [], total: 0 };
 
+  // l1/l2 may or may not exist depending on whether the backend still
+  // returns them — guard so the panel never crashes on a missing key.
+  const hasCategories = Array.isArray(f.l1) && f.l1.length > 0;
+
   const toggleIn = (key, value) =>
     setFilters((prev) => {
       const list = prev[key];
@@ -64,9 +65,6 @@ export default function FilterPanel({
       return {
         ...prev,
         [key]: has ? list.filter((v) => String(v) !== String(value)) : [...list, value],
-        // Changing L1 can orphan an L2 pick from a different branch. The
-        // engine lets L2 override L1, so a stale child would silently widen
-        // results back out of the chosen parent - drop them instead.
         ...(key === "l1" ? { l2: [] } : {}),
       };
     });
@@ -94,11 +92,9 @@ export default function FilterPanel({
               setFilters((p) => ({
                 ...p,
                 expo: newExpo,
-                // Category/Subcategory are hidden while India expo is
-                // selected (see below) - clear them on switching IN so a
-                // filter picked earlier doesn't keep narrowing results
-                // invisibly, with no control left to see or remove it.
-                ...(newExpo === "India expo" ? { l1: [], l2: [] } : {}),
+                // Clear category filters on expo change since they may not
+                // be available for the newly selected show.
+                l1: [], l2: [],
               }));
             }}
           >
@@ -117,7 +113,11 @@ export default function FilterPanel({
           onToggle={(v) => toggleIn("countries", v)}
         />
 
-        {filters.expo !== "India expo" && (
+        {/* Category and Subcategory panels are shown only if the backend
+            actually returns them. If categories were removed from the
+            backend, these panels simply disappear rather than showing
+            empty/broken states. */}
+        {hasCategories && (
           <>
             <FacetList
               label="Category"
@@ -127,14 +127,16 @@ export default function FilterPanel({
               idKey="id"
             />
 
-            <FacetList
-              label="Subcategory"
-              options={f.l2}
-              selected={filters.l2}
-              onToggle={(v) => toggleIn("l2", v)}
-              idKey="id"
-              initial={8}
-            />
+            {Array.isArray(f.l2) && f.l2.length > 0 && (
+              <FacetList
+                label="Subcategory"
+                options={f.l2}
+                selected={filters.l2}
+                onToggle={(v) => toggleIn("l2", v)}
+                idKey="id"
+                initial={8}
+              />
+            )}
           </>
         )}
 
