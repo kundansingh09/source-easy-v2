@@ -140,7 +140,22 @@ class SourcingSearchEngine:
         return " | ".join(p for p in parts if p)
 
     def _init_collection(self):
+            # --- CLOUD SKIP: if Qdrant already has the data, just build facets
+            # and return -- no local file needed. This must come BEFORE the
+            # file-existence check below, otherwise a missing/renamed JSON
+            # silently exits and leaves _facet_rows empty, making count() return
+            # 0 and the API appear broken even though Qdrant is fine.
+            if self.client.collection_exists(self.collection_name):
+                if self.client.get_collection(self.collection_name).points_count > 0:
+                    print("Data already in Qdrant Cloud. Skipping heavy upload.")
+                    self._build_facet_index()
+                    return
+
+            # Only reach here if Qdrant is empty / collection missing.
+            # Local file is required to seed Qdrant -- fail clearly if absent.
             if not os.path.exists(self.data_path):
+                print(f"WARNING: {self.data_path} not found and Qdrant has no data. "
+                      f"Run force_re-index.py locally to seed Qdrant before deploying.")
                 return
             with open(self.data_path) as f:
                 suppliers = json.load(f)
@@ -160,16 +175,7 @@ class SourcingSearchEngine:
             #             bucket.setdefault(child["id"], child["name"])
             #             self.l2_names_by_id.setdefault(child["id"], child["name"])
 
-            # --- NEW CLOUD SKIP LOGIC ---
-            # Check if data is already in the Cloud. If yes, skip embedding and just build facets!
-            if self.client.collection_exists(self.collection_name):
-                if self.client.get_collection(self.collection_name).points_count > 0:
-                    print("Data already in Qdrant Cloud. Skipping heavy upload.")
-                    self._build_facet_index()
-                    return
-            
-            print("Embedding data and pushing to Qdrant... (This takes a few minutes)")
-            # ----------------------------
+            print("Seeding Qdrant from local file...")
 
             self.client.create_collection(
                 collection_name=self.collection_name,
