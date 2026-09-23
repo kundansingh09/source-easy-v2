@@ -52,20 +52,15 @@ export default function FilterPanel({
   facets, filters, setFilters, onClearAll, open, onClose,
   rerankAvailable, totalIndexed,
 }) {
-  const f = facets || { expos: [], countries: [], l1: [], l2: [], total: 0 };
-
-  // l1/l2 may or may not exist depending on whether the backend still
-  // returns them — guard so the panel never crashes on a missing key.
-  const hasCategories = Array.isArray(f.l1) && f.l1.length > 0;
+  const f = facets || { expos: [], countries: [], total: 0 };
 
   const toggleIn = (key, value) =>
     setFilters((prev) => {
-      const list = prev[key];
+      const list = prev[key] || [];
       const has = list.some((v) => String(v) === String(value));
       return {
         ...prev,
         [key]: has ? list.filter((v) => String(v) !== String(value)) : [...list, value],
-        ...(key === "l1" ? { l2: [] } : {}),
       };
     });
 
@@ -92,9 +87,6 @@ export default function FilterPanel({
               setFilters((p) => ({
                 ...p,
                 expo: newExpo,
-                // Clear category filters on expo change since they may not
-                // be available for the newly selected show.
-                l1: [], l2: [],
               }));
             }}
           >
@@ -112,33 +104,6 @@ export default function FilterPanel({
           selected={filters.countries}
           onToggle={(v) => toggleIn("countries", v)}
         />
-
-        {/* Category and Subcategory panels are shown only if the backend
-            actually returns them. If categories were removed from the
-            backend, these panels simply disappear rather than showing
-            empty/broken states. */}
-        {hasCategories && (
-          <>
-            <FacetList
-              label="Category"
-              options={f.l1}
-              selected={filters.l1}
-              onToggle={(v) => toggleIn("l1", v)}
-              idKey="id"
-            />
-
-            {Array.isArray(f.l2) && f.l2.length > 0 && (
-              <FacetList
-                label="Subcategory"
-                options={f.l2}
-                selected={filters.l2}
-                onToggle={(v) => toggleIn("l2", v)}
-                idKey="id"
-                initial={8}
-              />
-            )}
-          </>
-        )}
 
         <div className="facet-group">
           <div className="facet-label">Ranking</div>

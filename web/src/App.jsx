@@ -9,8 +9,6 @@ const PAGE_SIZE = 10;
 const CLEARED = {
   expo: "All",
   countries: [],
-  l1: [],
-  l2: [],
   alpha: 0.4,
   appliedQuery: "",
 };
@@ -42,17 +40,15 @@ export default function App() {
   }, []);
 
   const activeCount =
-    (filters.expo !== "All" ? 1 : 0) +
-    filters.countries.length + filters.l1.length + filters.l2.length;
+    (filters.expo !== "All" ? 1 : 0) + filters.countries.length;
   const hasFilters = activeCount > 0;
 
   useEffect(() => {
     if (!health || health.status !== "ok") return;
-    // Facets call: l1/l2 are sent but the backend silently ignores them
-    // if categories were removed — safe to always send, and the response
-    // will simply have empty l1/l2 arrays which FilterPanel handles.
-    api.facets(filters).then(setFacets).catch(() => setFacets(null));
-  }, [health, filters.expo, filters.countries, filters.l1, filters.l2]);
+    api.facets({ expo: filters.expo, countries: filters.countries })
+      .then(setFacets)
+      .catch(() => setFacets(null));
+  }, [health, filters.expo, filters.countries]);
 
   const runSearch = useCallback(async (f, pageIndex) => {
     const isBrowse = !f.appliedQuery.trim();
@@ -66,11 +62,6 @@ export default function App() {
         query: f.appliedQuery,
         expo: f.expo === "All" ? null : f.expo,
         countries: f.countries,
-        // l1/l2 are still sent — FastAPI ignores unknown params, so this
-        // is safe even if the backend no longer uses them. When the backend
-        // is ready to re-add category filtering, no frontend change needed.
-        l1: f.l1,
-        l2: f.l2,
         limit: isBrowse ? PAGE_SIZE : 10,
         offset: isBrowse ? pageIndex * PAGE_SIZE : 0,
         rerank: !isBrowse,
@@ -97,8 +88,7 @@ export default function App() {
       runSearch(filters, 0);
     }, SEARCH_DEBOUNCE_MS);
     return () => clearTimeout(debounceRef.current);
-  }, [health, filters.expo, filters.countries, filters.l1, filters.l2,
-      filters.alpha, filters.appliedQuery]);
+  }, [health, filters.expo, filters.countries, filters.alpha, filters.appliedQuery]);
 
   const submit = (e) => {
     e?.preventDefault();
@@ -143,13 +133,6 @@ export default function App() {
     }
   };
 
-  const taxonomyLabel = useMemo(() => {
-    const map = new Map();
-    (facets?.l1 || []).forEach((o) => map.set(`l1-${o.id}`, o.label));
-    (facets?.l2 || []).forEach((o) => map.set(`l2-${o.id}`, o.label));
-    return map;
-  }, [facets]);
-
   const chips = [];
   if (filters.expo !== "All") {
     chips.push({ key: "expo", label: filters.expo,
@@ -158,12 +141,6 @@ export default function App() {
   filters.countries.forEach((c) =>
     chips.push({ key: `c-${c}`, label: c,
       clear: () => setFilters((p) => ({ ...p, countries: p.countries.filter((x) => x !== c) })) }));
-  filters.l1.forEach((id) =>
-    chips.push({ key: `l1-${id}`, label: taxonomyLabel.get(`l1-${id}`) || `Category ${id}`,
-      clear: () => setFilters((p) => ({ ...p, l1: p.l1.filter((x) => x !== id), l2: [] })) }));
-  filters.l2.forEach((id) =>
-    chips.push({ key: `l2-${id}`, label: taxonomyLabel.get(`l2-${id}`) || `Subcategory ${id}`,
-      clear: () => setFilters((p) => ({ ...p, l2: p.l2.filter((x) => x !== id) })) }));
 
   const results = data?.results || [];
   const isBrowse = data?.mode === "browse";

@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import { visibleCategories, allCategories } from "../categories.js";
 import { parseOverview, relevanceLevel } from "../overview.js";
 
 const FALLBACK_ABOUT = "Semiconductor technology and equipment supplier.";
@@ -165,46 +164,6 @@ function OverviewSection({ about, refined }) {
   );
 }
 
-function CategoryTags({ item, filters }) {
-  const [expanded, setExpanded] = useState(false);
-  const opts = {
-    selectedL1: filters.l1,
-    selectedL2: filters.l2,
-    query: filters.appliedQuery,
-  };
-  const { shown, hiddenCount, total, hasHits } = visibleCategories(item.cat_tree, opts, 6);
-  if (!total) return null;
-
-  const list = expanded ? allCategories(item.cat_tree, opts) : shown;
-  const hitKeys = new Set(
-    hasHits ? visibleCategories(item.cat_tree, opts, 999).shown.map((e) => e.key) : []
-  );
-
-  return (
-    <div className="tags">
-      {list.map((e) => (
-        <span
-          key={e.key}
-          className={`tag${hitKeys.has(e.key) ? " is-hit" : ""}`}
-          title={e.parent ? `${e.parent} › ${e.label}` : e.label}
-        >
-          {e.label}
-        </span>
-      ))}
-      {!expanded && hiddenCount > 0 && (
-        <button className="tag-more" onClick={() => setExpanded(true)}>
-          +{hiddenCount} more
-        </button>
-      )}
-      {expanded && (
-        <button className="tag-more" onClick={() => setExpanded(false)}>
-          Show fewer
-        </button>
-      )}
-    </div>
-  );
-}
-
 function toSafeUrl(url) {
   if (!url || url === "#") return null;
   return /^https?:\/\//i.test(url) ? url : `https://${url}`;
@@ -276,12 +235,11 @@ export default function ResultCard({ item, filters, explanation, explanations })
         </div>
       )}
 
-      {/* Booth/Segment/Relevance, tags, and website/booth links all moved
+      {/* Booth/Segment/Relevance, and website/booth links all moved
           above the overview - they're the scannable, glanceable facts;
           the free-text overview is the heaviest read, so it goes last and
           collapsed. */}
       <InfoBadges parsed={parsed} country={item.hq_country} />
-      <CategoryTags item={item} filters={filters} />
       <CardLinks item={item} sources={sources} hasOverview={hasOverview} />
 
       <OverviewSection about={item.about} refined={item.refined} />
