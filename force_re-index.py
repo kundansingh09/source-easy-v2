@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DATA_PATH = "/Users/kundansingh/source-easy-v2/full-global-refined-hybrid.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.environ.get("DATA_PATH", os.path.join(BASE_DIR, "full-global-refined-hybrid.json"))
 COLLECTION_NAME = "semicon_suppliers"
 
 def main():
@@ -27,6 +28,8 @@ def main():
     qdrant_api_key = os.getenv("QDRANT_API_KEY")
 
     if qdrant_url:
+        if qdrant_url.startswith("https://") and qdrant_url.endswith(":6333"):
+            qdrant_url = qdrant_url[:-5]
         client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
         if client.collection_exists(COLLECTION_NAME):
             print(f"Deleting collection '{COLLECTION_NAME}' from Qdrant Cloud...")

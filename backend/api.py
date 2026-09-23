@@ -27,7 +27,12 @@ from backend.search_engine import SourcingSearchEngine
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_DATA_PATH = os.path.join(BASE_DIR, "full-global-refined-hybrid.json")
 DATA_PATH = os.environ.get("DATA_PATH", DEFAULT_DATA_PATH)
+if not os.path.isabs(DATA_PATH):
+    DATA_PATH = os.path.join(BASE_DIR, DATA_PATH)
+
 TAXONOMY_PATH = os.environ.get("TAXONOMY_PATH", os.path.join(BASE_DIR, "data", "categories.json"))
+if not os.path.isabs(TAXONOMY_PATH):
+    TAXONOMY_PATH = os.path.join(BASE_DIR, TAXONOMY_PATH)
 # Comma-separated list, e.g. "https://sourcing-web.onrender.com,http://localhost:5173"
 ALLOWED_ORIGINS = [o.strip() for o in os.environ.get(
     "ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if o.strip()]

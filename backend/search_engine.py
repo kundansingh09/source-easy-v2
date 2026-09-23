@@ -79,6 +79,10 @@ DEFAULT_DATA_PATH = os.path.join(BASE_DIR, "full-global-refined-hybrid.json")
 
 class SourcingSearchEngine:
     def __init__(self, data_path=DEFAULT_DATA_PATH, taxonomy_path=None):
+        if data_path and not os.path.isabs(data_path):
+            data_path = os.path.join(BASE_DIR, data_path)
+        if taxonomy_path and not os.path.isabs(taxonomy_path):
+            taxonomy_path = os.path.join(BASE_DIR, taxonomy_path)
         self.data_path = data_path
         self.taxonomy_path = taxonomy_path
 
@@ -86,7 +90,10 @@ class SourcingSearchEngine:
         qdrant_url = os.environ.get("QDRANT_URL")
         qdrant_key = os.environ.get("QDRANT_API_KEY")
         if qdrant_url and qdrant_key:
-            self.client = QdrantClient(url=qdrant_url, api_key=qdrant_key, timeout=60)
+            if qdrant_url.startswith("https://") and qdrant_url.endswith(":6333"):
+                qdrant_url = qdrant_url[:-5]
+            port = 443 if qdrant_url.startswith("https://") else 6333
+            self.client = QdrantClient(url=qdrant_url, port=port, api_key=qdrant_key, timeout=60)
         else:
             self.client = QdrantClient(":memory:")
             
@@ -101,25 +108,65 @@ class SourcingSearchEngine:
         self.l1_names_by_id = {}
         self.l2_names_by_id = {}
         self._facet_rows = []
+        self._refined_lookup = self._load_refined_lookup()
         self._init_collection()
 
     # ------------------------------------------------------------- loading
 
+    def _load_refined_lookup(self):
+        """Build an in-memory lookup of company_name/id -> refined dict from local file.
+        Guarantees that even if Qdrant Cloud hasn't been re-indexed with 'refined' payloads yet,
+        all search/browse results immediately carry the full refined intelligence."""
+        lookup = {}
+        if not self.data_path or not os.path.exists(self.data_path):
+            return lookup
+        try:
+            with open(self.data_path, "r", encoding="utf-8") as f:
+                suppliers = json.load(f)
+            for idx, item in enumerate(suppliers):
+                ref = item.get("refined")
+                if ref:
+                    name = (item.get("company_name") or "").strip().lower()
+                    if name:
+                        lookup[name] = ref
+                    lookup[idx + 1] = ref
+        except Exception as e:
+            print(f"Warning: could not load refined lookup from {self.data_path}: {e}")
+        return lookup
+
     def _build_text_chunk(self, item):
-        """Text that gets embedded. `about` goes FIRST when real content
-        exists, since that is the actual differentiator between companies -
-        putting it after the category list let generic tags dominate the
-        embedding for well-documented companies too. Category NAMES are still
-        included: many exhibitors have no Overview at all, so their categories
-        are the only semantic content they have.
+        """Text that gets embedded. Dense MiniLM and sparse BM25 index
+        company name, refined summary, capabilities, technical expertise,
+        role/segment, HQ, categories, and about.
         """
         parts = [item.get("company_name", "")]
 
-        about = item.get("about", "")
+        refined = item.get("refined") or {}
+        if not refined and hasattr(self, "_refined_lookup"):
+            key = (item.get("company_name") or "").strip().lower()
+            refined = self._refined_lookup.get(key) or {}
+
+        summary = (refined.get("summary") or "").strip()
+        about = (item.get("about") or "").strip()
         has_real_about = bool(about) and about != FALLBACK_ABOUT
-        if has_real_about:
+
+        if summary:
+            parts.append(f"About: {summary}")
+        elif has_real_about:
             embed_about = clean_overview(about)["cleaned"] if self.clean_overview else about
             parts.append(f"About: {embed_about}")
+
+        role = refined.get("value_chain_position")
+        if role and role != "Other":
+            parts.append(f"Segment: {role}")
+
+        caps = refined.get("capabilities") or []
+        if caps:
+            parts.append("Capabilities: " + "; ".join(caps[:6]))
+
+        tech = refined.get("technical_expertise") or []
+        if tech:
+            parts.append("Expertise: " + "; ".join(tech[:4]))
 
         hq = item.get("hq_location") or item.get("hq_country")
         if hq and hq != UNKNOWN_COUNTRY:
@@ -130,7 +177,7 @@ class SourcingSearchEngine:
         if cats:
             parts.append("Categories: " + "; ".join(cats))
 
-        if not has_real_about and about:
+        if not summary and not has_real_about and about:
             parts.append(about)  # keep the fallback string as a weak tail signal
 
         return " | ".join(p for p in parts if p)
@@ -207,6 +254,7 @@ class SourcingSearchEngine:
                             "hq_location": item.get("hq_location"),           # display
                             "hq_country": item.get("hq_country", UNKNOWN_COUNTRY),
                             "about": item.get("about", ""),
+                            "refined": item.get("refined") or {},
                             "website": item.get("website"),
                             "ebooth_url": item.get("ebooth_url", "#"),  # primary/first-seen link
                             "sources": item.get("sources", []),  # {location, ebooth_url} per expo
@@ -396,15 +444,23 @@ class SourcingSearchEngine:
                 key="cat_l1_ids", match=models.MatchAny(any=[int(i) for i in cat_l1_ids])))
         return models.Filter(must=must) if must else None
 
-    @staticmethod
-    def _shape(point_id, payload, score=None):
+    def _shape(self, point_id, payload, score=None):
+        company_name = payload.get("company_name")
+        company_key = (company_name or "").strip().lower()
+        refined = (
+            payload.get("refined")
+            or getattr(self, "_refined_lookup", {}).get(company_key)
+            or getattr(self, "_refined_lookup", {}).get(point_id)
+            or {}
+        )
         return {
             "id": point_id,
-            "company_name": payload.get("company_name"),
+            "company_name": company_name,
             "locations": payload.get("location") or [],  # every expo, post-dedupe
             "hq_location": payload.get("hq_location"),
             "hq_country": payload.get("hq_country"),
             "about": payload.get("about"),
+            "refined": refined,
             "website": payload.get("website"),
             "url": payload.get("ebooth_url"),
             "sources": payload.get("sources", []),  # per-expo booth link, when deduped

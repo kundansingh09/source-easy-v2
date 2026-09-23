@@ -62,11 +62,54 @@ function emptyResult(summary) {
   return {
     summary, booth: null, valueChain: null, relevance: null,
     capabilities: [], technicalExpertise: [], endMarkets: [],
-    indiaPresence: null, structured: false,
+    regionalPresence: null, indiaPresence: null, structured: false,
   };
 }
 
-export function parseOverview(about) {
+export function parseOverview(about, refined) {
+  // If refined object is provided and non-empty, use structured fields directly
+  if (refined && typeof refined === "object" && Object.keys(refined).length > 0) {
+    const summary = (refined.summary || about || "").trim();
+    const capabilities = Array.isArray(refined.capabilities)
+      ? refined.capabilities
+      : (refined.capabilities ? [refined.capabilities] : []);
+    const technicalExpertise = Array.isArray(refined.technical_expertise)
+      ? refined.technical_expertise
+      : (refined.technical_expertise ? [refined.technical_expertise] : []);
+    const endMarkets = Array.isArray(refined.end_markets)
+      ? refined.end_markets
+      : (refined.end_markets ? [refined.end_markets] : []);
+    const valueChain = refined.value_chain_position || null;
+    const relevance = refined.semiconductor_relevance || null;
+
+    let regionalPresence = null;
+    if (typeof refined.regional_presence === "string") {
+      regionalPresence = refined.regional_presence.trim();
+    } else if (refined.regional_presence && typeof refined.regional_presence === "object") {
+      const parts = Object.entries(refined.regional_presence)
+        .map(([k, v]) => (v ? `${k}: ${v}` : k));
+      if (parts.length > 0) regionalPresence = parts.join("; ");
+    }
+    const indiaPresence = refined.india_presence || regionalPresence || null;
+
+    const hasStructured = Boolean(
+      valueChain || relevance || capabilities.length || technicalExpertise.length || endMarkets.length || regionalPresence || indiaPresence
+    );
+
+    return {
+      summary,
+      booth: null,
+      valueChain,
+      relevance,
+      capabilities,
+      technicalExpertise,
+      endMarkets,
+      regionalPresence,
+      indiaPresence,
+      structured: hasStructured,
+    };
+  }
+
   const text = (about || "").trim();
   if (!text) return emptyResult("");
 
@@ -77,7 +120,7 @@ export function parseOverview(about) {
     summary: text.slice(0, matches[0].index).trim(),
     booth: null, valueChain: null, relevance: null,
     capabilities: [], technicalExpertise: [], endMarkets: [],
-    indiaPresence: null, structured: true,
+    regionalPresence: null, indiaPresence: null, structured: true,
   };
 
   for (let i = 0; i < matches.length; i++) {
@@ -132,8 +175,11 @@ export function parseOverview(about) {
 }
 
 export function relevanceLevel(value) {
-  const v = (value || "").toLowerCase();
-  return v === "high" || v === "medium" || v === "low" ? v : null;
+  const v = (value || "").toLowerCase().trim();
+  if (v.startsWith("high")) return "high";
+  if (v.startsWith("medium")) return "medium";
+  if (v.startsWith("low")) return "low";
+  return null;
 }
 
 export { FALLBACK_ABOUT };

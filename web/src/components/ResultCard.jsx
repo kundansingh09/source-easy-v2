@@ -121,8 +121,8 @@ function ClampedText({ text, longThreshold = 320, open, onToggle }) {
   );
 }
 
-function OverviewSection({ about }) {
-  const parsed = useMemo(() => parseOverview(about), [about]);
+function OverviewSection({ about, refined }) {
+  const parsed = useMemo(() => parseOverview(about, refined), [about, refined]);
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((v) => !v);
 
@@ -136,7 +136,7 @@ function OverviewSection({ about }) {
 
   const hasExtra = Boolean(
     parsed.capabilities.length || parsed.technicalExpertise.length
-    || parsed.endMarkets.length || parsed.indiaPresence
+    || parsed.endMarkets.length || parsed.regionalPresence || parsed.indiaPresence
   );
   // If the summary itself is short (won't clamp) but there's extra detail,
   // ClampedText renders no toggle of its own - so a toggle still needs to
@@ -158,10 +158,12 @@ function OverviewSection({ about }) {
           <TextGroup title="Key Capabilities" items={parsed.capabilities} />
           <TextGroup title="Technical Expertise" items={parsed.technicalExpertise} />
           <TextGroup title="End Markets" items={parsed.endMarkets} />
-          {parsed.indiaPresence && (
+          {(parsed.regionalPresence || parsed.indiaPresence) && (
             <div className="callout">
-              <div className="callout-label">India Presence</div>
-              <div className="callout-body">{parsed.indiaPresence}</div>
+              <div className="callout-label">
+                {parsed.regionalPresence ? "Regional Presence" : "India Presence"}
+              </div>
+              <div className="callout-body">{parsed.regionalPresence || parsed.indiaPresence}</div>
             </div>
           )}
         </>
@@ -242,7 +244,7 @@ export default function ResultCard({ item, filters, explanation, explanations })
   const hq = formatHQ(item.hq_location, item.hq_country);
   const locations = item.locations || [];
   const sources = item.sources || [];
-  const parsed = useMemo(() => parseOverview(item.about), [item.about]);
+  const parsed = useMemo(() => parseOverview(item.about, item.refined), [item.about, item.refined]);
   
   const hasOverview = parsed.structured || (parsed.summary && parsed.summary !== FALLBACK_ABOUT);
   const safeWebsite = toSafeUrl(item.website);
@@ -289,7 +291,7 @@ export default function ResultCard({ item, filters, explanation, explanations })
       <CategoryTags item={item} filters={filters} />
       <CardLinks item={item} sources={sources} hasOverview={hasOverview} />
 
-      <OverviewSection about={item.about} />
+      <OverviewSection about={item.about} refined={item.refined} />
     </article>
   );
 }

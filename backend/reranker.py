@@ -152,21 +152,36 @@ def normalise(values, method="minmax"):
 def _format_candidates(candidates):
     lines = []
     for c in candidates:
+        refined = c.get("refined") or {}
+        role = refined.get("value_chain_position") or ""
+        caps_list = refined.get("capabilities") or []
+        caps_str = ", ".join(caps_list[:5]) if caps_list else ""
+
         cats = ", ".join((c.get("categories_l2") or c.get("cat_l2_names") or c.get("categories_l1") or c.get("cat_l1_names") or [])[:6])
-        about = (c.get("about") or "").strip()
+        about = (refined.get("summary") or c.get("about") or "").strip()
         if not about or about == FALLBACK_ABOUT:
-            about = "(no overview provided)"
+            if caps_str:
+                about = f"Capabilities: {caps_str}"
+            else:
+                about = "(no overview provided)"
         elif len(about) > 700:
             # Long marketing copy dilutes the judgement and inflates cost; the
             # opening lines carry the capability statement in practice.
             about = about[:700].rsplit(" ", 1)[0] + " ..."
-        lines.append(
-            f"id={c.get('id')}\n"
-            f"  company: {c.get('company_name')}\n"
-            f"  hq: {c.get('hq_country') or 'Unknown'}\n"
-            f"  categories: {cats or 'none listed'}\n"
-            f"  overview: {about}"
-        )
+
+        item_lines = [
+            f"id={c.get('id')}",
+            f"  company: {c.get('company_name')}",
+        ]
+        if role:
+            item_lines.append(f"  role: {role}")
+        item_lines.append(f"  hq: {c.get('hq_country') or 'Unknown'}")
+        item_lines.append(f"  categories: {cats or 'none listed'}")
+        if caps_str and not about.startswith("Capabilities:"):
+            item_lines.append(f"  capabilities: {caps_str}")
+        item_lines.append(f"  overview: {about}")
+
+        lines.append("\n".join(item_lines))
     return "\n\n".join(lines)
 
 
