@@ -8,7 +8,7 @@ import json
 from qdrant_client import QdrantClient
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.environ.get("DATA_PATH", os.path.join(BASE_DIR, "full-global-refined-hybrid.json"))
@@ -30,7 +30,8 @@ def main():
     if qdrant_url:
         if qdrant_url.startswith("https://") and qdrant_url.endswith(":6333"):
             qdrant_url = qdrant_url[:-5]
-        client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
+        port = 443 if qdrant_url.startswith("https://") else 6333
+        client = QdrantClient(url=qdrant_url, port=port, api_key=qdrant_api_key, timeout=60)
         if client.collection_exists(COLLECTION_NAME):
             print(f"Deleting collection '{COLLECTION_NAME}' from Qdrant Cloud...")
             client.delete_collection(COLLECTION_NAME)

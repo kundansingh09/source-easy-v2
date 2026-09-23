@@ -96,76 +96,69 @@ function TextGroup({ title, items }) {
   );
 }
 
-function ClampedText({ text, longThreshold = 320, open, onToggle }) {
-  // open/onToggle come from the parent (OverviewSection) rather than owning
-  // local state, so one "Read more" click reveals the capabilities/
-  // expertise/end-markets sections at the same time as the full summary -
-  // the mentor's ask was for all of it to be hidden together, not just the
-  // summary paragraph on its own.
-  //
-  // longThreshold moved up from 180: the clamp is now 4 lines (was 2), so
-  // the length at which a 4-line clamp actually visually truncates
-  // anything is correspondingly higher - the old 180-char threshold was
-  // tuned for a 2-line clamp and would show a "Read more" button on text
-  // that no longer overflows 4 lines.
-  const longEnough = text.length > longThreshold;
-  return (
-    <div>
-      <div className={`overview${open || !longEnough ? "" : " overview-clamp"}`}>{text}</div>
-      {longEnough && (
-        <button className="overview-toggle" onClick={onToggle}>
-          {open ? "Show less" : "Read more"}
-        </button>
-      )}
-    </div>
-  );
-}
-
 function OverviewSection({ about, refined }) {
   const parsed = useMemo(() => parseOverview(about, refined), [about, refined]);
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((v) => !v);
 
-  if (!parsed.structured) {
-    // Legacy format - identical behavior to the original Overview component.
-    if (!parsed.summary || parsed.summary === FALLBACK_ABOUT) {
-      return <div className="overview overview-empty">No overview provided by this exhibitor.</div>;
-    }
-    return <ClampedText text={parsed.summary} open={open} onToggle={toggle} />;
-  }
-
+  const summary = (parsed.summary || "").trim();
+  const hasSummary = Boolean(summary && summary !== FALLBACK_ABOUT);
   const hasExtra = Boolean(
     parsed.capabilities.length || parsed.technicalExpertise.length
     || parsed.endMarkets.length || parsed.regionalPresence || parsed.indiaPresence
   );
-  // If the summary itself is short (won't clamp) but there's extra detail,
-  // ClampedText renders no toggle of its own - so a toggle still needs to
-  // show up somewhere, and this is it.
-  const needsOwnToggle = hasExtra && parsed.summary.length <= 320;
+
+  if (!parsed.structured && !hasSummary) {
+    // Legacy format - identical behavior to the original Overview component.
+    return <div className="overview overview-empty">No overview provided by this exhibitor.</div>;
+  }
+
+  const isLongSummary = summary.length > 320;
+  const canExpand = hasExtra || isLongSummary;
 
   return (
-    <div className="overview-structured">
-      {parsed.summary && <ClampedText text={parsed.summary} open={open} onToggle={toggle} />}
+    <div className={parsed.structured ? "overview-structured" : undefined}>
+      {hasSummary && (
+        <div>
+          <div className={`overview${!open && isLongSummary ? " overview-clamp" : ""}`}>
+            {summary}
+          </div>
+          {canExpand && !open && (
+            <button className="overview-toggle" onClick={toggle}>
+              Read more
+            </button>
+          )}
+        </div>
+      )}
 
-      {needsOwnToggle && !open && (
+      {!hasSummary && canExpand && !open && (
         <button className="overview-toggle" onClick={toggle}>
-          Read more (capabilities, expertise, end markets)
+          Read more
         </button>
       )}
 
-      {hasExtra && open && (
+      {open && (
         <>
-          <TextGroup title="Key Capabilities" items={parsed.capabilities} />
-          <TextGroup title="Technical Expertise" items={parsed.technicalExpertise} />
-          <TextGroup title="End Markets" items={parsed.endMarkets} />
-          {(parsed.regionalPresence || parsed.indiaPresence) && (
-            <div className="callout">
-              <div className="callout-label">
-                {parsed.regionalPresence ? "Regional Presence" : "India Presence"}
-              </div>
-              <div className="callout-body">{parsed.regionalPresence || parsed.indiaPresence}</div>
-            </div>
+          {hasExtra && (
+            <>
+              <TextGroup title="Key Capabilities" items={parsed.capabilities} />
+              <TextGroup title="Technical Expertise" items={parsed.technicalExpertise} />
+              <TextGroup title="End Markets" items={parsed.endMarkets} />
+              {(parsed.regionalPresence || parsed.indiaPresence) && (
+                <div className="callout">
+                  <div className="callout-label">
+                    {parsed.regionalPresence ? "Regional Presence" : "India Presence"}
+                  </div>
+                  <div className="callout-body">
+                    {parsed.regionalPresence || parsed.indiaPresence}
+                  </div>
+                </div>
+              )}
+            </>
           )}
+          <button className="overview-toggle" onClick={toggle}>
+            Show less
+          </button>
         </>
       )}
     </div>
