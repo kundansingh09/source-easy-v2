@@ -58,7 +58,7 @@ services:
       - key: PYTHON_VERSION
         value: "3.12"
       - key: FASTEMBED_CACHE_PATH
-        value: /var/cache/fastembed
+        value: /tmp/fastembed_cache
       - key: DATA_PATH
         value: full-global-refined-hybrid.json
       - key: TAXONOMY_PATH

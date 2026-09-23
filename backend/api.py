@@ -18,6 +18,19 @@ serverless runtimes there is no way to avoid it.
 import os
 from contextlib import asynccontextmanager
 
+# Ensure FASTEMBED_CACHE_PATH points to a writable directory.
+fastembed_cache = os.environ.get("FASTEMBED_CACHE_PATH", "/tmp/fastembed_cache")
+try:
+    os.makedirs(fastembed_cache, exist_ok=True)
+    test_file = os.path.join(fastembed_cache, ".write_test")
+    with open(test_file, "w") as f:
+        f.write("ok")
+    os.remove(test_file)
+except (PermissionError, OSError):
+    fastembed_cache = "/tmp/fastembed_cache"
+    os.makedirs(fastembed_cache, exist_ok=True)
+os.environ["FASTEMBED_CACHE_PATH"] = fastembed_cache
+
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field

@@ -31,6 +31,20 @@ import threading
 import time
 from collections import Counter
 
+# Ensure FASTEMBED_CACHE_PATH points to a writable directory.
+# On cloud platforms without a mounted volume, /var/cache is read-only for non-root users.
+fastembed_cache = os.environ.get("FASTEMBED_CACHE_PATH", "/tmp/fastembed_cache")
+try:
+    os.makedirs(fastembed_cache, exist_ok=True)
+    test_file = os.path.join(fastembed_cache, ".write_test")
+    with open(test_file, "w") as f:
+        f.write("ok")
+    os.remove(test_file)
+except (PermissionError, OSError):
+    fastembed_cache = "/tmp/fastembed_cache"
+    os.makedirs(fastembed_cache, exist_ok=True)
+os.environ["FASTEMBED_CACHE_PATH"] = fastembed_cache
+
 from qdrant_client import QdrantClient, models
 try:
     from backend.text_clean import clean_overview
