@@ -60,7 +60,7 @@ services:
       - key: FASTEMBED_CACHE_PATH
         value: /var/cache/fastembed
       - key: DATA_PATH
-        value: data/semi_suppliers.json
+        value: full-global-refined-hybrid.json
       - key: TAXONOMY_PATH
         value: data/categories.json
       - key: QDRANT_URL

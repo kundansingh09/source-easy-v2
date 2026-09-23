@@ -44,9 +44,8 @@ UNKNOWN_COUNTRY = "Unknown"
 
 # Fields the facet index needs. Kept narrow on purpose: this is scrolled in
 # full at startup and held in RAM.
-# _FACET_FIELDS = ["company_name", "location", "hq_country",
-#                  "cat_l1_ids", "cat_l2_ids", "cat_tree"]
-_FACET_FIELDS = ["company_name", "location", "hq_country"]
+_FACET_FIELDS = ["company_name", "location", "hq_country",
+                 "cat_l1_ids", "cat_l2_ids", "cat_tree"]
 
 
 # --------------------------------------------------------------------------
@@ -65,19 +64,23 @@ def _row_matches(row, expo=None, hq_countries=None, cat_l1_ids=None, cat_l2_ids=
         return False
     # L2 is more specific, so it supersedes L1 when both are present - same
     # precedence as build_filter's if/elif.
-    # if cat_l2_ids:
-    #     if not (row["l2"] & {int(i) for i in cat_l2_ids}):
-    #         return False
-    # elif cat_l1_ids:
-    #     if not (row["l1"] & {int(i) for i in cat_l1_ids}):
-    #         return False
+    if cat_l2_ids:
+        if not (row["l2"] & {int(i) for i in cat_l2_ids}):
+            return False
+    elif cat_l1_ids:
+        if not (row["l1"] & {int(i) for i in cat_l1_ids}):
+            return False
     return True
 
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_DATA_PATH = os.path.join(BASE_DIR, "full-global-refined-hybrid.json")
+
+
 class SourcingSearchEngine:
-    def __init__(self, data_path="/Users/kundansingh/source-easy-v2/full-global-refined-hybrid.json"):
+    def __init__(self, data_path=DEFAULT_DATA_PATH, taxonomy_path=None):
         self.data_path = data_path
-        # self.taxonomy_path = taxonomy_path
+        self.taxonomy_path = taxonomy_path
 
         # Connect to Cloud if credentials exist, otherwise use local RAM
         qdrant_url = os.environ.get("QDRANT_URL")
@@ -93,21 +96,14 @@ class SourcingSearchEngine:
         # this scale. Left in place because Streamlit spawns a thread per
         # interaction and FastEmbed's batch dict is not documented as re-entrant.
         self.lock = threading.Lock()
-        # self.taxonomy = self._load_taxonomy()
         self.clean_overview = clean_overview
-        # self.l1_to_l2 = {}
-        # self.l1_names_by_id = {}
-        # self.l2_names_by_id = {}
+        self.l1_to_l2 = {}
+        self.l1_names_by_id = {}
+        self.l2_names_by_id = {}
         self._facet_rows = []
         self._init_collection()
 
     # ------------------------------------------------------------- loading
-
-    # def _load_taxonomy(self):
-    #     if not os.path.exists(self.taxonomy_path):
-    #         return {"level1": [], "level2": []}
-    #     with open(self.taxonomy_path) as f:
-    #         return json.load(f)
 
     def _build_text_chunk(self, item):
         """Text that gets embedded. `about` goes FIRST when real content
@@ -129,10 +125,10 @@ class SourcingSearchEngine:
         if hq and hq != UNKNOWN_COUNTRY:
             parts.append(f"HQ: {hq}")
 
-        # cats = list(dict.fromkeys(
-        #     list(item.get("cat_l1_names", [])) + list(item.get("cat_l2_names", []))))
-        # if cats:
-        #     parts.append("Categories: " + "; ".join(cats))
+        cats = list(dict.fromkeys(
+            list(item.get("cat_l1_names", [])) + list(item.get("cat_l2_names", []))))
+        if cats:
+            parts.append("Categories: " + "; ".join(cats))
 
         if not has_real_about and about:
             parts.append(about)  # keep the fallback string as a weak tail signal
@@ -162,18 +158,18 @@ class SourcingSearchEngine:
             if not suppliers:
                 return
 
-            # # Real L1 -> L2 map, built from the nested cat_tree captured at scrape
-            # # time (document order on the profile page).
-            # for item in suppliers:
-            #     for node in item.get("cat_tree", []) or []:
-            #         l1_id = node.get("l1_id")
-            #         if l1_id is None:
-            #             continue
-            #         self.l1_names_by_id.setdefault(l1_id, node.get("l1_name", str(l1_id)))
-            #         bucket = self.l1_to_l2.setdefault(l1_id, {})
-            #         for child in node.get("children", []) or []:
-            #             bucket.setdefault(child["id"], child["name"])
-            #             self.l2_names_by_id.setdefault(child["id"], child["name"])
+            # Real L1 -> L2 map, built from the nested cat_tree captured at scrape
+            # time (document order on the profile page).
+            for item in suppliers:
+                for node in item.get("cat_tree", []) or []:
+                    l1_id = node.get("l1_id")
+                    if l1_id is None:
+                        continue
+                    self.l1_names_by_id.setdefault(l1_id, node.get("l1_name", str(l1_id)))
+                    bucket = self.l1_to_l2.setdefault(l1_id, {})
+                    for child in node.get("children", []) or []:
+                        bucket.setdefault(child["id"], child["name"])
+                        self.l2_names_by_id.setdefault(child["id"], child["name"])
 
             print("Seeding Qdrant from local file...")
 
@@ -215,11 +211,11 @@ class SourcingSearchEngine:
                             "ebooth_url": item.get("ebooth_url", "#"),  # primary/first-seen link
                             "sources": item.get("sources", []),  # {location, ebooth_url} per expo
                             "hq_country_conflict": item.get("hq_country_conflict", []),
-                            # "cat_l1_ids": item.get("cat_l1_ids", []),
-                            # "cat_l1_names": item.get("cat_l1_names", []),
-                            # "cat_l2_ids": item.get("cat_l2_ids", []),
-                            # "cat_l2_names": item.get("cat_l2_names", []),
-                            # "cat_tree": item.get("cat_tree", []),
+                            "cat_l1_ids": item.get("cat_l1_ids", []),
+                            "cat_l1_names": item.get("cat_l1_names", []),
+                            "cat_l2_ids": item.get("cat_l2_ids", []),
+                            "cat_l2_names": item.get("cat_l2_names", []),
+                            "cat_tree": item.get("cat_tree", []),
                         },
                     )
                 )
@@ -230,8 +226,8 @@ class SourcingSearchEngine:
                 ("location", models.PayloadSchemaType.KEYWORD),
                 ("hq_country", models.PayloadSchemaType.KEYWORD),
                 ("company_name", models.PayloadSchemaType.KEYWORD),
-                # ("cat_l1_ids", models.PayloadSchemaType.INTEGER),
-                # ("cat_l2_ids", models.PayloadSchemaType.INTEGER),
+                ("cat_l1_ids", models.PayloadSchemaType.INTEGER),
+                ("cat_l2_ids", models.PayloadSchemaType.INTEGER),
             ]:
                 try:
                     self.client.create_payload_index(self.collection_name, field,
@@ -259,6 +255,9 @@ class SourcingSearchEngine:
         live rather than batch - this table is a snapshot.
         """
         rows, offset = [], None
+        l1_names_by_id = {}
+        l1_to_l2 = {}
+        l2_names_by_id = {}
         while True:
             batch, offset = self.client.scroll(
                 collection_name=self.collection_name,
@@ -267,6 +266,16 @@ class SourcingSearchEngine:
             )
             for pt in batch:
                 p = pt.payload or {}
+                for node in (p.get("cat_tree") or []):
+                    l1_id = node.get("l1_id")
+                    if l1_id is None:
+                        continue
+                    l1_names_by_id.setdefault(l1_id, node.get("l1_name", str(l1_id)))
+                    bucket = l1_to_l2.setdefault(l1_id, {})
+                    for child in (node.get("children") or []):
+                        bucket.setdefault(child["id"], child["name"])
+                        l2_names_by_id.setdefault(child["id"], child["name"])
+
                 rows.append({
                     "id": pt.id,
                     "name": p.get("company_name") or "",
@@ -276,12 +285,16 @@ class SourcingSearchEngine:
                     # so it's discoverable and filterable under any of them.
                     "expos": p.get("location") or ["Unknown"],
                     "country": p.get("hq_country") or UNKNOWN_COUNTRY,
-                    # "l1": {int(i) for i in (p.get("cat_l1_ids") or [])},
-                    # "l2": {int(i) for i in (p.get("cat_l2_ids") or [])},
+                    "l1": {int(i) for i in (p.get("cat_l1_ids") or [])},
+                    "l2": {int(i) for i in (p.get("cat_l2_ids") or [])},
                 })
             if offset is None:
                 break
         self._facet_rows = rows
+        if l1_names_by_id:
+            self.l1_names_by_id = l1_names_by_id
+            self.l1_to_l2 = l1_to_l2
+            self.l2_names_by_id = l2_names_by_id
 
     def facets(self, expo=None, hq_countries=None, cat_l1_ids=None, cat_l2_ids=None):
         """Reachable filter values + counts, given the current selection.
@@ -315,19 +328,19 @@ class SourcingSearchEngine:
 
         expo_counts = counted(lambda r: r["expos"], expo=None)
         country_counts = counted(lambda r: [r["country"]], hq_countries=None)
-        # l1_counts = counted(lambda r: r["l1"], cat_l1_ids=None, cat_l2_ids=None)
+        l1_counts = counted(lambda r: r["l1"], cat_l1_ids=None, cat_l2_ids=None)
 
-        # # L2: honour the L1 selection, ignore the L2 selection, and only surface
-        # # subcategories that actually belong to the selected parents.
-        # allowed_l2 = None
-        # if cat_l1_ids:
-        #     allowed_l2 = set()
-        #     for l1 in cat_l1_ids:
-        #         allowed_l2 |= set(self.l1_to_l2.get(int(l1), {}).keys())
-        # l2_counts = counted(
-        #     lambda r: (r["l2"] & allowed_l2) if allowed_l2 is not None else r["l2"],
-        #     cat_l2_ids=None,
-        # )
+        # L2: honour the L1 selection, ignore the L2 selection, and only surface
+        # subcategories that actually belong to the selected parents.
+        allowed_l2 = None
+        if cat_l1_ids:
+            allowed_l2 = set()
+            for l1 in cat_l1_ids:
+                allowed_l2 |= set(self.l1_to_l2.get(int(l1), {}).keys())
+        l2_counts = counted(
+            lambda r: (r["l2"] & allowed_l2) if allowed_l2 is not None else r["l2"],
+            cat_l2_ids=None,
+        )
 
         total = sum(1 for r in rows if _row_matches(
             r, expo, hq_countries, cat_l1_ids, cat_l2_ids))
@@ -346,8 +359,8 @@ class SourcingSearchEngine:
         return {
             "expos": as_values(expo_counts),
             "countries": as_values(country_counts),
-            # "l1": as_cats(l1_counts, self.l1_names_by_id),
-            # "l2": as_cats(l2_counts, self.l2_names_by_id),
+            "l1": as_cats(l1_counts, self.l1_names_by_id),
+            "l2": as_cats(l2_counts, self.l2_names_by_id),
             "total": total,
         }
 
@@ -375,12 +388,12 @@ class SourcingSearchEngine:
         if hq_countries:
             must.append(models.FieldCondition(
                 key="hq_country", match=models.MatchAny(any=list(hq_countries))))
-        # if cat_l2_ids:
-        #     must.append(models.FieldCondition(
-        #         key="cat_l2_ids", match=models.MatchAny(any=[int(i) for i in cat_l2_ids])))
-        # elif cat_l1_ids:
-        #     must.append(models.FieldCondition(
-        #         key="cat_l1_ids", match=models.MatchAny(any=[int(i) for i in cat_l1_ids])))
+        if cat_l2_ids:
+            must.append(models.FieldCondition(
+                key="cat_l2_ids", match=models.MatchAny(any=[int(i) for i in cat_l2_ids])))
+        elif cat_l1_ids:
+            must.append(models.FieldCondition(
+                key="cat_l1_ids", match=models.MatchAny(any=[int(i) for i in cat_l1_ids])))
         return models.Filter(must=must) if must else None
 
     @staticmethod
@@ -396,9 +409,9 @@ class SourcingSearchEngine:
             "url": payload.get("ebooth_url"),
             "sources": payload.get("sources", []),  # per-expo booth link, when deduped
             "hq_country_conflict": payload.get("hq_country_conflict", []),
-            # "categories_l1": payload.get("cat_l1_names", []),
-            # "categories_l2": payload.get("cat_l2_names", []),
-            # "cat_tree": payload.get("cat_tree", []),
+            "categories_l1": payload.get("cat_l1_names", []),
+            "categories_l2": payload.get("cat_l2_names", []),
+            "cat_tree": payload.get("cat_tree", []),
             "score": round(score, 4) if score is not None else None,
             "retrieval_score": round(score, 6) if score is not None else None,
         }
@@ -514,22 +527,15 @@ class SourcingSearchEngine:
 
     # ----------------------------------------------------------- UI helpers
 
-    # def level1_categories(self):
-    #     """Master taxonomy, restricted to level-1 categories some ingested
-    #     company actually carries. Falls back to observed data if
-    #     categories.json is missing."""
-    #     from_file = self.taxonomy.get("level1", [])
-    #     if from_file:
-    #         observed = set(self.l1_names_by_id)
-    #         if observed:
-    #             return [c for c in from_file if c["id"] in observed] or from_file
-    #         return from_file
-    #     return [{"id": k, "name": v}
-    #             for k, v in sorted(self.l1_names_by_id.items(), key=lambda kv: kv[1])]
+    def level1_categories(self):
+        """Master taxonomy, restricted to level-1 categories some ingested
+        company actually carries."""
+        return [{"id": k, "name": v}
+                for k, v in sorted(self.l1_names_by_id.items(), key=lambda kv: kv[1])]
 
-    # def level2_names_for_l1(self, l1_id):
-    #     """[(id, name), ...] of subcategories belonging to this parent."""
-    #     return sorted(self.l1_to_l2.get(int(l1_id), {}).items(), key=lambda kv: kv[1])
+    def level2_names_for_l1(self, l1_id):
+        """[(id, name), ...] of subcategories belonging to this parent."""
+        return sorted(self.l1_to_l2.get(int(l1_id), {}).items(), key=lambda kv: kv[1])
 
     def available_countries(self):
         return [f["value"] for f in self.facets()["countries"]]
