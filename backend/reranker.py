@@ -149,9 +149,9 @@ def normalise(values, method="minmax"):
 
 # ----------------------------------------------------------------- prompting
 
-def _format_candidates(candidates):
+def _format_candidates(candidates, include_rank=False):
     lines = []
-    for c in candidates:
+    for idx, c in enumerate(candidates, 1):
         refined = c.get("refined") or {}
         role = refined.get("value_chain_position") or ""
         caps_list = refined.get("capabilities") or []
@@ -169,8 +169,10 @@ def _format_candidates(candidates):
             # opening lines carry the capability statement in practice.
             about = about[:700].rsplit(" ", 1)[0] + " ..."
 
+        item_id = c.get("id")
+        header = f"[Rank {idx}] id={item_id}" if include_rank else f"id={item_id}"
         item_lines = [
-            f"id={c.get('id')}",
+            header,
             f"  company: {c.get('company_name')}",
         ]
         if role:
@@ -324,14 +326,26 @@ def llm_rerank(query, candidates, top_n=None, client=None):
 # ----------------------------------------------------------- on-demand explainer
 
 EXPLAIN_SYSTEM_PROMPT = """\
-You are a senior procurement judge for a semiconductor fab qualifying suppliers. \
-You will receive a buyer's sourcing query and a shortlist of candidates. \
-For EACH candidate in the provided shortlist, write a 1-sentence (<=20 words) \
-explanation of why that candidate fits the query based on their capabilities, \
-products, or categories.
+You are an expert semiconductor search analyst and technical procurement judge. \
+A buyer searched for: "{query}".
+
+You are given the ranked search results in order (Rank 1, Rank 2, etc.).
+Your job is to explain the RANKING and MATCH RATIONALE for each candidate — specifically explaining WHY each candidate appeared in this rank position for this specific search query.
+
+CRITICAL GUIDELINES:
+1. EXPLAIN THE MATCH & RANKING RATIONALE — DO NOT simply summarize what the company does or repeat generic marketing text. The buyer can already read the company overview on the card.
+2. Direct vs. Contextual Match:
+   - If the query is a company or brand (e.g., "ASML", "Applied Materials"):
+     * For the primary company itself: State that it is the direct primary brand match and its flagship domain.
+     * For other ranked suppliers: Explicitly explain their relationship to the queried brand (e.g., key subsidiary/division, critical OEM component supplier, or direct competitor). Example: "Ranked #2 as ASML's key subsidiary, developing the critical DUV/EUV lasers for ASML scanners."
+   - If the query is a product, technology, or material (e.g., "CMP slurry", "e-beam inspection"):
+     * Explain why the candidate ranks in that position (e.g., tier-1 manufacturer of the item vs. adjacent equipment/consumable provider).
+   - If the query is a process or problem (e.g., "sub-5nm etch"):
+     * Highlight the specific tool, technology, or capability that directly solves the queried requirement.
+3. Style: 1 punchy sentence (15-25 words). Start directly with the match relationship (e.g., "Direct brand match...", "Ranked #2 as ASML's key subsidiary...", "Primary competitor offering...", "Specialized OEM supplier of...").
 
 Return ONLY a JSON object:
-{"explanations": [{"id": <id, copied exactly from the record>, "reasoning": "<1-sentence explanation <=20 words>"}]}
+{{"explanations": [{{"id": <id, copied exactly from the record>, "reasoning": "<1-sentence explanation 15-25 words>"}}]}}
 Include every candidate id from the shortlist exactly once. Never invent an id.\
 """
 
@@ -388,6 +402,9 @@ def explain_results(query, candidates, client=None, model=None, temperature=0.0)
     if not candidates:
         return {}
 
+    query_str = (query or "").strip() or "semiconductor suppliers"
+    sys_prompt = EXPLAIN_SYSTEM_PROMPT.format(query=query_str)
+
     try:
         if not os.environ.get("OPENAI_API_KEY") and client is None:
             raise ValueError("OPENAI_API_KEY not configured")
@@ -398,10 +415,10 @@ def explain_results(query, candidates, client=None, model=None, temperature=0.0)
             temperature=temperature,
             response_format={"type": "json_object"},
             messages=[
-                {"role": "system", "content": EXPLAIN_SYSTEM_PROMPT},
+                {"role": "system", "content": sys_prompt},
                 {"role": "user",
-                 "content": f"Buyer query: {query}\n\nShortlist:\n\n"
-                            f"{_format_candidates(candidates)}"},
+                 "content": f"Buyer query: {query_str}\n\nRanked Results:\n\n"
+                            f"{_format_candidates(candidates, include_rank=True)}"},
             ],
         )
         llm_ms = (time.perf_counter() - t0) * 1000
