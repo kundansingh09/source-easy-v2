@@ -10,9 +10,11 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ----------------- CONFIGURATION -----------------
-INPUT_FILE  = "/Users/kundansingh/source-easy-v2/test/japan2025_en_merged.json"  # Change this to your input file
-OUTPUT_FILE = "japan2025_with_homepages.json"
-FAILURES_FILE = "homepage_scrape_failures.csv"
+import os
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+INPUT_FILE  = os.path.join(BASE_DIR, "test", "japan2025_en_merged.json")  # Change this to your input file
+OUTPUT_FILE = os.path.join(BASE_DIR, "japan2025_with_homepages.json")
+FAILURES_FILE = os.path.join(BASE_DIR, "homepage_scrape_failures.csv")
 
 # Set to 10 for testing; set to None to run all records
 TEST_LIMIT  = 10

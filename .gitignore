@@ -1,7 +1,10 @@
 # ----------------------------------------------------------------------
 # DATA & OUTPUT FILES
-# ----------------------------------------------------------------------
 data/
+!data/**/*.py
+!data/*.py
+cache*/
+*-old.json
 *.csv
 # If you want to keep some JSON config files but ignore scraped data, 
 # you can specifically ignore scraped files instead of all JSONs:

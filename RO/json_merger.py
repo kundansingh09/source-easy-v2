@@ -1,9 +1,10 @@
+import os
 import json
 
-# Adjust paths to match your local master database file
-MASTER_JSON = "/Users/kundansingh/source-easy-v2/data/semi_suppliers.json" 
-INDIA_JSON = "/Users/kundansingh/source-easy-v2/RO/india_suppliers.json"
-OUTPUT_JSON = "/Users/kundansingh/source-easy-v2/data/final_combined_suppliers.json"
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+MASTER_JSON = os.path.join(BASE_DIR, "data", "semi_suppliers.json")
+INDIA_JSON = os.path.join(BASE_DIR, "RO", "india_suppliers.json")
+OUTPUT_JSON = os.path.join(BASE_DIR, "data", "final_combined_suppliers.json")
 
 def main():
     with open(MASTER_JSON, "r", encoding="utf-8") as f:

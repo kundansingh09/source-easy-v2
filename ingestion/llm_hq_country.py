@@ -5,8 +5,9 @@ from openai import OpenAI
 # Automatically reads the OPENAI_API_KEY environment variable you exported
 client = OpenAI()
 
-INPUT_JSON = "/Users/kundansingh/source-easy-v2/data/Translate/japan2025_final_translated.json"
-OUTPUT_JSON = "/Users/kundansingh/source-easy-v2/data/final/japan2025_standardized.json"
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+INPUT_JSON = os.path.join(BASE_DIR, "data", "Translate", "japan2025_final_translated.json")
+OUTPUT_JSON = os.path.join(BASE_DIR, "data", "final", "japan2025_standardized.json")
 BATCH_SIZE = 50
 
 def extract_countries_batched(locations_batch):

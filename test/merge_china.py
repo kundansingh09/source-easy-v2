@@ -2,10 +2,11 @@ import json
 import os
 import re
 
-LANG1_FILE = "/Users/kundansingh/source-easy-v2/test/china2026_lang1.json"  # English (Base)
-LANG2_FILE = "/Users/kundansingh/source-easy-v2/test/china2026_lang2.json"  # Chinese (Supplemental)
-OUTPUT_FILE = "/Users/kundansingh/source-easy-v2/test/china2026_merged.json"
-REPORT_FILE = "/Users/kundansingh/source-easy-v2/test/china2026_merge_report.txt"
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+LANG1_FILE = os.path.join(BASE_DIR, "test", "china2026_lang1.json")  # English (Base)
+LANG2_FILE = os.path.join(BASE_DIR, "test", "china2026_lang2.json")  # Chinese (Supplemental)
+OUTPUT_FILE = os.path.join(BASE_DIR, "test", "china2026_merged.json")
+REPORT_FILE = os.path.join(BASE_DIR, "test", "china2026_merge_report.txt")
 
 def load_json(filepath):
     if not os.path.exists(filepath):
