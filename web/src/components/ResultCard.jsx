@@ -44,8 +44,8 @@ function normalizeCountry(c) {
 // Scraped directory data contains a mix of city/state only ("San Jose, CA"),
 // local exhibitor branch locations ("Shanghai, China" for ASML), and country
 // naming variations ("Korea (South)"). This standardizes aliases, avoids duplicate
-// country mentions, and clearly attributes regional registrant branches when the
-// local show office country differs from the parent corporate headquarters.
+// country mentions, and cleanly defaults to the corporate headquarters
+// when the local show office country differs from the parent corporate headquarters.
 function formatHQ(hqLocation, hqCountry) {
   const country = hqCountry && hqCountry !== "Unknown" ? hqCountry.trim() : null;
   let loc = hqLocation ? hqLocation.trim() : null;
@@ -78,7 +78,7 @@ function formatHQ(hqLocation, hqCountry) {
   }
 
   if (KNOWN_COUNTRIES.has(normLast)) {
-    return `${normCountry} (Branch: ${cleanLoc})`;
+    return normCountry;
   }
 
   return `${cleanLoc}, ${normCountry}`;
