@@ -8,13 +8,80 @@ const FALLBACK_ABOUT = "Semiconductor technology and equipment supplier.";
 // logic only fell back to hq_country when hq_location was MISSING entirely,
 // not when it was present but incomplete. Fix: always surface the country,
 // appending it only if it isn't already present in the location string
-// (avoids "Hsinchu, Taiwan, Taiwan" when the scraper already included it).
+const KNOWN_COUNTRIES = new Set([
+  "china", "japan", "taiwan", "south korea", "korea (south)", "germany", "united states",
+  "usa", "u.s.a.", "us", "singapore", "netherlands", "united kingdom", "uk", "france",
+  "switzerland", "austria", "italy", "hong kong", "malaysia", "poland", "canada",
+  "belgium", "israel", "czech republic", "sweden", "finland", "ireland", "denmark",
+  "spain", "australia", "india", "thailand", "vietnam", "philippines", "mexico",
+  "brazil", "russia", "norway", "new zealand", "luxembourg", "liechtenstein"
+]);
+
+function normalizeCountry(c) {
+  if (!c) return "";
+  const lower = c.trim().toLowerCase();
+  if (lower === "korea (south)" || lower === "korea, south" || lower === "republic of korea") {
+    return "South Korea";
+  }
+  if (lower === "usa" || lower === "u.s.a." || lower === "us" || lower === "united states of america") {
+    return "United States";
+  }
+  if (lower === "uk" || lower === "u.k.") {
+    return "United Kingdom";
+  }
+  if (lower.includes("hong kong")) {
+    return "Hong Kong";
+  }
+  if (lower.includes("taiwan")) {
+    return "Taiwan";
+  }
+  if (lower.includes("p.r.china") || lower.includes("p.r. china")) {
+    return "China";
+  }
+  return c.trim();
+}
+
+// Scraped directory data contains a mix of city/state only ("San Jose, CA"),
+// local exhibitor branch locations ("Shanghai, China" for ASML), and country
+// naming variations ("Korea (South)"). This standardizes aliases, avoids duplicate
+// country mentions, and clearly attributes regional registrant branches when the
+// local show office country differs from the parent corporate headquarters.
 function formatHQ(hqLocation, hqCountry) {
-  const country = hqCountry && hqCountry !== "Unknown" ? hqCountry : null;
-  if (!hqLocation) return country;
-  if (!country) return hqLocation;
-  const already = hqLocation.toLowerCase().includes(country.toLowerCase());
-  return already ? hqLocation : `${hqLocation}, ${country}`;
+  const country = hqCountry && hqCountry !== "Unknown" ? hqCountry.trim() : null;
+  let loc = hqLocation ? hqLocation.trim() : null;
+
+  if (loc && /^(#VALUE!|#N\/A|N\/A|UNKNOWN|-|NONE)$/i.test(loc)) {
+    loc = null;
+  }
+
+  if (!loc) return country;
+  if (!country) return loc;
+
+  const normCountry = normalizeCountry(country);
+
+  let cleanLoc = loc
+    .replace(/\bKorea\s*\(South\)/gi, "South Korea")
+    .replace(/\bP\.R\.China\b/gi, "China")
+    .replace(/\bTaiwan,\s*China\b/gi, "Taiwan")
+    .replace(/\bHong Kong,\s*China\b/gi, "Hong Kong");
+
+  if (cleanLoc.toLowerCase().includes(normCountry.toLowerCase())) {
+    return cleanLoc;
+  }
+
+  const parts = cleanLoc.split(",").map((p) => p.trim()).filter(Boolean);
+  const lastPart = parts.length > 0 ? parts[parts.length - 1] : "";
+  const normLast = normalizeCountry(lastPart).toLowerCase();
+
+  if (normLast === normCountry.toLowerCase()) {
+    return cleanLoc;
+  }
+
+  if (KNOWN_COUNTRIES.has(normLast)) {
+    return `${normCountry} (Branch: ${cleanLoc})`;
+  }
+
+  return `${cleanLoc}, ${normCountry}`;
 }
 
 function Scores({ item }) {
@@ -169,25 +236,35 @@ function toSafeUrl(url) {
   return /^https?:\/\//i.test(url) ? url : `https://${url}`;
 }
 
-function CardLinks({ item, sources, hasOverview }) {
-  const profileUrl = toSafeUrl(item.url);
-  const showSemiconProfile = hasOverview && profileUrl;
-  
-  if (!showSemiconProfile && sources.length <= 1) return null;
-  
+function CardLinks({ item, sources = [] }) {
+  const links = [];
+  const seenUrls = new Set();
+
+  for (const s of sources) {
+    const url = toSafeUrl(s.ebooth_url);
+    if (url && !seenUrls.has(url)) {
+      seenUrls.add(url);
+      const label = s.location ? `${s.location} booth ↗` : "Expo booth ↗";
+      links.push({ url, label });
+    }
+  }
+
+  // Fallback to item.url if sources had no valid URLs
+  const fallbackUrl = toSafeUrl(item.url);
+  if (fallbackUrl && !seenUrls.has(fallbackUrl)) {
+    seenUrls.add(fallbackUrl);
+    links.push({ url: fallbackUrl, label: "Expo booth ↗" });
+  }
+
+  if (links.length === 0) return null;
+
   return (
     <div className="card-links">
-      {showSemiconProfile && (
-        <a href={profileUrl} target="_blank" rel="noopener noreferrer">Semicon Profile ↗</a>
-      )}
-      {sources.length > 1 &&
-        sources
-          .filter((s) => toSafeUrl(s.ebooth_url))
-          .map((s) => (
-            <a key={s.location} href={toSafeUrl(s.ebooth_url)} target="_blank" rel="noopener noreferrer">
-              {s.location} booth ↗
-            </a>
-          ))}
+      {links.map((link) => (
+        <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
+          {link.label}
+        </a>
+      ))}
     </div>
   );
 }
@@ -198,7 +275,6 @@ export default function ResultCard({ item, filters, explanation, explanations })
   const sources = item.sources || [];
   const parsed = useMemo(() => parseOverview(item.about, item.refined), [item.about, item.refined]);
   
-  const hasOverview = parsed.structured || (parsed.summary && parsed.summary !== FALLBACK_ABOUT);
   const safeWebsite = toSafeUrl(item.website);
   const cardReason = explanation || explanations?.[item.id] || explanations?.[String(item.id)];
 
@@ -240,7 +316,7 @@ export default function ResultCard({ item, filters, explanation, explanations })
           the free-text overview is the heaviest read, so it goes last and
           collapsed. */}
       <InfoBadges parsed={parsed} country={item.hq_country} />
-      <CardLinks item={item} sources={sources} hasOverview={hasOverview} />
+      <CardLinks item={item} sources={sources} />
 
       <OverviewSection about={item.about} refined={item.refined} />
     </article>
