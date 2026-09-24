@@ -128,24 +128,36 @@ class SourcingSearchEngine:
     # ------------------------------------------------------------- loading
 
     def _load_refined_lookup(self):
-        """Build an in-memory lookup of company_name/id -> refined dict from local file.
-        Guarantees that even if Qdrant Cloud hasn't been re-indexed with 'refined' payloads yet,
-        all search/browse results immediately carry the full refined intelligence."""
+        """Build an in-memory lookup of company_name/id -> refined dict and HQ metadata from local file.
+        Guarantees that even if Qdrant Cloud hasn't been re-indexed with updated payloads yet,
+        all search/browse results immediately carry the full refined intelligence and standardized HQ."""
         lookup = {}
+        hq_lookup = {}
         if not self.data_path or not os.path.exists(self.data_path):
+            self._hq_lookup = hq_lookup
             return lookup
         try:
             with open(self.data_path, "r", encoding="utf-8") as f:
                 suppliers = json.load(f)
             for idx, item in enumerate(suppliers):
+                pid = idx + 1
+                name = (item.get("company_name") or "").strip().lower()
                 ref = item.get("refined")
                 if ref:
-                    name = (item.get("company_name") or "").strip().lower()
                     if name:
                         lookup[name] = ref
-                    lookup[idx + 1] = ref
+                    lookup[pid] = ref
+                hq_data = {
+                    "hq_location": item.get("hq_location"),
+                    "hq_country": item.get("hq_country"),
+                    "website": item.get("website")
+                }
+                if name:
+                    hq_lookup[name] = hq_data
+                hq_lookup[pid] = hq_data
         except Exception as e:
             print(f"Warning: could not load refined lookup from {self.data_path}: {e}")
+        self._hq_lookup = hq_lookup
         return lookup
 
     def _build_text_chunk(self, item):
@@ -467,15 +479,24 @@ class SourcingSearchEngine:
             or getattr(self, "_refined_lookup", {}).get(point_id)
             or {}
         )
+        hq_info = (
+            getattr(self, "_hq_lookup", {}).get(company_key)
+            or getattr(self, "_hq_lookup", {}).get(point_id)
+            or {}
+        )
+        hq_location = hq_info.get("hq_location") if "hq_location" in hq_info else payload.get("hq_location")
+        hq_country = hq_info.get("hq_country") if "hq_country" in hq_info else payload.get("hq_country")
+        website = hq_info.get("website") if hq_info.get("website") else payload.get("website")
+
         return {
             "id": point_id,
             "company_name": company_name,
             "locations": payload.get("location") or [],  # every expo, post-dedupe
-            "hq_location": payload.get("hq_location"),
-            "hq_country": payload.get("hq_country"),
+            "hq_location": hq_location,
+            "hq_country": hq_country,
             "about": payload.get("about"),
             "refined": refined,
-            "website": payload.get("website"),
+            "website": website,
             "url": payload.get("ebooth_url"),
             "sources": payload.get("sources", []),  # per-expo booth link, when deduped
             "hq_country_conflict": payload.get("hq_country_conflict", []),

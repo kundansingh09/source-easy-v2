@@ -50,7 +50,7 @@ function formatHQ(hqLocation, hqCountry) {
   const country = hqCountry && hqCountry !== "Unknown" ? hqCountry.trim() : null;
   let loc = hqLocation ? hqLocation.trim() : null;
 
-  if (loc && /^(#VALUE!|#N\/A|N\/A|UNKNOWN|-|NONE)$/i.test(loc)) {
+  if (loc && /^(#VALUE!|#N\/A|N\/A|UNKNOWN|-|NONE|\?+)$/i.test(loc)) {
     loc = null;
   }
 
@@ -58,6 +58,12 @@ function formatHQ(hqLocation, hqCountry) {
   if (!country) return loc;
 
   const normCountry = normalizeCountry(country);
+
+  // If the location contains Chinese, Japanese, or Korean characters,
+  // cleanly fall back to the standardized English country name.
+  if (/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(loc)) {
+    return normCountry;
+  }
 
   let cleanLoc = loc
     .replace(/\bKorea\s*\(South\)/gi, "South Korea")
